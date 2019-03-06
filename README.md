@@ -1,0 +1,2 @@
+注意数据库部署在服务器上之前要配置jdbc.properties
+所有建表语句在resources的database文件夹中
