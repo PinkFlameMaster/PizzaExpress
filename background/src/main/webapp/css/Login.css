@@ -1,0 +1,45 @@
+body{
+    margin: 0px;
+}
+.Login {
+    background-image: url("../images/LoginBackground.png");
+    background-repeat: no-repeat;
+    background-size:100% auto;
+    text-align:center;
+    position: relative;
+}
+.Input{
+    border-radius:5px;
+    height: 40px;
+    width: 200px;
+    margin-top:40px;
+    margin-left:20px;
+
+}
+#PizzaIcon{
+    margin-top: 100px;
+    height: 200px;
+}
+#LoginRect{
+    border-radius:10px;
+    background-color:rgba(255,255,255,0.7);
+    height: 250px;
+    width: 420px;
+    margin: 50px auto;
+
+}
+.RectLeft{
+    float: left;
+}
+.RectRight {
+    float: right;
+}
+.Button{
+    width: 100px;
+    height: 60px;
+    margin-right: 40px;
+    margin-top: 80px;
+    background-color: #999999;
+    color: #555555;
+    font-size: 15px;
+}
