@@ -43,7 +43,7 @@ leftNavBarDiv.innerHTML = '' +
     '        </li>\n' +
     '    </ul>';
     // '</nav>';
-leftNavBarDivWrap.style.textAlign="center";
+// leftNavBarDivWrap.style.textAlign="center";
 leftNavBarDivWrap.style.display = "inline-block";
 leftNavBarDivWrap.style.width = "16.6666667%";
 leftNavBarDivWrap.style.float = "left";
