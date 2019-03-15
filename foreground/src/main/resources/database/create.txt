@@ -1,0 +1,144 @@
+DROP DATABASE IF EXISTS PizzaExpress;
+CREATE DATABASE PizzaExpress;
+USE PizzaExpress;
+
+CREATE TABLE user
+(
+	phoneNum	varchar(16) PRIMARY KEY,
+    password	varchar(32) NOT NULL,
+    nickname	varchar(32),
+    city		varchar(16),
+    birthday	date
+);
+
+CREATE TABLE userQQ
+(
+	QQ				varchar(16) PRIMARY KEY,
+    userPhoneNum	varchar(16),
+    FOREIGN KEY (userPhoneNum) REFERENCES user(phoneNum)
+);
+
+CREATE TABLE userWechat
+(
+	weChat			varchar(16) PRIMARY KEY,
+    userPhoneNum	varchar(16),
+    FOREIGN KEY (userPhoneNum) REFERENCES user(phoneNum)
+);
+
+CREATE TABLE receiverAddress
+(
+	id					int AUTO_INCREMENT PRIMARY KEY,
+    userPhoneNum		varchar(16),
+    receiverName		varchar(32) NOT NULL,
+    receiverPhoneNum	varchar(16) NOT NULL,
+    address				varchar(128) NOT NULL,
+    latitude			float NOT NULL,
+    longitude			float NOT NULL,
+    FOREIGN KEY (userPhoneNum) REFERENCES user(phoneNum)
+);
+
+CREATE TABLE factory
+(
+	id			int AUTO_INCREMENT PRIMARY KEY,
+    name		varchar(32) NOT NULL,
+    address		varchar(128) NOT NULL,
+    latitude	float NOT NULL,
+    longitude	float NOT NULL,
+    phoneNum	varchar(16) NOT NULL,
+    businessTimeFrom	time,
+    businessTimeTo		time
+);
+
+CREATE TABLE menuItem
+(
+	id			int AUTO_INCREMENT PRIMARY KEY,
+    name		varchar(64) NOT NULL,
+    prize		float NOT NULL,
+    introduce	varchar(256) NOT NULL,
+    onSale		bool NOT NULL DEFAULT true
+);
+
+CREATE TABLE ingredient
+(
+	id			int AUTO_INCREMENT PRIMARY KEY,
+    type		varchar(16) NOT NULL,
+    source		varchar(32) NOT NULL,
+    inportDate	date NOT NULL,
+    factoryId	int,
+    amount		float NOT NULL,
+    FOREIGN KEY (factoryId) REFERENCES factory(id)
+);
+
+CREATE TABLE menuItem_ingredient
+(
+	menuItemId			int,
+    ingredientType		varchar(16) NOT NULL,
+    ingredientAmount	float NOT NULL,
+    FOREIGN KEY (menuItemId) REFERENCES menuItem(id)
+);
+
+CREATE TABLE pizzaOrder
+(
+	id					int AUTO_INCREMENT PRIMARY KEY,
+	factoryId			int,
+    receiverAddressId	int,
+    state				varchar(16) NOT NULL,
+    orderTime			timestamp NOT NULL,
+    receiveTime			timestamp,
+	FOREIGN KEY (factoryId) REFERENCES factory(id),
+	FOREIGN KEY (receiverAddressId) REFERENCES receiverAddress(id),
+    CHECK (state = 'delivering' OR state = 'finished' OR state = 'canceled' OR state = 'returned')
+);
+
+CREATE TABLE orderItem
+(
+	id				int AUTO_INCREMENT PRIMARY KEY,
+    orderId			int,
+    menuItemId		int,
+    actualUnitPrize	float NOT NULL,
+    num				int  NOT NULL DEFAULT 1,
+    FOREIGN KEY (orderId) REFERENCES pizzaOrder(id),
+	FOREIGN KEY (menuItemId) REFERENCES menuItem(id)
+);
+
+CREATE TABLE orderItem_ingredient
+(
+	orderItemId		int,
+    ingredientId	int,
+	FOREIGN KEY (orderItemId) REFERENCES orderItem(id),
+	FOREIGN KEY (ingredientId) REFERENCES ingredient(id)
+);
+
+CREATE TABLE admin
+(
+	userName	varchar(16) PRIMARY KEY,
+    password	varchar(32) NOT NULL,
+    role		varchar(16) NOT NULL,
+    factoryId	int,
+    phoneNum	varchar(16) NOT NULL,
+    entryDate	date NOT NULL,
+    resigned	bool NOT NULL DEFAULT false,
+    FOREIGN KEY (factoryId) REFERENCES factory(id),
+    CHECK (role = 'system' OR role = 'market' OR role = 'service' OR role = 'branch')
+);
+
+INSERT INTO user (phoneNum, password, nickName) VALUES 
+('001', '001', 'nickname1'),
+('002', '002', 'nickname2'),
+('003', '003', 'nickname3'),
+('004', '004', 'nickname4'),
+('005', '005', 'nickname5');
+
+INSERT INTO factory (name, address, latitude, longitude, phoneNum) VALUES
+('factory1', 'factory address1', 180.0, 190.0, '001'),
+('factory2', 'factory address2', 180.1, 190.1, '002'),
+('factory3', 'factory address3', 180.2, 190.2, '003'),
+('factory4', 'factory address4', 180.3, 190.3, '004'),
+('factory5', 'factory address5', 180.4, 190.4, '005');
+
+INSERT INTO admin(userName, password, role, factoryId, phoneNum, entryDate) VALUES
+('admin', 'admin', 'system', 1, '001', '2019-03-13'),
+('admin2', 'admin2', 'market', 2, '002', '2019-03-14'),
+('admin3', 'admin3', 'service', 3, '003', '2019-03-15'),
+('admin4', 'admin4', 'branch', 4, '004', '2019-03-16'),
+('admin5', 'admin5', 'branch', 5, '006', '2019-03-17');

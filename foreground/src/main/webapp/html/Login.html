@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Pizza Express - Login</title>
+    <link rel="stylesheet" href="../css/Login.css">
+    <script type="text/javascript" src="../js/Login.js"></script>
+</head>
+<body>
+    <div class="Login" >
+        <div>
+        <img id="PizzaIcon" src="../images/PizzaIcon.jpg"/>
+        </div>
+        <div>
+        <form id="LoginRect" action="http://localhost:1080/admin/checkLogin" method="post">
+            <table>
+                <div class="RectLeft">
+                    <tr>
+                        <td><input class="Input" id="username" name="username" type="text" placeholder="  Username..."></td>
+                    </tr>
+                    <tr>
+                        <td><input class="Input" id="password" name="password" type="password" placeholder="  Password..."></td>
+                    </tr>
+                </div>
+                <div class="RectRight">
+                    <input class="Button" type="submit" value="Log in"/>
+                </div>
+            </table>
+        </form>
+        </div>
+    </div>
+
+</body>
+</html>
