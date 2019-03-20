@@ -1,3 +1,21 @@
 .bright-bg{
     background-color: #eeeeee;
 }
+
+.gray-blue-bg{
+    background-color: #b3c0d6;
+}
+
+.white-bg {
+    background-color: #FFFFFF;
+}
+
+.nav>li>a:hover {
+    background-color: #b3c0d6;
+}
+
+#mainBody{
+    display : inline-block;
+    flaot:left;
+    width: 80%;
+}
