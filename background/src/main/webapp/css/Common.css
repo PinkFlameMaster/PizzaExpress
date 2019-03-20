@@ -20,3 +20,13 @@
     flaot:left;
     width: 80%;
 }
+.inline-block{
+     display: inline-block;
+ }
+.navRight{
+    display: inline-block;
+    float: none;
+    text-align:left;
+    vertical-align: middle;
+    margin: auto;
+}
