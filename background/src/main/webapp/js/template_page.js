@@ -6,8 +6,8 @@ var leftNavBarDivWrap = document.createElement("div");
 var leftNavBarDiv = document.createElement("div");
 leftNavBarDiv.innerHTML = '' +
     '    <ul class="nav nav-pills nav-stacked white-bg">\n' +
-    '        <li class="active"><a href="#">首页</a></li>\n' +
-    '        <li><a href="#">用户管理</a></li>\n' +
+    '        <li class="active"><a href="./HomePage.html">首页</a></li>\n' +
+    '        <li><a href="./UserMgt.html">用户管理</a></li>\n' +
     '        <li>\n' +
     '            <a data-toggle="collapse" data-parent="#accordion"\n' +
     '               href="#orderMgtItem">\n' +
