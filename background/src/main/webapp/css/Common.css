@@ -20,3 +20,8 @@
     flaot:left;
     width: 80%;
 }
+
+.common-input-group{
+    display: inline-block;
+    width:200px;
+}
