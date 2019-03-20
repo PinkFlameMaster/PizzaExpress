@@ -54,27 +54,30 @@ insertNodeBefore(leftNavBarDivWrap, document.getElementById("mainBody"));
 leftNavBarDivWrap.appendChild(leftNavBarDiv);
 
 var topNavBarDiv = document.createElement("div");
-topNavBarDiv.innerHTML = '<nav class="navbar navbar-expand-lg white-bg">\n' +
-    '        <a class="navbar-brand" href="#">Pizza Express</a>\n' +
-    '    <div class="dropdown column pull-right">\n' +
-    '\n' +
-    '        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" data-toggle="dropdown" role="button"  aria-haspopup="true" aria-expanded="false">\n' +
-    '            <div class="container-fluid">\n' +
-    '                <div class="column">\n' +
-    '                    <span class="glyphicon glyphicon-user"></span>\n' +
-    '                    <div id="AdminName">AdminName</div>\n' +
-    '                    <span class="glyphicon glyphicon-triangle-bottom"></span>\n' +
-    '                </div>\n' +
-    '            </div>\n' +
-    '        </a>\n' +
-    '        <ul class="dropdown-menu">\n' +
-    '            <li><a href="#">User Info</a></li>\n' +
-    '            <li><a href="#">Setting</a></li>\n' +
-    '            <li><a href="#">Something else here</a></li>\n' +
-    '            <li role="separator" class="divider"></li>\n' +
-    '            <li><a href="#">Sign Out</a></li>\n' +
-    '        </ul>\n' +
-    '    </div>\n' +
-    '</nav>';
+topNavBarDiv.innerHTML = '<nav class="navbar navbar-default bright-bg">'+
+    '<div class="container-fluid">'+
+    '<a class="navbar-brand" href="#">Pizza Express</a>'+
+'<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">'+
+    '<div class="navbar-right nav navbar-nav">'+
+    '<li class="dropdown">'+
+
+    '<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" data-toggle="dropdown" role="button"  aria-haspopup="true" aria-expanded="false">'+
+
+    '<span class="glyphicon glyphicon-user"></span>'+
+    '<div id="AdminName" class="inline-block">&nbsp&nbspAdminName&nbsp&nbsp</div>'+
+    '<span class="glyphicon glyphicon-triangle-bottom"></span>'+
+    '</a>'+
+    '<ul class="dropdown-menu">'+
+    '<li><a href="#">User Info</a></li>'+
+'<li><a href="#">Setting</a></li>'+
+'<li><a href="#">Something else here</a></li>'+
+'<li role="separator" class="divider"></li>'+
+    '<li><a href="#">Sign Out</a></li>'+
+'</li>'+
+'</ul>'+
+'</div>'+
+'</div>'+
+'</div>'+
+'</nav>';
 topNavBarDiv.style.textAlign="center";
 insertNodeBefore(topNavBarDiv, document.body.firstElementChild);
