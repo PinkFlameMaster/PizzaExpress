@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>HomePage</title>
-    <link rel="stylesheet" href="../css/Header.css">
+    <link rel="stylesheet" href="../css/NavBar.css">
     <script type="text/javascript" src="../js/HomePage.js"></script>
 
     <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
@@ -15,27 +15,30 @@
 </head>
 <body>
 
-<nav class="navbar navbar-expand-lg bright-bg">
+<nav class="navbar navbar-default bright-bg">
+    <div class="container-fluid">
         <a class="navbar-brand" href="#">Pizza Express</a>
-    <div class="dropdown column pull-right">
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <div class="navbar-right nav navbar-nav">
+                <li class="dropdown">
 
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" data-toggle="dropdown" role="button"  aria-haspopup="true" aria-expanded="false">
-            <div class="container-fluid">
-                <div class="column">
-                    <span class="glyphicon glyphicon-user"></span>
-                    <div id="AdminName">AdminName</div>
-                    <span class="glyphicon glyphicon-triangle-bottom"></span>
-                </div>
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" data-toggle="dropdown" role="button"  aria-haspopup="true" aria-expanded="false">
+
+                        <span class="glyphicon glyphicon-user"></span>
+                        <div id="AdminName" class="inline-block">AdminName</div>
+                        <span class="glyphicon glyphicon-triangle-bottom"></span>
+                    </a>
+                <ul class="dropdown-menu">
+                    <li><a href="#">User Info</a></li>
+                    <li><a href="#">Setting</a></li>
+                    <li><a href="#">Something else here</a></li>
+                    <li role="separator" class="divider"></li>
+                    <li><a href="#">Sign Out</a></li>
+                </li>
+                </ul>
             </div>
-        </a>
-        <ul class="dropdown-menu">
-            <li><a href="#">User Info</a></li>
-            <li><a href="#">Setting</a></li>
-            <li><a href="#">Something else here</a></li>
-            <li role="separator" class="divider"></li>
-            <li><a href="#">Sign Out</a></li>
-        </ul>
+        </div>
     </div>
-    </nav>
+</nav>
 </body>
 </html>
