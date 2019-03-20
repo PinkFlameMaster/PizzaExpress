@@ -13,3 +13,9 @@
 .nav>li>a:hover {
     background-color: #b3c0d6;
 }
+
+#mainBody{
+    display : inline-block;
+    flaot:left;
+    width: 80%;
+}
