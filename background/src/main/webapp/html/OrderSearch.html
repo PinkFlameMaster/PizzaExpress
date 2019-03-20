@@ -3,8 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <title>PizzaExpress-Search Orders</title>
-</head>
-<body>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/Order.css">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="../css/Common.css">
 
+    <script src="../lib/bootstrap-table/bootstrap-table.js"></script>
+    <link href="../lib/bootstrap-table/bootstrap-table.css" rel="stylesheet" />
+    <script src="../lib/bootstrap-table/locale/bootstrap-table-zh-CN.js"></script>
+
+    <!--@*4、页面Js文件的引用*@-->
+    <script src="../js/OrderItemTable.js"></script>
+</head>
+<body class="bright-bg">
+<div id = "mainBodyWrap">
+    <div class="Order-content" id = "mainBody">
+        <div id="store" class="">
+            曹杨路店
+        </div>
+        <table id="tb_item" >
+            <thead>
+            </thead>
+            <tbody id="tbody"></tbody>
+        </table>
+    </div>
+</div>
 </body>
 </html>
+<script type="text/javascript" src="../js/template_page.js"></script>

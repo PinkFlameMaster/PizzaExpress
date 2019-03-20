@@ -54,7 +54,7 @@ insertNodeBefore(leftNavBarDivWrap, document.getElementById("mainBody"));
 leftNavBarDivWrap.appendChild(leftNavBarDiv);
 
 var topNavBarDiv = document.createElement("div");
-topNavBarDiv.innerHTML = '<nav class="navbar navbar-default bright-bg">'+
+topNavBarDiv.innerHTML = '<nav class="navbar navbar-default white-bg">'+
     '<div class="container-fluid">'+
     '<a class="navbar-brand" href="#">Pizza Express</a>'+
 '<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">'+
