@@ -7,7 +7,27 @@ public class User {
     private String password;
     private String nickname;
     private String city;
-    private Date birthday;
+    private String birthday;
+    private boolean deleted;
+
+    public User(){
+
+    }
+
+    public User(String phoneNum, String password,String nickname,String city,String birthday){
+        this.phoneNum = phoneNum;
+        this.password = password;
+        this.nickname = nickname;
+        this.city = city;
+        this.birthday = birthday;
+    }
+    public boolean isDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
+    }
 
     public String getPhoneNum() {
         return phoneNum;
@@ -41,11 +61,11 @@ public class User {
         this.city = city;
     }
 
-    public Date getBirthday() {
+    public String getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(Date birthday) {
+    public void setBirthday(String birthday) {
         this.birthday = birthday;
     }
 }
