@@ -8,8 +8,8 @@ public class Order {
     private int factoryId;
     private int receiverAddressId;
     private OrderState state;
-    private Date orderTime;
-    private Date receiveTime;
+    private String orderTime;
+    private String receiveTime;
     private ArrayList<OrderItem> items;
 
     public int getId() {
@@ -44,19 +44,19 @@ public class Order {
         this.state = state;
     }
 
-    public Date getOrderTime() {
+    public String getOrderTime() {
         return orderTime;
     }
 
-    public void setOrderTime(Date orderTime) {
+    public void setOrderTime(String orderTime) {
         this.orderTime = orderTime;
     }
 
-    public Date getReceiveTime() {
+    public String getReceiveTime() {
         return receiveTime;
     }
 
-    public void setReceiveTime(Date receiveTime) {
+    public void setReceiveTime(String receiveTime) {
         this.receiveTime = receiveTime;
     }
 
