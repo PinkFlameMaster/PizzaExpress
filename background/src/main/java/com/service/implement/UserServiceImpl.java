@@ -6,6 +6,11 @@ import com.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 @Service
 public class UserServiceImpl implements UserService {
     @Autowired
@@ -13,16 +18,17 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User checkLogin(String phoneNum, String password) {
-        User user = userDao.findByPhoneNum(phoneNum);
-        if (user != null && user.getPassword().equals(password)) {
-            return user;
-        }
+//        User user = userDao.findByUserPhoneNum(phoneNum);
+//        if (user != null && user.getPassword().equals(password)) {
+//            return user;
+//        }
         return null;
     }
 
     @Override
     public User loginByPhoneNum(String phoneNum) {
-        return userDao.findByPhoneNum(phoneNum);
+        return null;
+        //        return userDao.findByUserPhoneNum(phoneNum);
     }
 
     @Override
@@ -34,6 +40,25 @@ public class UserServiceImpl implements UserService {
     public User loginByWechat(String wechat) {
         return userDao.findByWechat(wechat);
     }
+
+    @Override
+    public List<User> queryByNickname(String nickname) {
+        return userDao.findByUserNickName(nickname);
+    }
+
+    @Override
+    public List<User> queryByPhoneNum(String phoneNum) {
+        return  userDao.findByUserPhoneNum(phoneNum);
+    }
+
+    @Override
+    public List<User> queryByPhoneAndNickname(String nickname, String phoneNum) {
+        Map paramMap=new HashMap();
+        paramMap.put("nickname",nickname);
+        paramMap.put("phoneNum",phoneNum);
+        return userDao.findByUserPhoneNick(paramMap);
+    }
+
 
     @Override
     public boolean modifyInfo(User user) {

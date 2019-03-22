@@ -2,8 +2,10 @@ package com.controller;
 
 import com.dto.UserDto;
 import com.pojo.User;
+import com.service.UserService;
 import com.vo.ReturnMsg;
 import net.sf.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,7 +18,8 @@ import java.util.List;
 @RequestMapping("/user")
 public class UserController {
 
-
+    @Autowired
+    UserService userService;
 
     @RequestMapping("/search")
     @ResponseBody
@@ -29,24 +32,19 @@ public class UserController {
         //定义返回数据
         ReturnMsg ret =new ReturnMsg();
         ret.setStatus("failure");
+        List<User> users = new ArrayList<>();
 
-        //查询 user信息
-        //当查询到数据时，mock数据
-        List<UserDto> users = new ArrayList<>();
-        users.add(new UserDto("15800111111","小王","上海","2001-01-01", false));
-        users.add(new UserDto("15800222222","小李","上海","2001-01-01", false));
-        users.add(new UserDto("15800333333","小韩","上海","2001-01-01",false));
-
-        ret.setData(users);
+        if (u.getPhoneNum() == null|| u.getPhoneNum().equals("")) {
+            users = userService.queryByNickname(u.getNickname());
+        } else if (u.getNickname() == null|| u.getNickname().equals("")){
+            users = userService.queryByPhoneNum(u.getPhoneNum());
+        }else{
+            users = userService.queryByPhoneAndNickname(u.getNickname(), u.getPhoneNum());
+        }
+        if(users != null)
+            ret.setData(users);
+        else ret.setData(new ArrayList<>());
         ret.setStatus("success");
-        //end mock
-
-        //当查询遇到错误时
-//        ret.setStatus("failure");
-//        ret.setErrorMsg("这是一条错误信息");
-
-//        User user = (User) JSONObject.toBean(JSONObject.fromObject(request.getParameter("user")), User.class);
-
         return ret;
     }
 }

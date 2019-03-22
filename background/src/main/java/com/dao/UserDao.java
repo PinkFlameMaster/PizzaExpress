@@ -1,12 +1,18 @@
 package com.dao;
 import com.pojo.User;
+
+import java.util.List;
+import java.util.Map;
+
 public interface UserDao {
     /**
      * 通过号码查询用户信息
      * @param phoneNum 用户号码
      * @return 若已经注册，则返回用户信息，否则返回null
      */
-    User findByPhoneNum(String phoneNum);
+    List<User> findByUserPhoneNum(String phoneNum);
+    List<User> findByUserNickName(String nickName);
+    List<User> findByUserPhoneNick(Map paramMap);
 
     /**
      * 通过QQ查询用户信息
