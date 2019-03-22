@@ -1,7 +1,5 @@
 package com.pojo;
 
-import java.util.Date;
-
 public class Ingredient {
     private int id;
     private String type;

@@ -1,15 +1,13 @@
 package com.pojo;
 
-import javafx.util.Pair;
-
-import java.util.ArrayList;
+import java.util.Map;
 
 public class MenuItem {
     private int id;
     private String name;
     private float prize;
     private String introduce;
-    private ArrayList<Pair<String, Float>> ingredients; // 原材料的类型-数量
+    private boolean onSale;
 
     public int getId() {
         return id;
@@ -43,11 +41,11 @@ public class MenuItem {
         this.introduce = introduce;
     }
 
-    public ArrayList<Pair<String, Float>> getIngredients() {
-        return ingredients;
+    public boolean isOnSale() {
+        return onSale;
     }
 
-    public void setIngredients(ArrayList<Pair<String, Float>> ingredients) {
-        this.ingredients = ingredients;
+    public void setOnSale(boolean onSale) {
+        this.onSale = onSale;
     }
 }

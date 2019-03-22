@@ -8,7 +8,8 @@ public class ReceiverAddress {
     private String address;
     private float latitude;
     private float longitude;
-
+    private boolean deleted;
+    
     public int getId() {
         return id;
     }
@@ -63,5 +64,13 @@ public class ReceiverAddress {
 
     public void setLongitude(float longitude) {
         this.longitude = longitude;
+    }
+
+    public boolean isDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
     }
 }

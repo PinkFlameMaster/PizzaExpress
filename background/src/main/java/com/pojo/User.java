@@ -1,7 +1,5 @@
 package com.pojo;
 
-import java.util.Date;
-
 public class User {
     private String phoneNum;
     private String password;
@@ -14,13 +12,15 @@ public class User {
 
     }
 
-    public User(String phoneNum, String password,String nickname,String city,String birthday){
+    public User(String phoneNum, String password, String nickname, String city, String birthday, boolean deleted) {
         this.phoneNum = phoneNum;
         this.password = password;
         this.nickname = nickname;
         this.city = city;
         this.birthday = birthday;
+        this.deleted = deleted;
     }
+
     public boolean isDeleted() {
         return deleted;
     }

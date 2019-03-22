@@ -1,16 +1,12 @@
 package com.pojo;
 
-import java.util.ArrayList;
-import java.util.Date;
-
 public class Order {
     private int id;
     private int factoryId;
     private int receiverAddressId;
-    private OrderState state;
+    private String state;
     private String orderTime;
     private String receiveTime;
-    private ArrayList<OrderItem> items;
 
     public int getId() {
         return id;
@@ -36,11 +32,11 @@ public class Order {
         this.receiverAddressId = receiverAddressId;
     }
 
-    public OrderState getState() {
+    public String getState() {
         return state;
     }
 
-    public void setState(OrderState state) {
+    public void setState(String state) {
         this.state = state;
     }
 
@@ -58,13 +54,5 @@ public class Order {
 
     public void setReceiveTime(String receiveTime) {
         this.receiveTime = receiveTime;
-    }
-
-    public ArrayList<OrderItem> getItems() {
-        return items;
-    }
-
-    public void setItems(ArrayList<OrderItem> items) {
-        this.items = items;
     }
 }
