@@ -1,0 +1,40 @@
+.bright-bg{
+    background-color: #eeeeee;
+}
+
+.gray-blue-bg{
+    background-color: #b3c0d6;
+}
+
+.white-bg {
+    background-color: #FFFFFF;
+}
+
+.nav>li>a:hover {
+    background-color: #b3c0d6;
+}
+
+#mainBody{
+    background-color: #FFFFFF;
+    display : inline-block;
+    flaot:left;
+    width: 80%;
+}
+<<<<<<< HEAD
+
+.common-input-group{
+    display: inline-block;
+    width:200px;
+}
+=======
+.inline-block{
+     display: inline-block;
+ }
+.navRight{
+    display: inline-block;
+    float: none;
+    text-align:left;
+    vertical-align: middle;
+    margin: auto;
+}
+>>>>>>> 8bf6b503530816837264b3fdd767aeef67bb34a9
