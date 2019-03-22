@@ -118,14 +118,17 @@ var ButtonInit = function () {
 $("#searchForm-searchBtn").click(function(){
     // alert("Value: " + $("#test").val());
 
+    //user对象
     var user={};
     user.nickname = $("#searchForm-name").val();
     user.phoneNum = $("#searchForm-phoneNum").val();
+    //user状态
     var status = $("#searchForm-status").val();
-
+    //封装ajax参数
     var params = {};
     params.user = JSON.stringify(user);
     params.status = status;
+    //发起ajax请求
     $.ajax({
         type: "POST",
         url: "../user/search",
@@ -134,16 +137,12 @@ $("#searchForm-searchBtn").click(function(){
         //	         		   contentType: "application/json; charset=utf-8",//此处不能设置，否则后台无法接值
         success:function(data){
             alert("success");
-            if(data.success === true) {
+            if(data.status === "success") {
                 $('#tb_users').bootstrapTable('load', data.data);
             }
             else{
                 alert("错误:"+data.errorMsg);
             }
-
-            // if(data.errorMessage == "none"){
-            // document.getElementById("returnXml").innerHTML =data.data;
-            // }
         },
         error:function(data){
             alert("出现异常，异常原因【" + data + "】!");
