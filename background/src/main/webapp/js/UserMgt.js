@@ -134,8 +134,12 @@ $("#searchForm-searchBtn").click(function(){
         //	         		   contentType: "application/json; charset=utf-8",//此处不能设置，否则后台无法接值
         success:function(data){
             alert("success");
-            console.log("success");
-            $('#tb_users').bootstrapTable('load',data.data);
+            if(data.success === true) {
+                $('#tb_users').bootstrapTable('load', data.data);
+            }
+            else{
+                alert("错误:"+data.errorMsg);
+            }
 
             // if(data.errorMessage == "none"){
             // document.getElementById("returnXml").innerHTML =data.data;

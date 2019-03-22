@@ -25,7 +25,8 @@ public class UserController {
         RetrunMsg ret =new RetrunMsg();
         ret.setSuccess(false);
 
-        //查询 user信息， 查询到，mock数据
+        //查询 user信息
+        //当查询到数据时，mock数据
         List<UserDto> users = new ArrayList<>();
         users.add(new UserDto("15800111111","小王","上海","2001-01-01", false));
         users.add(new UserDto("15800222222","小李","上海","2001-01-01", false));
@@ -34,6 +35,11 @@ public class UserController {
         ret.setData(users);
         ret.setSuccess(true);
         //end mock
+
+        //当查询遇到错误时
+//        ret.setSuccess(false);
+//        ret.setErrorMsg("这是一条错误信息");
+
 
 
         return ret;

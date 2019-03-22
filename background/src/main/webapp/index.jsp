@@ -29,5 +29,12 @@
         </tr>
     </table>
 </form>
+
+<script type="text/javascript">
+    // var newWin = window.open("../html/Login.html");
+    // var newWin = window.open("../views/UserMgt.jsp");
+</script>
+
 </body>
 </html>
+
