@@ -6,7 +6,7 @@ public class Ingredient {
     private int id;
     private String type;
     private String source;
-    private Date inportDate;
+    private String inportDate;
     private int factoryId;
     private float amount;
 
@@ -34,11 +34,11 @@ public class Ingredient {
         this.source = source;
     }
 
-    public Date getInportDate() {
+    public String getInportDate() {
         return inportDate;
     }
 
-    public void setInportDate(Date inportDate) {
+    public void setInportDate(String inportDate) {
         this.inportDate = inportDate;
     }
 

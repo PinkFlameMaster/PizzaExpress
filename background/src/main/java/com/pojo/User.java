@@ -7,7 +7,7 @@ public class User {
     private String password;
     private String nickname;
     private String city;
-    private Date birthday;
+    private String birthday;
 
     public String getPhoneNum() {
         return phoneNum;
@@ -41,11 +41,11 @@ public class User {
         this.city = city;
     }
 
-    public Date getBirthday() {
+    public String getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(Date birthday) {
+    public void setBirthday(String birthday) {
         this.birthday = birthday;
     }
 }
