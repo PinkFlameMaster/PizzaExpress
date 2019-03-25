@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Bootstrap 实例 - 响应式的导航栏</title>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/common.css">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class ="col-xs-2">
+    <ul class="nav nav-pills nav-stacked light-blue-bg">
+        <li class="active"><a href="./HomePage.html">首页</a></li>
+        <li><a href="#">用户管理</a></li>
+        <li>
+            <a data-toggle="collapse" data-parent="#accordion"
+               href="#orderMgtItem">
+                订单管理<b class="caret"></b>
+            </a>
+            <ul id = "orderMgtItem">
+                <li><a href="#">退单审核</a></li>
+                <li><a href="#">订单查询</a></li>
+                <li><a href="#">订单详情</a></li>
+            </ul>
+        </li>
+        <li><a href="#">库存管理</a></li>
+        <li>
+            <a data-toggle="collapse" data-parent="#accordion"
+               href="#menuMgtItem">
+                菜单管理<b class="caret"></b>
+            </a>
+            <ul id = "menuMgtItem">
+                <li><a href="#">菜单查询</a></li>
+                <li><a href="#">新增菜品</a></li>
+            </ul>
+        </li>
+        <li><a href="#">店面管理</a></li>
+        <li><a href="#">系统设置</a></li>
+        <li>
+            <a data-toggle="collapse" data-parent="#accordion"
+               href="#systemSettingItem">
+                系统设置<b class="caret"></b>
+            </a>
+            <ul id = "systemSettingItem">
+                <li><a href="#">权限查看</a></li>
+            </ul>
+        </li>
+    </ul>
+</div>
+
+</body>
+</html>

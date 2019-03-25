@@ -1,21 +1,17 @@
 package com.controller;
 
-import com.dto.UserDto;
 import com.pojo.MenuItem;
 import com.pojo.OrderItem;
 import com.pojo.ReceiverAddress;
 import com.pojo.User;
 import com.service.UserService;
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import com.vo.ReturnMsg;
-import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
