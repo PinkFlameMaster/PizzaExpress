@@ -1,9 +1,8 @@
 package com.controller;
 
-import com.pojo.MenuItem;
-import com.pojo.OrderItem;
-import com.pojo.ReceiverAddress;
-import com.pojo.User;
+import com.pojo.*;
+import com.service.MenuService;
+import com.service.OrderService;
 import com.service.UserService;
 import com.vo.ReturnMsg;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +11,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -20,7 +21,10 @@ import java.util.List;
 public class HomeController {
 
     @Autowired
-    UserService userService;
+    MenuService menuService;
+
+    @Autowired
+    OrderService orderService;
 
     @RequestMapping("/homePicture")
     @ResponseBody
@@ -37,33 +41,19 @@ public class HomeController {
     @RequestMapping("/menu")
     @ResponseBody
     public ReturnMsg getMenuItem(Model model)
-    {
-        //定义返回数据
-        ReturnMsg ret =new ReturnMsg();
-        ret.setStatus("failure");
-        List<MenuItem> items=new ArrayList<>();
-
-        MenuItem item1=new MenuItem();
-        item1.setId(1);
-        item1.setIntroduce("臭披萨");
-        item1.setName("鲱鱼罐头披萨");
-        item1.setOnSale(true);
-        item1.setPrize(100);
-
-        MenuItem item2=new MenuItem();
-        item2.setId(2);
-        item2.setIntroduce("香披萨");
-        item2.setName("大便披萨");
-        item2.setOnSale(true);
-        item2.setPrize(200);
-
-        items.add(item1);
-        items.add(item2);
-        if(items!=null)
         {
-            ret.setData(items);
-        }
-        else
+            //定义返回数据
+            ReturnMsg ret =new ReturnMsg();
+            ret.setStatus("failure");
+            List<MenuItem> items=new ArrayList<>();
+
+            items=menuService.queryAllOnSale();
+
+            if(items!=null)
+            {
+                ret.setData(items);
+            }
+            else
         {
             ret.setData(new ArrayList<>());
         }
@@ -80,35 +70,55 @@ public class HomeController {
         ret.setStatus("failure");
         List<MenuItem> items=new ArrayList<>();
 
-        MenuItem item1=new MenuItem();
-        item1.setId(1);
-        item1.setIntroduce("臭披萨");
-        item1.setName("鲱鱼罐头披萨");
-        item1.setOnSale(true);
-        item1.setPrize(100);
-
-
-        items.add(item1);
-        if(items!=null)
-        {
-            ret.setData(items);
-        }
-        else
+        MenuItem menuItem=menuService.queryItemByID(itemID);
+        if(menuItem==null)
         {
             ret.setData(new ArrayList<>());
         }
+        else
+        {
+            items.add(menuItem);
+            ret.setData(items);
+        }
+
         ret.setStatus("success");
         return ret;
     }
 
     @RequestMapping("/orderCommit")
     @ResponseBody
-    public Boolean commitOrder(Model model, User user, ReceiverAddress receiverAddress, ArrayList<OrderItem> orderItems)
+    public ReturnMsg commitOrder(Model model, User user, ReceiverAddress receiverAddress, ArrayList<OrderItem> orderItems)
     {
-        Boolean commitSuccess=true;
+        //定义返回数据
+        ReturnMsg ret =new ReturnMsg();
+        ret.setStatus("success");
+        ret.setData(new ArrayList<>());
 
+        //下单时间
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
+        String orderTime=df.format(new Date());// new Date()为获取当前系统时间
 
+        //生成order的id
+        int id=orderService.getMaxOrderID();
+        id+=1;
 
-        return commitSuccess;
+        Order order=new Order();
+        order.setId(id);
+        order.setOrderTime(orderTime);
+        order.setReceiverAddressId(receiverAddress.getId());
+        order.setState("Ordered");
+
+        //新增pizzaOrder
+        orderService.commitOrder(order);
+
+        for(int i=0;i<orderItems.size();i++)
+        {
+            //新增orderItem
+            OrderItem orderItem=orderItems.get(i);
+            orderItem.setOrderId(id);
+            orderService.insertOrderItem(orderItem);
+        }
+
+        return ret;
     }
 }

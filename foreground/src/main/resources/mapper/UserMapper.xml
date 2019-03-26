@@ -29,5 +29,16 @@
         WHERE phoneNum LIKE CONCAT('%',#{phoneNum},'%') AND nickname LIKE CONCAT('%',#{nickname},'%')
     </select>
 
-
+    <insert id="registerNew"  parameterType="com.pojo.User">
+        INSERT INTO user
+        (
+        phoneNum,
+        password
+        )
+        VALUES
+        (
+        #{phoneNum},
+        #{password}
+        )
+    </insert>
 </mapper>
