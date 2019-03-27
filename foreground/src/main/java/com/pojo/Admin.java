@@ -3,10 +3,12 @@ package com.pojo;
 public class Admin {
     private String username;
     private String password;
+    private String name;
+    private String role;
     private int factoryId;
-    private String entryTime;
-    private String position;
     private String phoneNum;
+    private String entryTime;
+    private boolean resigned;
 
     public String getUsername() {
         return username;
@@ -22,6 +24,14 @@ public class Admin {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public int getFactoryId() {
@@ -40,14 +50,6 @@ public class Admin {
         this.entryTime = entryTime;
     }
 
-    public String getPosition() {
-        return position;
-    }
-
-    public void setPosition(String position) {
-        this.position = position;
-    }
-
     public String getPhoneNum() {
         return phoneNum;
     }
@@ -56,4 +58,19 @@ public class Admin {
         this.phoneNum = phoneNum;
     }
 
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    public boolean isResigned() {
+        return resigned;
+    }
+
+    public void setResigned(boolean resigned) {
+        this.resigned = resigned;
+    }
 }

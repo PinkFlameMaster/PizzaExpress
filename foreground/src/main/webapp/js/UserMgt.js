@@ -136,7 +136,7 @@ $("#searchForm-searchBtn").click(function(){
         dataType:"json",
         //	         		   contentType: "application/json; charset=utf-8",//此处不能设置，否则后台无法接值
         success:function(data){
-            // alert("success");
+            alert("success");
             if(data.status === "success") {
                 $('#tb_users').bootstrapTable('load', data.data);
             }
@@ -151,49 +151,6 @@ $("#searchForm-searchBtn").click(function(){
 });
 
 
-$("#btn_delete").click(function(){
-    var rows = $("#tb_users").bootstrapTable('getSelections');
-
-    var phoneNums = []
-    rows.forEach(function(value){
-        phoneNums.push(value.phoneNum);
-    })
-    var params = {};
-    // params.phoneNums = JSON.stringify(phoneNums);
-    params = {"phoneNums":phoneNums}
-    //发起ajax请求
-    $.ajax({
-        type: "POST",
-        url: "../user/deleteByPhoneNum",
-        data: params,
-        traditional:true,//防止深度序列化
-        dataType:"json",
-        //	         		   contentType: "application/json; charset=utf-8",//此处不能设置，否则后台无法接值
-        success:function(data){
-            // alert("success");
-            if(data.status === "success") {
-                var deletedUsers = data.data[0];
-                var undeletedUsers = data.data[1];
-                $("#tb_users").bootstrapTable('remove',{
-                    field:"phoneNum",
-                    values: deletedUsers
-                })
-                if(undeletedUsers.length === 0){
-                    alert("所选用户已删除");
-                }
-                else{
-                    alert('用户：'+ undeletedUsers.toString()+' 删除失败');
-                }
-            }
-            else{
-                alert("错误:"+data.errorMsg);
-            }
-        },
-        error:function(data){
-            alert("出现异常，异常原因【" + data + "】!");
-        }
-    });
-});
 
 var mockData = [
     {

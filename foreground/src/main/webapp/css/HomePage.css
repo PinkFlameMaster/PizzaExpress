@@ -1,0 +1,35 @@
+.admin-info
+{
+    height: 320px;
+    width:400px;
+    border-radius: 10px;
+    background-color: #aaaaaa;
+    color: #111111;
+    margin: 40px;
+}
+.info-header
+{
+    margin-top: 60px;
+    height: 100px;
+}
+.bs-callout {
+    padding: 5px;
+    padding-left: 10px;
+    border: 0px solid;
+    border-left-width: 5px;
+}
+.bs-callout-primary {
+    border-left-color: #428bca;
+}
+.portrait
+{
+}
+.info-content
+{
+    margin-bottom: 20px;
+    font-size: medium;
+}
+.homepage-content
+{
+    /*max-width: 600px ;*/
+}
