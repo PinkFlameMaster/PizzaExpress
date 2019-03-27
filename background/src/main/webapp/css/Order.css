@@ -1,9 +1,44 @@
-#store{
-    font-size: large;
+#factory{
+    font-size: x-large;
     font-weight: bold;
     padding: 20px;
 }
 .Order-content
 {
     padding: 40px;
+}
+.delivery-fee
+{
+    margin-top: 20px;
+}
+hr{
+    margin-top: 10px;
+    border-top: 1px solid #777777;
+}
+.delivery-info-content
+{
+    margin-top: 10px;
+    LINE-HEIGHT:15px;
+}
+.title
+{
+    margin-top: 10px;
+    font-size: x-large;
+}
+.search-btn{
+     margin:0px 40px;
+     width:100px;
+ }
+.grid-wrap{
+    width: 90%;
+    margin-left:40px;
+    margin-bottom:50px;
+}
+.Order-search
+{
+    padding: 20px;
+}
+
+.common-input-group{
+    margin-left:10px;
 }
