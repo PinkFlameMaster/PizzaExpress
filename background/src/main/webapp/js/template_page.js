@@ -1,7 +1,11 @@
 var insertNodeBefore = function (newNode, oldNode){
     oldNode.parentNode.insertBefore(newNode,oldNode);
 }
-
+var adminInfo={}
+var username = "";
+var priority = "";
+adminInfo.username = username == null ? "AdminName":username;
+adminInfo.priority = priority == null? "all" : priority;
 var leftNavBarDivWrap = document.createElement("div");
 var leftNavBarDiv = document.createElement("div");
 leftNavBarDiv.innerHTML = '' +
@@ -64,7 +68,7 @@ topNavBarDiv.innerHTML = '<nav class="navbar navbar-default bright-bg">'+
     '<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" data-toggle="dropdown" role="button"  aria-haspopup="true" aria-expanded="false">'+
 
     '<span class="glyphicon glyphicon-user"></span>'+
-    '<div id="AdminName" class="inline-block">&nbsp&nbspAdminName&nbsp&nbsp</div>'+
+    '<div id="AdminName" class="inline-block">&nbsp&nbsp'+adminInfo.username+'&nbsp&nbsp</div>'+
     '<span class="glyphicon glyphicon-triangle-bottom"></span>'+
     '</a>'+
     '<ul class="dropdown-menu">'+
