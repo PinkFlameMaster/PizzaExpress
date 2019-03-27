@@ -5,8 +5,8 @@ $(function () {
     oTable.Init();
 
     //2.初始化Button的点击事件
-    var oButtonInit = new ButtonInit();
-    oButtonInit.Init();
+    // var oButtonInit = new ButtonInit();
+    // oButtonInit.Init();
 
 });
 
@@ -16,8 +16,8 @@ var TableInit = function () {
     //初始化Table
     oTableInit.Init = function () {
         $('#tb_users').bootstrapTable({
-            url: '/Home/GetDepartment',         //请求后台的URL（*）
-            method: 'get',                      //请求方式（*）
+            // url: '/Home/GetDepartment',         //请求后台的URL（*）
+            // method: 'get',                      //请求方式（*）
             clickEdit: true,                    //点击修改
             toolbar: '#toolbar',                //工具按钮用哪个容器
             striped: true,                      //是否显示行间隔色
@@ -37,7 +37,7 @@ var TableInit = function () {
             minimumCountColumns: 2,             //最少允许的列数
             clickToSelect: true,                //是否启用点击选中行
             height: 550,                        //行高，如果没有设置height属性，表格自动根据记录条数觉得表格高度
-            uniqueId: "name",                     //每一行的唯一标识，一般为主键列
+            uniqueId: "phoneNum",                     //每一行的唯一标识，一般为主键列
             showToggle:true,                    //是否显示详细视图和列表视图的切换按钮
             cardView: false,                    //是否显示详细视图
             detailView: false,                   //是否显示父子表
@@ -46,31 +46,27 @@ var TableInit = function () {
             columns: [{
                 checkbox: true
             }, {
-                field: 'name',
+                field: 'nickname',
                 title: '用户姓名',
-            }, {
-                field: 'sex',
-                title: '性别',
-                edit:true,
-            }, {
+            },{
                 field: 'birthday',
                 title: '生日',
                 edit:false,
             }, {
-                field: 'telephone',
+                field: 'phoneNum',
                 title: '联系方式'
-            }, {
-                field: 'address',
-                title: '地址'
-            }, {
+            },{
                 field: 'city',
                 title: '城市'
             }, {
-                field: 'status',
-                title: '状态'
-            }, {
-                field: 'remark',
-                title: '备注'
+                field: 'deleted',
+                title: '状态',
+                formatter: function(value, row, index) {
+                    if(value === true) {
+                        return "正常";
+                    }
+                    else return "已删除"
+                }
             },],
 
             onClickCell: function(field, value, row, $element) {
@@ -93,17 +89,17 @@ var TableInit = function () {
         }
     };
 
-    //得到查询的参数
     oTableInit.queryParams = function (params) {
-        var temp = {   //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
-            limit: params.limit,   //页面大小
-            offset: params.offset,  //页码
-            departmentname: $("#txt_search_departmentname").val(),
-            statu: $("#txt_search_statu").val()
-        };
-        return temp;
+        // var temp = {   //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
+        //     limit: params.limit,   //页面大小
+        //     offset: params.offset,  //页码
+        //     departmentname: $("#txt_search_departmentname").val(),
+        //     statu: $("#txt_search_statu").val()
+        // };
+        // return temp;
     };
     return oTableInit;
+
 };
 
 
@@ -118,34 +114,63 @@ var ButtonInit = function () {
     return oInit;
 };
 
+
+$("#searchForm-searchBtn").click(function(){
+    // alert("Value: " + $("#test").val());
+
+    //user对象
+    var user={};
+    user.nickname = $("#searchForm-name").val();
+    user.phoneNum = $("#searchForm-phoneNum").val();
+    //user状态
+    var status = $("#searchForm-status").val();
+    //封装ajax参数
+    var params = {};
+    params.user = JSON.stringify(user);
+    params.status = status;
+    //发起ajax请求
+    $.ajax({
+        type: "POST",
+        url: "../user/search",
+        data: params,
+        dataType:"json",
+        //	         		   contentType: "application/json; charset=utf-8",//此处不能设置，否则后台无法接值
+        success:function(data){
+            alert("success");
+            if(data.status === "success") {
+                $('#tb_users').bootstrapTable('load', data.data);
+            }
+            else{
+                alert("错误:"+data.errorMsg);
+            }
+        },
+        error:function(data){
+            alert("出现异常，异常原因【" + data + "】!");
+        }
+    });
+});
+
+
+
 var mockData = [
     {
-        "name": "小王",
-        "sex": "♂",
+        "nickname": "小王",
         "birthday": "1997-09-12",
-        "telephone":"15836445998",
-        "address":"中山北路3661号",
+        "phoneNum":"15836445998",
         "city":"上海",
-        "status":"正常",
-        "remark":"none"
+        "deleted":true,
     },{
-        "name": "小李",
-        "sex": "♂",
+        "nickname": "小李",
         "birthday": "1997-09-12",
-        "telephone":"15836445998",
-        "address":"中山北路3661号",
+        "phoneNum":"15836445998",
         "city":"上海",
-        "status":"正常",
-        "remark":"none"
+        "deleted":false,
     },{
-        "name": "小赵",
-        "sex": "♀",
+        "nickname": "小赵",
         "birthday": "1997-09-12",
-        "telephone":"15836445998",
-        "address":"中山北路3661号",
+        "phoneNum":"15836445998",
         "city":"北京",
-        "status":"正常",
-        "remark":"none"
+        "deleted":true,
     },
 ]
 

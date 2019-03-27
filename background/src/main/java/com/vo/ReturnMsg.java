@@ -2,9 +2,9 @@ package com.vo;
 
 import java.util.List;
 
-public class RetrunMsg {
+public class ReturnMsg {
     private List data;          //返回的数据 push进 List中
-    private boolean isSuccess;  //是否能正确返回数据
+    private String status;  //是否能正确返回数据 ,选填“success”和“failure”
     private String errorMsg;    //错误信息
 
     public List getData() {
@@ -15,12 +15,12 @@ public class RetrunMsg {
         this.data = data;
     }
 
-    public boolean isSuccess() {
-        return isSuccess;
+    public String getStatus() {
+        return status;
     }
 
-    public void setSuccess(boolean success) {
-        isSuccess = success;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public String getErrorMsg() {

@@ -1,26 +1,25 @@
-package com.pojo;
+package com.dto;
 
-public class User {
+import java.util.Date;
+
+public class UserDto {
     private String phoneNum;
-    private String password;
     private String nickname;
     private String city;
     private String birthday;
     private boolean deleted;
 
-    public User(){
+    public UserDto(){
 
     }
 
-    public User(String phoneNum, String password, String nickname, String city, String birthday, boolean deleted) {
+    public UserDto(String phoneNum, String nickname, String city, String birthday, boolean deleted){
         this.phoneNum = phoneNum;
-        this.password = password;
         this.nickname = nickname;
         this.city = city;
         this.birthday = birthday;
         this.deleted = deleted;
     }
-
     public boolean isDeleted() {
         return deleted;
     }
@@ -35,14 +34,6 @@ public class User {
 
     public void setPhoneNum(String phoneNum) {
         this.phoneNum = phoneNum;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public String getNickname() {
