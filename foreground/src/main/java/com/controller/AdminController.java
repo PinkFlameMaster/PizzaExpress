@@ -26,11 +26,12 @@ public class AdminController {
     }
 
     @RequestMapping("/checkLogin")
-    public String checkLogin(Admin Admin){
+    public String checkLogin(Admin Admin, HttpSession session){
         //调用service方法
         Admin = adminService.checkLogin(Admin.getUsername(), Admin.getPassword());
         //若有Admin则添加到model里并且跳转到成功页面
         if(Admin != null){
+            session.setAttribute("admin", Admin);
             return "success";
         }
         return "fail";

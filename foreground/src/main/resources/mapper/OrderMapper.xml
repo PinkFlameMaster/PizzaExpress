@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.OrderDao">
+
+    <insert id="commitOrder"  parameterType="com.pojo.Order">
+        INSERT INTO pizzaOrder
+        (
+        id,
+        receiverAddressId,
+        state,
+        orderTime
+        )
+        VALUES
+        (
+        #{id},
+        #{receiverAddressId},
+        #{state},
+        #{orderTime},
+        )
+    </insert>
+
+    <select id="getMaxOrderID" resultType="int">
+        SELECT max(id)
+        FROM pizzaOrder
+    </select>
+
+    <insert id="insertOrderItem"  parameterType="com.pojo.OrderItem">
+        INSERT INTO orderItem
+        (
+        orderId,
+        menuItemId,
+        actualUnitPrize,
+        num
+        )
+        VALUES
+        (
+        #{orderId},
+        #{menuItemId},
+        #{actualUnitPrize},
+        #{num},
+        )
+    </insert>
+
+</mapper>

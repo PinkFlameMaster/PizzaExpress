@@ -11,6 +11,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.aliyuncs.CommonRequest;
+import com.aliyuncs.CommonResponse;
+import com.aliyuncs.DefaultAcsClient;
+import com.aliyuncs.IAcsClient;
+import com.aliyuncs.exceptions.ClientException;
+import com.aliyuncs.exceptions.ServerException;
+import com.aliyuncs.http.MethodType;
+import com.aliyuncs.profile.DefaultProfile;
+
 @Service
 public class UserServiceImpl implements UserService {
     @Autowired
@@ -23,6 +32,49 @@ public class UserServiceImpl implements UserService {
 //            return user;
 //        }
         return null;
+    }
+
+    @Override
+    public String generateIDCode(String phoneNum)
+    {
+        String code="";
+        if(phoneNum==null || phoneNum=="")
+            return code;
+
+        code=smsCode();
+        DefaultProfile profile = DefaultProfile.getProfile("default", "<accessKeyId>", "<accessSecret>");
+        IAcsClient client = new DefaultAcsClient(profile);
+
+        CommonRequest request = new CommonRequest();
+        //request.setProtocol(ProtocolType.HTTPS);
+        request.setMethod(MethodType.POST);
+        request.setDomain("dysmsapi.aliyuncs.com");
+        request.setVersion("2017-05-25");
+        request.setAction("SendSms");
+        request.putQueryParameter("PhoneNumbers", phoneNum);
+        request.putQueryParameter("SignName", "PizzaExpress");
+        request.putQueryParameter("TemplateCode", "SMS_161360041");
+        request.putQueryParameter("TemplateParam", "{\"code\":\""+code+"\"}");
+        try {
+            CommonResponse response = client.getCommonResponse(request);
+            System.out.println(response.getData());
+        } catch (ServerException e) {
+            code="error";
+            e.printStackTrace();
+        } catch (ClientException e) {
+            code="error";
+            e.printStackTrace();
+        }
+        finally
+        {
+            return code;
+        }
+    }
+
+    // 创建验证码
+    public static String smsCode() {
+        String random = (int) ((Math.random() * 9 + 1) * 100000) + "";
+        return random;
     }
 
     @Override

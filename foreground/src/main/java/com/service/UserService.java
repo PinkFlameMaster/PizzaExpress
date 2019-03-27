@@ -6,6 +6,8 @@ import java.util.List;
 public interface UserService {
     User checkLogin(String phoneNum, String password);
 
+    String generateIDCode(String phoneNum);
+
     User loginByPhoneNum(String phoneNum);
 
     User loginByQQ(String qq);
