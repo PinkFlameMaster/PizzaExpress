@@ -5,3 +5,4 @@ function getQueryString(name) {
     }
     return result[1];
 }
+
