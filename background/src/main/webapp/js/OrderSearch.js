@@ -13,8 +13,6 @@ var TableInit = function () {
     //初始化Table
     oTableInit.Init = function () {
         $('#tb_order').bootstrapTable({
-            url: '/Home/GetDepartment',         //请求后台的URL（*）
-            method: 'get',                      //请求方式（*）
             clickEdit: false,                    //点击修改
             toolbar: '#toolbar',                //工具按钮用哪个容器
             striped: true,                      //是否显示行间隔色
@@ -47,18 +45,21 @@ var TableInit = function () {
                 title: '用户名称',
                 edit:false,
             }, {
-                field: 'phoneNum',
+                field: 'userid',
                 title: '用户id',
                 edit:false,
             }, {
-                field: 'contact',
-                title: '门店联系方式'
+                field: 'phoneNum',
+                title: '收货人联系方式'
             },{
                 field: 'factory',
                 title: '配送门店'
             },{
                 field: 'DetailHref',
-                title: '查看详情'
+                title: '查看详情',
+                formatter: function(value, row, index) {
+                    return '<a href="../../html/OrderInfo.html?id='+row.id+'">查看详情</a>'
+                }
             } ],
 
             onClickCell: function(field, value, row, $element) {
@@ -126,15 +127,15 @@ var mockData = [
     {
         "id": 0,
         "username": "Item 0",
-        "phoneNum": "$0",
-        "contact":"abc",
+        "userid":"1909999999",
+        "phoneNum": "1801999999",
         "factory":"dasw"
     },
     {
         "id":1,
         "username": "Item 1",
-        "phoneNum": "$0",
-        "contact":"abc",
+        "userid":"1909999999",
+        "phoneNum": "1801999999",
         "factory":"dasw"
     },
 ]

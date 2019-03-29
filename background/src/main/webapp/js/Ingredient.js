@@ -12,7 +12,7 @@ var TableInit = function () {
     var oTableInit = new Object();
     //初始化Table
     oTableInit.Init = function () {
-        $('#tb_item').bootstrapTable({
+        $('#tb_import').bootstrapTable({
             url: '/Home/GetDepartment',         //请求后台的URL（*）
             method: 'get',                      //请求方式（*）
             clickEdit: false,                    //点击修改
@@ -30,7 +30,7 @@ var TableInit = function () {
             search: false,                       //是否显示表格搜索，此搜索是客户端搜索，不会进服务端，所以，个人感觉意义不大
             strictSearch: true,
             showColumns: false,                  //是否显示所有的列
-            showRefresh: true,                  //是否显示刷新按钮
+            showRefresh: false,                  //是否显示刷新按钮
             minimumCountColumns: 2,             //最少允许的列数
             clickToSelect: false,                //是否启用点击选中行
             uniqueId: "ID",                     //每一行的唯一标识，一般为主键列
@@ -40,20 +40,17 @@ var TableInit = function () {
             editable: false,
 
             columns: [{
-                field: 'itemType',
-                title: '原料品种',
-                formatter: function(value, row, index) {
-                    return '<a href="../../html/Ingredient.html?id='+row.id+'">'+row.type+'</a>'
-                }
+                field: 'amount',
+                title: '进货量',
             }, {
-                field: 'remain',
-                title: '库存数量',
+                field: 'importTime',
+                title: '进货时间',
             }, {
-                field: 'threshold',
-                title: '阈值',
+                field: 'idCode',
+                title: '识别码',
             }, {
-                field: 'status',
-                title: '状态',
+                field: 'source',
+                title: '供货商',
             }
             ],
 
@@ -73,20 +70,8 @@ var TableInit = function () {
     return oTableInit;
 
 
-        return [
-            '<a class="like" href="javascript:void(0)" title="Like">',
-            value,
-            '</a>'].join('');
-    };
-
-var mockData = [
-    {
-        "id": 0,
-        "type":"鸡肉",
-        "importTime":"1999年9月9日 9:00",
-        "source": "正常",
-        "phoneNum": "p100019",
-        "manager":"abc"
-    }
-]
-$('#tb_item').bootstrapTable('load',mockData);   //这行代码在浏览器debug的console里输入，就有数据了。
+    return [
+        '<a class="like" href="javascript:void(0)" title="Like">',
+        value,
+        '</a>'].join('');
+};
