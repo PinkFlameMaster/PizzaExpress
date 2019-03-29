@@ -1,5 +1,5 @@
 <%@ page import="com.pojo.Admin" %>
-<%@ page import="com.helper.AdminToFactoryHelpler" %><%--
+<%@ page import="com.helper.AdminToFactoryHelper" %><%--
   Created by IntelliJ IDEA.
   User: XinJi
   Date: 2019/3/27
@@ -25,7 +25,7 @@
     var entrytime = "<%=admin.getEntryTime()%>";
     var role = "<%=admin.getRole()%>";
     var phoneNum = "<%=admin.getPhoneNum()%>";
-    <%AdminToFactoryHelpler adminToFactoryHelpler = new AdminToFactoryHelpler(admin);%>
+    <%AdminToFactoryHelper adminToFactoryHelpler = new AdminToFactoryHelper(admin);%>
     var factory = "<%=adminToFactoryHelpler.getFactoryName()%>";
 </script>
 <body class="bright-bg">

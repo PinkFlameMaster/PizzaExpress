@@ -13,6 +13,7 @@ public interface UserDao {
     List<User> findByUserPhoneNum(String phoneNum);
     List<User> findByUserNickName(String nickName);
     List<User> findByUserPhoneNick(Map paramMap);
+    void deleteUserByPhoneNum(String phoneNum);
 
     /**
      * 通过QQ查询用户信息

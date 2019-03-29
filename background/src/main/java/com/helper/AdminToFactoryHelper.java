@@ -7,11 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 
 
-public class AdminToFactoryHelpler{
+public class AdminToFactoryHelper {
 
     FactoryService factoryService = SpringTool.getBean(FactoryService.class);
     int id;
-    public AdminToFactoryHelpler(Admin admin){
+    public AdminToFactoryHelper(Admin admin){
 
         id = admin.getFactoryId();
     }

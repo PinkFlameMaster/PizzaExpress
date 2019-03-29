@@ -59,6 +59,11 @@ public class UserServiceImpl implements UserService {
         return userDao.findByUserPhoneNick(paramMap);
     }
 
+    @Override
+    public void deleteUser(String phoneNum) {
+        userDao.deleteUserByPhoneNum(phoneNum);
+    }
+
 
     @Override
     public boolean modifyInfo(User user) {
