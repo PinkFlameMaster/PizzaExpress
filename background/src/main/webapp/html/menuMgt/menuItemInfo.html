@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!--<script type="text/javascript" src="../js/Login.js"></script>-->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../css/Common.css">
+    <link rel="stylesheet" href="../../css/menuItemInfo.css">
+
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+
+
+    <!--@*3、bootstrap table组件以及中文包的引用*@-->
+    <script src="../../lib/bootstrap-table/bootstrap-table.js"></script>
+    <link href="../../lib/bootstrap-table/bootstrap-table.css" rel="stylesheet" />
+    <script src="../../lib/bootstrap-table/bootstrap-table-zh-CN.js"></script>
+    <script type="text/javascript" src="../../js/helper.js"></script>
+    <title>Title</title>
+</head>
+<script type="text/javascript">
+    var id = getQueryString('id');
+    alert(id);
+</script>
+<body class="bright-bg">
+<div id = "mainBodyWrap">
+    <div id = "mainBody" class="white-bg ">
+        <div id="breadcrumbs-nav">
+            <ul class="breadcrumb white-bg">
+                <li><a href="../HomePage.html">首页</a></li>
+                <li>菜单管理</li>
+                <li class="active">新增菜品</li>
+            </ul>
+        </div>
+        <div id="input-area">
+            <div id="itemInfoForm" class="bs-example bs-example-form" role="form">
+                <div class="common-input-group">
+                    <div class="input-group">
+                        <span class="input-group-addon">名称</span>
+                        <input id="itemInfoForm-name" type="text" class="form-control" placeholder="">
+                    </div>
+                </div>
+                <div class="common-input-group">
+                    <div class="input-group">
+                        <span class="input-group-addon">价格</span>
+                        <input id="itemInfoForm-prize" type="text" class="form-control" placeholder="">
+                    </div>
+                </div>
+                <div class="common-input-group">
+                    <div class="input-group">
+                        <span class="input-group-addon">状态</span>
+                        <select id="searchForm-status" class="form-control">
+                            <option>在售</option>
+                            <option>下架</option>
+                        </select>
+                    </div>
+                </div>
+                <br>
+                <div class="common-input-group">
+                    <div class="input-group">
+                        <span class="input-group-addon">描述</span>
+                        <input id="itemInfoForm-desc" type="text" class="form-control" placeholder="">
+                    </div>
+                </div>
+                <div class="common-input-group">
+                    <div class="input-group">
+                        <span class="input-group-addon">图片</span>
+                        <img id="itemInfoForm-img" type="text" src="../../images/PizzaIcon.jpg">
+                    </div>
+                </div>
+                <button id="searchForm-searchBtn" type="submit" class="btn  btn-default common-btn search-btn">搜索</button>
+            </div>
+            <div class="grid-wrap">
+                <div id="toolbar" class="btn-group">
+                    <button id="btn_delete" type="button" class="btn btn-default">
+                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>删除
+                    </button>
+                </div>
+                <table id="tb_menu"></table>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+<script type="text/javascript" src="../../js/template_page.js"></script>
+<script type="text/javascript" src="../../js/menuMgt/menuItemInfo.js"></script>
