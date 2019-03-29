@@ -1,4 +1,5 @@
-<%@ page import="com.pojo.Admin" %><%--
+<%@ page import="com.pojo.Admin" %>
+<%@ page import="com.helper.AdminToFactoryHelpler" %><%--
   Created by IntelliJ IDEA.
   User: XinJi
   Date: 2019/3/27
@@ -18,9 +19,14 @@
     <link rel="stylesheet" href="../css/Common.css">
 </head>
 <script type = "text/javascript">
-    <%Admin admin = (Admin)request.getSession().getAttribute("user");%>;
+    <%Admin admin = (Admin)request.getSession().getAttribute("admin");%>
     var priority="<%=admin.getRole()%>";
-    var userName = "<%=admin.getUsername()%>";
+    var username = "<%=admin.getUsername()%>";
+    var entrytime = "<%=admin.getEntryTime()%>";
+    var role = "<%=admin.getRole()%>";
+    var phoneNum = "<%=admin.getPhoneNum()%>";
+    <%AdminToFactoryHelpler adminToFactoryHelpler = new AdminToFactoryHelpler(admin);%>
+    var factory = <%=adminToFactoryHelpler.getFactoryName()%>;
 </script>
 <body class="bright-bg">
 <div id = "mainBodyWrap">
@@ -37,11 +43,11 @@
                 </div>
                 <div class="info-content">
                     <div class="col-lg-4 col-md-4">管理员：</div>
-                    <div class="col-lg-8 col-md-8" id="adminName">admin</div>
+                    <div class="col-lg-8 col-md-8" id="adminName"><%=admin.getUsername()%></div>
                 </div>
                 <div class="info-content">
                     <div class="col-lg-4 col-md-4">所属门店：</div>
-                    <div class="col-lg-8 col-md-8" id="store">静安嘉里店</div>
+                    <div class="col-lg-8 col-md-8" id="store"><%=adminToFactoryHelpler.getFactoryName()%></div>
                 </div>
                 <div class="info-content">
                     <div class="col-lg-4 col-md-4">联系方式：</div>

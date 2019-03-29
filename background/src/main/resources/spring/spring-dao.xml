@@ -55,4 +55,6 @@
         <property name="basePackage" value="com.dao"/>
     </bean>
 
+    <bean class="com.helper.SpringTool"/>
+
 </beans>

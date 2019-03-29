@@ -2,8 +2,8 @@ var insertNodeBefore = function (newNode, oldNode){
     oldNode.parentNode.insertBefore(newNode,oldNode);
 }
 var adminInfo={}
-var username = "";
-var priority = "";
+ //var username = "";
+// var priority = "";
 adminInfo.username = username == null ? "AdminName":username;
 adminInfo.priority = priority == null? "all" : priority;
 var leftNavBarDivWrap = document.createElement("div");
