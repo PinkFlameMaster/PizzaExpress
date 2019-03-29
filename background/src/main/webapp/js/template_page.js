@@ -31,7 +31,7 @@ leftNavBarDiv.innerHTML = '' +
     '            </a>\n' +
     '            <ul id = "menuMgtItem">\n' +
     '                <li><a href="#">菜单查询</a></li>\n' +
-    '                <li><a href="#">新增菜品</a></li>\n' +
+    '                <li><a href="./menuMgt/menuSearch.html">新增菜品</a></li>\n' +
     '            </ul>\n' +
     '        </li>\n' +
     '        <li><a href="#">店面管理</a></li>\n' +

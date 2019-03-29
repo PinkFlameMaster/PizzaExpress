@@ -63,9 +63,9 @@ var TableInit = function () {
                 title: '状态',
                 formatter: function(value, row, index) {
                     if(value === true) {
-                        return "正常";
+                        return "已删除";
                     }
-                    else return "已删除"
+                    else return "正常"
                 }
             },],
 

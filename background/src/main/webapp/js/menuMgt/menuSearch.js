@@ -73,7 +73,7 @@ var TableInit = function () {
                     //     return "在售";
                     // }
                     // else return "下架"
-                    return '<a href="../../html/menuMgt/menuItemDetail.html?id='+row.id+'">点击查看</a>'
+                    return '<a href='+row.id+'"../../html/menuMgt/menuItemInfo.html?id=">点击查看</a>'
                 }
             },],
 

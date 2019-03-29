@@ -18,6 +18,8 @@ public interface UserService {
 
     List<User> queryByPhoneAndNickname(String nickname, String phoneNum);
 
+    void deleteUser(String phoneNum);
+
     boolean modifyInfo(User user);
 
     boolean register(User user);

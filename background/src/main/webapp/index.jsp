@@ -10,31 +10,58 @@
 %>
 <html>
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>Insert title here</title>
+    <meta charset="UTF-8">
+    <title>Pizza Express - Login</title>
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="../css/Login.css">
+    <script type="text/javascript" src="../js/Login.js"></script>
 </head>
-
-<form action="<%=basePath%>admin/checkLogin" method="post">
-    <table>
-        <tr>
-            <td>用户名:</td>
-            <td><input id="username" name="username" type="text"></td>
-        </tr>
-        <tr>
-            <td>密码:</td>
-            <td><input id="password" name="password" type="password"></td>
-        </tr>
-        <tr >
-            <td><input type="submit" value="登录"  ></td>
-        </tr>
-    </table>
-</form>
-
-<script type="text/javascript">
-    // var newWin = window.open("../html/Login.html");
-    // var newWin = window.open("../views/UserMgt.jsp");
-</script>
+<body>
+<div class="Login" >
+    <div>
+        <img id="PizzaIcon" src="../images/PizzaIcon.jpg"/>
+    </div>
+    <div>
+        <form id="LoginRect" action="" method="post">
+            <table>
+                <div class="RectLeft">
+                    <tr>
+                        <td><input class="Input" id="username" name="username" type="text" placeholder="  Username..."></td>
+                    </tr>
+                    <tr>
+                        <td><input class="Input" id="password" name="password" type="password" placeholder="  Password..."></td>
+                    </tr>
+                </div>
+                <div class="RectRight">
+                    <input class="Button" type="button" value="Login" onclick="login()"/>
+                </div>
+            </table>
+        </form>
+    </div>
+</div>
 
 </body>
 </html>
+
+<script type="text/javascript">
+    function login() {
+        $.ajax({
+            type: "POST",
+            dataType: "json",
+            url: "<%=basePath %>admin/checkLogin" ,
+            data: $('#LoginRect').serialize(),
+            success: function (result) {
+                if (result.status == "success") {
+                    window.location.replace(result.data[0]);
+                }
+                else{
+                    alert(result.errorMsg);
+                }
+            },
+            error : function() {
+                alert("异常！");
+            }
+        });
+    }
+</script>
 
