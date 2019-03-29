@@ -26,7 +26,7 @@
     var role = "<%=admin.getRole()%>";
     var phoneNum = "<%=admin.getPhoneNum()%>";
     <%AdminToFactoryHelpler adminToFactoryHelpler = new AdminToFactoryHelpler(admin);%>
-    var factory = <%=adminToFactoryHelpler.getFactoryName()%>;
+    var factory = "<%=adminToFactoryHelpler.getFactoryName()%>";
 </script>
 <body class="bright-bg">
 <div id = "mainBodyWrap">
