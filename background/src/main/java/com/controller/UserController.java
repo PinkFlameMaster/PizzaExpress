@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/user")
@@ -41,9 +42,19 @@ public class UserController {
         }else{
             users = userService.queryByPhoneAndNickname(u.getNickname(), u.getPhoneNum());
         }
-        if(users != null)
-            ret.setData(users);
-        else ret.setData(new ArrayList<>());
+
+        List<User> deletedUserSet = new ArrayList<>();
+        List<User> notDeletedUserSet = new ArrayList<>();
+
+        for(User us: users){
+            if(us.isDeleted()) deletedUserSet.add(us);
+            else notDeletedUserSet.add(us);
+        }
+        if(status.equals("已删除"))
+            users = deletedUserSet;
+        else if(status.equals("正常"))
+            users = notDeletedUserSet;
+        ret.setData(users);
         ret.setStatus("success");
         return ret;
     }
@@ -51,21 +62,23 @@ public class UserController {
     @RequestMapping("/deleteByPhoneNum")
     @ResponseBody
     public ReturnMsg deleteByPhoneNum(Model model, String[] phoneNums){
-
-        //定义返回数据
         ReturnMsg ret =new ReturnMsg();
         ret.setStatus("failure");
 
-        //查询 user信息
-        //成功删除的用户
         List<String> deletedUsers = new ArrayList<>();
-        deletedUsers.add("15800111111");
-        deletedUsers.add("15800222222");
 
-        //未成功删除的用户
-        List<String> undeletedUsers = new ArrayList<>();
-        undeletedUsers.add("15800333333");
-        undeletedUsers.add("15800444444");
+        List<String> notDeletedUsers = new ArrayList<>();
+
+        List<User> queryResult = new ArrayList<>();
+        for(String s: phoneNums){
+            queryResult = userService.queryByPhoneNum(s);
+            if(queryResult != null){
+                userService.deleteUser(s);
+                deletedUsers.add(queryResult.get(0).getPhoneNum());
+            }else{
+                notDeletedUsers.add(queryResult.get(0).getPhoneNum());
+            }
+        }
 
         /*  组织data，returnMsg数据格式：
             {
@@ -79,7 +92,7 @@ public class UserController {
          */
         List<List<String>> data = new ArrayList<>();
         data.add(deletedUsers);
-        data.add(undeletedUsers);
+        data.add(notDeletedUsers);
 
         ret.setData(data);
         ret.setStatus("success");

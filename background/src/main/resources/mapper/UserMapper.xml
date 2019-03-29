@@ -17,6 +17,7 @@
         FROM user
         WHERE nickname LIKE CONCAT('%',#{nickname},'%')
     </select>
+
     <select id="findByUserPhoneNum" resultMap="userResultMap" parameterType="String">
         SELECT *
         FROM user
@@ -27,6 +28,10 @@
         SELECT *
         FROM user
         WHERE phoneNum LIKE CONCAT('%',#{phoneNum},'%') AND nickname LIKE CONCAT('%',#{nickname},'%')
+    </select>
+
+    <select id="deleteUserByPhoneNum" resultMap="userResultMap" parameterType="int">
+        UPDATE user set deleted = 1 where phoneNum = #{phoneNum}
     </select>
 
 
