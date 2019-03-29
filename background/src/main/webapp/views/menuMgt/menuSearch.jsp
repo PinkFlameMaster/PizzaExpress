@@ -1,4 +1,4 @@
-<%@ page import="com.helper.AdminToFactoryHelpler" %>
+<%@ page import="com.helper.AdminToFactoryHelper" %>
 <%@ page import="com.pojo.Admin" %><%--
   Created by IntelliJ IDEA.
   User: XinJi
@@ -34,7 +34,7 @@
     var entrytime = "<%=admin.getEntryTime()%>";
     var role = "<%=admin.getRole()%>";
     var phoneNum = "<%=admin.getPhoneNum()%>";
-    <%AdminToFactoryHelpler adminToFactoryHelpler = new AdminToFactoryHelpler(admin);%>
+    <%AdminToFactoryHelper adminToFactoryHelpler = new AdminToFactoryHelper(admin);%>
     var factory = "<%=adminToFactoryHelpler.getFactoryName()%>";
 </script>
 <body class="bright-bg">
