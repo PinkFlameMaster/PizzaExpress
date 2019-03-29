@@ -14,7 +14,7 @@
     <title>Insert title here</title>
 </head>
 
-<form action="http://localhost:1080/admin/checkLogin" method="post">
+<form action="<%=basePath%>admin/checkLogin" method="post">
     <table>
         <tr>
             <td>用户名:</td>

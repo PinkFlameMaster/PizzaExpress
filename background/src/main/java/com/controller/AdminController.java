@@ -32,7 +32,7 @@ public class AdminController {
         //若有Admin则添加到model里并且跳转到成功页面
         if(Admin != null){
             session.setAttribute("admin", Admin);
-            return "success";
+            return "../../views/HomePage";
         }
         return "fail";
     }
