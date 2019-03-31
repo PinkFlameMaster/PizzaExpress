@@ -29,14 +29,12 @@ public interface ReceiverAddressDao {
     /**
      * 删除某条收货地址
      * @param id 被删除的id
-     * @return 是否成功
      */
-    boolean delete(int id);
+    void delete(int id);
 
     /**
      * 修改某条收货地址的信息
      * @param address 修改后的收货地址
-     * @return 修改是否成功
      */
-    boolean modify(ReceiverAddress address);
+    void modify(ReceiverAddress address);
 }

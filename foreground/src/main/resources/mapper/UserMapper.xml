@@ -20,13 +20,25 @@
     <select id="findByUserPhoneNum" resultMap="userResultMap" parameterType="String">
         SELECT *
         FROM user
-        WHERE phoneNum LIKE CONCAT('%',#{phoneNum},'%')
+        WHERE phoneNum = #{phoneNum}
     </select>
 
     <select id="findByUserPhoneNick" resultMap="userResultMap">
         SELECT *
         FROM user
         WHERE phoneNum LIKE CONCAT('%',#{phoneNum},'%') AND nickname LIKE CONCAT('%',#{nickname},'%')
+    </select>
+
+    <select id="findByUserPhonePwd" resultMap="userResultMap">
+        SELECT *
+        FROM user
+        WHERE phoneNum = #{phoneNum} AND password = #{password}
+    </select>
+
+    <select id="findByUserPhone" resultMap="userResultMap" parameterType="String">
+        SELECT *
+        FROM user
+        WHERE phoneNum = #{phoneNum}
     </select>
 
     <insert id="registerNew"  parameterType="com.pojo.User">
@@ -41,4 +53,10 @@
         #{password}
         )
     </insert>
+
+    <update id="modifyInfo" parameterType="com.pojo.User">
+        UPDATE user
+        SET password = #{password},nickname = #{nickname},city = #{city},birthday = #{birthday}
+        WHERE phoneNum = #{phoneNum}
+    </update>
 </mapper>

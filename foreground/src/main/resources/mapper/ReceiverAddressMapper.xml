@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.ReceiverAddressDao">
+    <resultMap type="ReceiverAddress" id="receiverAddress" >
+        <id property="id" column="id"/>
+        <result property="userPhoneNum" column="userPhoneNum"/>
+        <result property="receiverName" column="receiverName"/>
+        <result property="receiverPhoneNum" column="receiverPhoneNum"/>
+        <result property="address" column="address"/>
+        <result property="latitude" column="latitude"/>
+        <result property="longitude" column="longitude"/>
+        <result property="deleted" column="deleted"/>
+    </resultMap>
+    <insert id="addNew"  parameterType="com.pojo.ReceiverAddress">
+        INSERT INTO receiverAddress
+        (
+        userPhoneNum,
+        receiverName,
+        receiverPhoneNum,
+        address
+        )
+        VALUES
+        (
+        #{userPhoneNum},
+        #{receiverName},
+        #{receiverPhoneNum},
+        #{address}
+        )
+    </insert>
+
+    <select id="findByUser" resultMap="receiverAddress" parameterType="String">
+        SELECT *
+        FROM receiverAddress
+        WHERE  userPhoneNum = #{userPhoneNum}
+    </select>
+
+
+    <select id="findById" resultMap="receiverAddress" parameterType="int">
+        SELECT *
+        FROM receiverAddress
+        WHERE  id = #{id}
+    </select>
+
+    <delete id="delete" parameterType="int">
+        DELETE  FROM  receiverAddress
+        WHERE id = #{id}
+    </delete>
+
+    <update id="modify" parameterType="com.pojo.ReceiverAddress">
+        UPDATE receiverAddress
+        SET userPhoneNum = #{userPhoneNum},receiverName = #{receiverName},receiverPhoneNum = #{receiverPhoneNum},address = #{address}
+        WHERE id = #{id}
+    </update>
+
+</mapper>

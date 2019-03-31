@@ -4,6 +4,45 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dao.OrderDao">
 
+    <resultMap type="Factory" id="factory" >
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="address" column="address"/>
+        <result property="latitude" column="latitude"/>
+        <result property="longitude" column="longitude"/>
+        <result property="phoneNum" column="phoneNum"/>
+        <result property="businessTimeFrom" column="businessTimeFrom"/>
+        <result property="businessTimeTo" column="businessTimeTo"/>
+    </resultMap>
+
+    <resultMap type="Order" id="order" >
+        <id property="id" column="id"/>
+        <result property="factoryId" column="factoryId"/>
+        <result property="receiverAddressId" column="receiverAddressId"/>
+        <result property="state" column="state"/>
+        <result property="orderTime" column="orderTime"/>
+        <result property="receiveTime" column="receiveTime"/>
+    </resultMap>
+
+    <resultMap type="OrderItem" id="orderItem" >
+        <id property="id" column="id"/>
+        <result property="orderId" column="orderId"/>
+        <result property="menuItemId" column="menuItemId"/>
+        <result property="actualUnitPrize" column="actualUnitPrize"/>
+        <result property="num" column="num"/>
+    </resultMap>
+
+    <resultMap type="ReceiverAddress" id="receiverAddress" >
+        <id property="id" column="id"/>
+        <result property="userPhoneNum" column="userPhoneNum"/>
+        <result property="receiverName" column="receiverName"/>
+        <result property="receiverPhoneNum" column="receiverPhoneNum"/>
+        <result property="address" column="address"/>
+        <result property="latitude" column="latitude"/>
+        <result property="longitude" column="longitude"/>
+        <result property="deleted" column="deleted"/>
+    </resultMap>
+
     <insert id="commitOrder"  parameterType="com.pojo.Order">
         INSERT INTO pizzaOrder
         (
@@ -17,13 +56,31 @@
         #{id},
         #{receiverAddressId},
         #{state},
-        #{orderTime},
+        #{orderTime}
         )
     </insert>
 
     <select id="getMaxOrderID" resultType="int">
         SELECT max(id)
         FROM pizzaOrder
+    </select>
+
+    <select id="getAllOrders" resultMap="order" parameterType="int">
+        SELECT *
+        FROM pizzaOrder
+        WHERE receiverAddressId = #{receiverAddressID}
+    </select>
+
+    <select id="getAllAddress" resultMap="receiverAddress" parameterType="String">
+        SELECT *
+        FROM receiverAddress
+        WHERE userPhoneNum = #{phoneNum}
+    </select>
+
+    <select id="getAllOrderItemFromOrderID" resultMap="orderItem" parameterType="int">
+        SELECT *
+        FROM orderItem
+        WHERE orderId = #{orderID}
     </select>
 
     <insert id="insertOrderItem"  parameterType="com.pojo.OrderItem">
@@ -39,8 +96,18 @@
         #{orderId},
         #{menuItemId},
         #{actualUnitPrize},
-        #{num},
+        #{num}
         )
     </insert>
 
+    <select id="getAllFactory" resultType="factory">
+        SELECT *
+        FROM factory
+    </select>
+
+    <select id="getOrderByID" resultType="int" resultMap="order">
+        SELECT *
+        FROM pizzaOrder
+        WHERE id = #{orderID}
+    </select>
 </mapper>

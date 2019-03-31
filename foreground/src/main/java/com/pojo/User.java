@@ -1,5 +1,14 @@
 package com.pojo;
 
+import com.aliyuncs.CommonRequest;
+import com.aliyuncs.CommonResponse;
+import com.aliyuncs.DefaultAcsClient;
+import com.aliyuncs.IAcsClient;
+import com.aliyuncs.exceptions.ClientException;
+import com.aliyuncs.exceptions.ServerException;
+import com.aliyuncs.http.MethodType;
+import com.aliyuncs.profile.DefaultProfile;
+
 public class User {
     private String phoneNum;
     private String password;
@@ -68,4 +77,6 @@ public class User {
     public void setBirthday(String birthday) {
         this.birthday = birthday;
     }
+
+
 }
