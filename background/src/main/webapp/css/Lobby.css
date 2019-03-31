@@ -1,0 +1,21 @@
+.lobby-content{
+    padding: 40px;
+}
+.ingredient-content{
+    padding: 40px;
+}
+#factory-content,#item-title{
+    font-size: x-large;
+    font-weight: bold;
+    padding: 20px;
+}
+.info-label{
+    font-size: large;
+}
+#tb_import{
+    margin-top: 20px;
+}
+#add-item{
+    font-size: large;
+    font-weight: bolder;
+}

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/user")
@@ -41,10 +42,68 @@ public class UserController {
         }else{
             users = userService.queryByPhoneAndNickname(u.getNickname(), u.getPhoneNum());
         }
-        if(users != null)
-            ret.setData(users);
-        else ret.setData(new ArrayList<>());
+
+        List<User> deletedUserSet = new ArrayList<>();
+        List<User> notDeletedUserSet = new ArrayList<>();
+
+        for(User us: users){
+            if(us.isDeleted()) deletedUserSet.add(us);
+            else notDeletedUserSet.add(us);
+        }
+        if(status.equals("已删除"))
+            users = deletedUserSet;
+        else if(status.equals("正常"))
+            users = notDeletedUserSet;
+        ret.setData(users);
         ret.setStatus("success");
+        return ret;
+    }
+
+    @RequestMapping("/deleteByPhoneNum")
+    @ResponseBody
+    public ReturnMsg deleteByPhoneNum(Model model, String[] phoneNums){
+        ReturnMsg ret =new ReturnMsg();
+        ret.setStatus("failure");
+
+        List<String> deletedUsers = new ArrayList<>();
+
+        List<String> notDeletedUsers = new ArrayList<>();
+
+        List<User> queryResult = new ArrayList<>();
+        for(String s: phoneNums){
+            queryResult = userService.queryByPhoneNum(s);
+            if(queryResult != null){
+                userService.deleteUser(s);
+                deletedUsers.add(queryResult.get(0).getPhoneNum());
+            }else{
+                notDeletedUsers.add(queryResult.get(0).getPhoneNum());
+            }
+        }
+
+        /*  组织data，returnMsg数据格式：
+            {
+                data:[
+                    ["15800111111","15800222222"],   //成功删除
+                    ["15800333333","15800444444"]   //未成功删除
+                ],
+                ...
+            }
+
+         */
+        List<List<String>> data = new ArrayList<>();
+        data.add(deletedUsers);
+        data.add(notDeletedUsers);
+
+        ret.setData(data);
+        ret.setStatus("success");
+        //end mock
+
+        //当查询遇到错误时
+//        ret.setStatus("failure");
+//        ret.setErrorMsg("这是一条错误信息");
+
+//        User user = (User) JSONObject.toBean(JSONObject.fromObject(request.getParameter("user")), User.class);
+
         return ret;
     }
 }

@@ -15,7 +15,7 @@ var TableInit = function () {
     var oTableInit = new Object();
     //初始化Table
     oTableInit.Init = function () {
-        $('#tb_users').bootstrapTable({
+        $('#tb_menu').bootstrapTable({
             // url: '/Home/GetDepartment',         //请求后台的URL（*）
             // method: 'get',                      //请求方式（*）
             clickEdit: true,                    //点击修改
@@ -37,51 +37,60 @@ var TableInit = function () {
             minimumCountColumns: 2,             //最少允许的列数
             clickToSelect: true,                //是否启用点击选中行
             height: 550,                        //行高，如果没有设置height属性，表格自动根据记录条数觉得表格高度
-            uniqueId: "phoneNum",                     //每一行的唯一标识，一般为主键列
+            uniqueId: "id",                     //每一行的唯一标识，一般为主键列
             showToggle:true,                    //是否显示详细视图和列表视图的切换按钮
             cardView: false,                    //是否显示详细视图
             detailView: false,                   //是否显示父子表
-            editable:false,
+            editable:true,
 
             columns: [{
                 checkbox: true
             }, {
-                field: 'nickname',
-                title: '用户姓名',
-            },{
-                field: 'birthday',
-                title: '生日',
+                field: 'id',
+                title: 'id',
                 edit:false,
-            }, {
-                field: 'phoneNum',
-                title: '联系方式'
             },{
-                field: 'city',
-                title: '城市'
+                field: 'name',
+                title: '名称',
             }, {
-                field: 'deleted',
+                field: 'introduce',
+                title: '介绍'
+            },{
+                field: 'onSale',
                 title: '状态',
                 formatter: function(value, row, index) {
                     if(value === true) {
-                        return "已删除";
+                        return "在售";
                     }
-                    else return "正常"
+                    else return "下架"
+                }
+            },{
+                field: 'ingredient',
+                title: '原料',
+                edit:false,
+                formatter: function(value, row, index) {
+                    // if(value === true) {
+                    //     return "在售";
+                    // }
+                    // else return "下架"
+                    return '<a href='+row.id+'"../../html/menuMgt/menuItemInfo.html?id=">点击查看</a>'
                 }
             },],
 
             onClickCell: function(field, value, row, $element) {
-                $element.attr('contenteditable', true);
-                $element.blur(function() {
-                    let index = $element.parent().data('index');
-                    let tdValue = $element.html();
-
-                    saveData(index, field, tdValue);
-                })
+                if(field !== "id" && field !== "ingredient") {
+                    $element.attr('contenteditable', true);
+                    $element.blur(function () {
+                        let index = $element.parent().data('index');
+                        let tdValue = $element.html();
+                        saveData(index, field, tdValue);
+                    })
+                }
             }
         });
 
         function saveData(index, field, value) {
-            $table.bootstrapTable('updateCell', {
+            $('#tb_menu').bootstrapTable('updateCell', {
                 index: index,       //行索引
                 field: field,       //列名
                 value: value        //cell值
@@ -119,26 +128,25 @@ $("#searchForm-searchBtn").click(function(){
     // alert("Value: " + $("#test").val());
 
     //user对象
-    var user={};
-    user.nickname = $("#searchForm-name").val();
-    user.phoneNum = $("#searchForm-phoneNum").val();
+    var menuItem={};
+    menuItem.name = $("#searchForm-name").val();
     //user状态
     var status = $("#searchForm-status").val();
     //封装ajax参数
     var params = {};
-    params.user = JSON.stringify(user);
+    params.menuItem = JSON.stringify(menuItem);
     params.status = status;
     //发起ajax请求
     $.ajax({
         type: "POST",
-        url: "../user/search",
+        url: "../../menu/searchItems",
         data: params,
         dataType:"json",
         //	         		   contentType: "application/json; charset=utf-8",//此处不能设置，否则后台无法接值
         success:function(data){
             // alert("success");
             if(data.status === "success") {
-                $('#tb_users').bootstrapTable('load', data.data);
+                $('#tb_menu').bootstrapTable('load', data.data);
             }
             else{
                 alert("错误:"+data.errorMsg);
@@ -152,19 +160,18 @@ $("#searchForm-searchBtn").click(function(){
 
 
 $("#btn_delete").click(function(){
-    var rows = $("#tb_users").bootstrapTable('getSelections');
+    var rows = $("#tb_menu").bootstrapTable('getSelections');
 
-    var phoneNums = []
+    var ids = []
     rows.forEach(function(value){
-        phoneNums.push(value.phoneNum);
+        ids.push(value.id);
     })
     var params = {};
-    // params.phoneNums = JSON.stringify(phoneNums);
-    params = {"phoneNums":phoneNums}
+    params = {"ids":ids}
     //发起ajax请求
     $.ajax({
         type: "POST",
-        url: "../user/deleteByPhoneNum",
+        url: "../../menu/deleteItemsById",
         data: params,
         traditional:true,//防止深度序列化
         dataType:"json",
@@ -172,17 +179,17 @@ $("#btn_delete").click(function(){
         success:function(data){
             // alert("success");
             if(data.status === "success") {
-                var deletedUsers = data.data[0];
-                var undeletedUsers = data.data[1];
-                $("#tb_users").bootstrapTable('remove',{
-                    field:"phoneNum",
-                    values: deletedUsers
+                var deletedItems = data.data[0];
+                var undeletedItems = data.data[1];
+                $("#tb_menu").bootstrapTable('remove',{
+                    field:"id",
+                    values: deletedItems
                 })
-                if(undeletedUsers.length === 0){
+                if(undeletedItems.length === 0){
                     alert("所选用户已删除");
                 }
                 else{
-                    alert('用户：'+ undeletedUsers.toString()+' 删除失败');
+                    alert('用户：'+ undeletedItems.toString()+' 删除失败');
                 }
             }
             else{
@@ -195,26 +202,4 @@ $("#btn_delete").click(function(){
     });
 });
 
-var mockData = [
-    {
-        "nickname": "小王",
-        "birthday": "1997-09-12",
-        "phoneNum":"15836445998",
-        "city":"上海",
-        "deleted":true,
-    },{
-        "nickname": "小李",
-        "birthday": "1997-09-12",
-        "phoneNum":"15836445998",
-        "city":"上海",
-        "deleted":false,
-    },{
-        "nickname": "小赵",
-        "birthday": "1997-09-12",
-        "phoneNum":"15836445998",
-        "city":"北京",
-        "deleted":true,
-    },
-]
-
-$('#tb_users').bootstrapTable('load',mockData);   //这行代码在浏览器debug的console里输入，就有数据了。
+// $('#tb_menu').bootstrapTable('load',mockData);   //这行代码在浏览器debug的console里输入，就有数据了。

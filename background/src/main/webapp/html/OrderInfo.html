@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>PizzaExpress-Order</title>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/Order.css">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="../css/Common.css">
+
+    <script src="../lib/bootstrap-table/bootstrap-table.js"></script>
+    <link href="../lib/bootstrap-table/bootstrap-table.css" rel="stylesheet" />
+    <script src="../lib/bootstrap-table/locale/bootstrap-table-zh-CN.js"></script>
+
+    <!--@*4、页面Js文件的引用*@-->
+    <script src="../js/helper.js"></script>
+    <script src="../js/OrderItemTable.js"></script>
+</head>
+<body class="bright-bg">
+<div id = "mainBodyWrap">
+    <div class="white-bg" id = "mainBody">
+            <div id="breadcrumbs-nav">
+                <ul class="breadcrumb white-bg">
+                    <li><a href="./HomePage.html">首页</a></li>
+                    <li class="active">订单详情</li>
+                </ul>
+            </div>
+
+        <div class="Order-content">
+            <div id="factory" class="">
+                曹杨路店
+            </div>
+            <table id="tb_item" >
+                <thead>
+                </thead>
+                <tbody id="tbody"></tbody>
+            </table>
+            <div class="delivery-fee">
+                <div class="pull-left">
+                配送费
+                </div>
+                <div class="pull-right">
+                    <div class="delivery-fee-amount inline-block" id="delivery-fee">
+                    12
+                    </div>
+                    <div class="inline-block">
+                        ￥
+                    </div>
+                </div>
+            </div>
+            <br/>
+            <hr />
+            <div class="delivery-info">
+                <div class="title">
+                    配送信息
+                </div>
+                <div class="delivery-info-content">
+                    <p>收货地址：<span id="address">宛平南路600号</span></p>
+                    <p>下单时间：<span id="datetime">1999年9月9日 10:10:10</span></p>
+                    <p>收货人：<span id="username">陈聪</span></p>
+                    <p>联系方式：<span id="contact">18010001000</span></p>
+                </div>
+            </div>
+            <div class="path">
+                <div class="title">
+                    配送路径
+                </div>
+                <div class="path-map">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+<script type="text/javascript" src="../js/template_page.js"></script>
