@@ -50,34 +50,44 @@
                 <div class="common-input-group">
                     <div class="input-group">
                         <span class="input-group-addon">状态</span>
-                        <select id="searchForm-status" class="form-control">
+                        <select id="itemInfoForm-status" class="form-control">
                             <option>在售</option>
                             <option>下架</option>
                         </select>
                     </div>
                 </div>
                 <br>
-                <div class="common-input-group">
+                <div id="itemInfoForm-desc-wrap"class="common-input-group">
                     <div class="input-group">
                         <span class="input-group-addon">描述</span>
                         <input id="itemInfoForm-desc" type="text" class="form-control" placeholder="">
                     </div>
                 </div>
-                <div class="common-input-group">
+                <div id="itemInfoForm-img-wrap"class="common-input-group">
                     <div class="input-group">
                         <span class="input-group-addon">图片</span>
                         <img id="itemInfoForm-img" type="text" src="../../images/PizzaIcon.jpg">
                     </div>
                 </div>
-                <button id="searchForm-searchBtn" type="submit" class="btn  btn-default common-btn search-btn">搜索</button>
             </div>
-            <div class="grid-wrap">
+            <div id="tb_ingredient-wrap"class="grid-wrap">
                 <div id="toolbar" class="btn-group">
-                    <button id="btn_delete" type="button" class="btn btn-default">
+                    <button id="btn_ingredient_add" type="button" class="btn btn-default">
+                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>添加
+                    </button>
+                    <button id="btn_ingredient_delete" type="button" class="btn btn-default">
                         <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>删除
                     </button>
                 </div>
-                <table id="tb_menu"></table>
+                <table id="tb_ingredient"></table>
+            </div>
+            <div id="page-btn-wrapper">
+                <button id="editBtn"type="button" class="btn btn-default">
+                    <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>编辑
+                </button>
+                <button id="saveBtn"type="button" class="btn btn-default">
+                    <span class="glyphicon glyphicon-save" aria-hidden="true"></span>保存
+                </button>
             </div>
         </div>
     </div>

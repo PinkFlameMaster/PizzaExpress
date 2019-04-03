@@ -1,6 +1,10 @@
 package com.dto;
 
+import com.pojo.Ingredient;
+
 import java.util.Dictionary;
+import java.util.List;
+import java.util.Map;
 
 public class MenuItemDto {
     private int id;
@@ -8,7 +12,9 @@ public class MenuItemDto {
     private float prize;
     private String introduce;
     private boolean onSale;
-    private Dictionary<String, Float> ingredients;
+    private String imgPath;
+
+    private List<Ingredient> ingredients;
 
     public int getId() {
         return id;
@@ -50,11 +56,19 @@ public class MenuItemDto {
         this.onSale = onSale;
     }
 
-    public Dictionary<String, Float> getIngredients() {
+    public List<Ingredient> getIngredients() {
         return ingredients;
     }
 
-    public void setIngredients(Dictionary<String, Float> ingredients) {
+    public void setIngredients(List<Ingredient> ingredients) {
         this.ingredients = ingredients;
+    }
+
+    public String getImgPath() {
+        return imgPath;
+    }
+
+    public void setImgPath(String imgPath) {
+        this.imgPath = imgPath;
     }
 }
