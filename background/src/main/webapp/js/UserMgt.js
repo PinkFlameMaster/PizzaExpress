@@ -81,7 +81,7 @@ var TableInit = function () {
         });
 
         function saveData(index, field, value) {
-            $table.bootstrapTable('updateCell', {
+            $('#tb_users').bootstrapTable('updateCell', {
                 index: index,       //行索引
                 field: field,       //列名
                 value: value        //cell值
