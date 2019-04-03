@@ -70,7 +70,6 @@ public class UserController {
         List<String> notDeletedUsers = new ArrayList<>();
 
         List<User> queryResult = new ArrayList<>();
-        if(phoneNums == null) return ret;
         for(String s: phoneNums){
             queryResult = userService.queryByPhoneNum(s);
             if(queryResult != null){

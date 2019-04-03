@@ -64,7 +64,6 @@ public class MenuController {
         //定义返回数据
         ReturnMsg ret =new ReturnMsg();
         ret.setStatus("failure");
-        List<User> queryResult = new ArrayList<>();
         MenuItem queryResultEntity;
         List<Integer> deletedItems = new ArrayList<>();
         List<Integer> notDeletedItems = new ArrayList<>();
