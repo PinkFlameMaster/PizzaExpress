@@ -17,31 +17,6 @@ public class UserServiceImpl implements UserService {
     UserDao userDao;
 
     @Override
-    public User checkLogin(String phoneNum, String password) {
-//        User user = userDao.findByUserPhoneNum(phoneNum);
-//        if (user != null && user.getPassword().equals(password)) {
-//            return user;
-//        }
-        return null;
-    }
-
-    @Override
-    public User loginByPhoneNum(String phoneNum) {
-        return null;
-        //        return userDao.findByUserPhoneNum(phoneNum);
-    }
-
-    @Override
-    public User loginByQQ(String qq) {
-        return userDao.findByQQ(qq);
-    }
-
-    @Override
-    public User loginByWechat(String wechat) {
-        return userDao.findByWechat(wechat);
-    }
-
-    @Override
     public List<User> queryByNickname(String nickname) {
         return userDao.findByUserNickName(nickname);
     }
@@ -62,26 +37,5 @@ public class UserServiceImpl implements UserService {
     @Override
     public void deleteUser(String phoneNum) {
         userDao.deleteUserByPhoneNum(phoneNum);
-    }
-
-
-    @Override
-    public boolean modifyInfo(User user) {
-        return userDao.modifyInfo(user);
-    }
-
-    @Override
-    public boolean register(User user) {
-        return userDao.registerNew(user);
-    }
-
-    @Override
-    public boolean bindQQ(String phoneNum, String qq) {
-        return userDao.addQQBinding(phoneNum, qq);
-    }
-
-    @Override
-    public boolean bindWechat(String phoneNum, String wechat) {
-        return userDao.addWechatBinding(phoneNum, wechat);
     }
 }
