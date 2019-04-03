@@ -12,10 +12,18 @@ public class FactoryDaoTest extends BaseUnitTest {
     private FactoryDao factoryDao;
 
     @Test
-    public void testFindFactoryById()
+    public void testFindFactoryByIdCorrect()
     {
         int id = 1;
         Factory factory = factoryDao.findFactoryById(id);
         Assert.assertEquals(id, factory.getId());
+    }
+
+    @Test
+    public void testFindFactoryByIdError()
+    {
+        int id = -1;
+        Factory factory = factoryDao.findFactoryById(id);
+        Assert.assertNull(factory);
     }
 }

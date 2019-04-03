@@ -11,10 +11,18 @@ public class AdminDaoTest extends BaseUnitTest {
     private AdminDao adminDao;
 
     @Test
-    public void testFindByUsername()
+    public void testFindByUsernameCorrect()
     {
         String userName = "admin";
         Admin admin = adminDao.findByUsername(userName);
         Assert.assertEquals(userName,admin.getUsername());
+    }
+
+    @Test
+    public void testFindByUsernameError()
+    {
+        String userName = "noExistName";
+        Admin admin = adminDao.findByUsername(userName);
+        Assert.assertNull(admin);
     }
 }
