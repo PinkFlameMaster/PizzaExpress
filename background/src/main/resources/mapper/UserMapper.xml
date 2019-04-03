@@ -30,8 +30,8 @@
         WHERE phoneNum LIKE CONCAT('%',#{phoneNum},'%') AND nickname LIKE CONCAT('%',#{nickname},'%')
     </select>
 
-    <select id="deleteUserByPhoneNum" resultMap="userResultMap" parameterType="int">
-        UPDATE user set deleted = 1 where phoneNum = #{phoneNum}
+    <select id="deleteUserByPhoneNum" resultMap="userResultMap" parameterType="Integer">
+        UPDATE user set onSale = 0 where id = #{id}
     </select>
 
 

@@ -35,8 +35,8 @@
     var entrytime = "<%=admin.getEntryTime()%>";
     var role = "<%=admin.getRole()%>";
     var phoneNum = "<%=admin.getPhoneNum()%>";
-    <%AdminToFactoryHepler adminToFactoryHelpler = new AdminToFactoryHelper(admin);%>
-    var factory = "<%=adminToFactoryHelpler.getFactoryName()%>";
+    <%AdminToFactoryHelper adminToFactoryHelper = new AdminToFactoryHelper(admin);%>
+    var factory = "<%=adminToFactoryHelper.getFactoryName()%>";
 </script>
 <body class="bright-bg">
 <div id = "mainBodyWrap">

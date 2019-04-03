@@ -11,6 +11,9 @@ public interface MenuItemDao {
      * @return 找到的菜单条目，若没找到，返回null
      */
     MenuItem findById(int id);
+    List<MenuItem> findMenuItemByName(String name);
+    MenuItem findMenuItemByID(int id);
+    void deleteMenuItemById(int id);
 
     /**
      * 获得所有在售菜品
