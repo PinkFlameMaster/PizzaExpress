@@ -212,5 +212,13 @@ public class OrderServiceImpl implements OrderService{
         return orderDao.getOrderByID(orderID);
     }
 
+    @Override
+    public void changeOrderStatus(int orderID, String status) {
+        Map map=new HashMap();
+        map.put("id",orderID);
+        map.put("state",status);
+        orderDao.changeOrderStatus(map);
+    }
+
 
 }

@@ -8,7 +8,15 @@ public class MenuItem {
     private float prize;
     private String introduce;
     private boolean onSale;
+    private String imgPath;
 
+    public String getImgPath() {
+        return imgPath;
+    }
+
+    public void setImgPath(String imgPath) {
+        this.imgPath = imgPath;
+    }
     public int getId() {
         return id;
     }

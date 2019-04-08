@@ -2,6 +2,7 @@ package com.service;
 import com.pojo.ReceiverAddress;
 import com.pojo.User;
 
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 public interface UserService {
@@ -29,6 +30,8 @@ public interface UserService {
 
     boolean modifyInfo(User user);
 
+    boolean modifyPassword(User user);
+
     boolean register(User user);
 
     boolean bindQQ(String phoneNum, String qq);
@@ -44,4 +47,6 @@ public interface UserService {
     void modifyAddress(ReceiverAddress receiverAddress);
 
     void deleteAddress(int id);
+
+    String unicodeToUtf8 (String s) throws UnsupportedEncodingException;
 }

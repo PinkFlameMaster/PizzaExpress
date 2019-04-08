@@ -27,14 +27,19 @@ public class LoginController {
 
     @RequestMapping(value = "/login",method = RequestMethod.POST)
     @ResponseBody
-    public JSONObject userLogin(Model model, @RequestBody Map map,@RequestBody HttpSession session)
+    public JSONObject userLogin(Model model, @RequestBody Map map)
     {
-        String t=(String)map.get("statusKey");
-        String userPhone=(String)map.get("userName");
-        String userPwd=(String)map.get("userPwd");
-        String code=(String)map.get("yanZhengCode");
+        if(map==null)
+            System.out.println("map 是空滴");
+        System.out.println(map.size());
+        System.out.println(map.toString());
+        String t=map.get("statusKey").toString();
+        String userPhone=map.get("userName").toString();
+        String userPwd=map.get("userPwd").toString();
+        String code=map.get("yanZhengCode").toString();
+        String correctCode=map.get("trueYanZhengCode").toString();
 
-        System.out.println(t+" "+userPhone+" "+userPwd+" "+code);
+        System.out.println(t+" "+userPhone+" "+userPwd+" "+code+" "+correctCode);
         int type=Integer.valueOf(t);
         //定义返回数据
         String status="success";
@@ -43,10 +48,18 @@ public class LoginController {
 
         if(type ==1)//验证码登录
         {
-            String correctCode=session.getAttribute("IDCode").toString();
             if(correctCode.equals(code))//验证码相同
             {
                 status="success";
+                List<User> list=userService.queryByPhoneNum(userPhone);
+                if(list==null || list.size()==0)
+                {
+                    User user=new User();
+                    user.setPhoneNum(userPhone);
+                    userService.register(user);
+                    status="success";
+                    System.out.println("注册成功");
+                }
             }
             else
             {
@@ -86,7 +99,7 @@ public class LoginController {
 
     @RequestMapping(value = "/IDcode",method = RequestMethod.POST)
     @ResponseBody
-    public JSONObject getIDcode(Model model, @RequestBody Map map,@RequestBody HttpSession session) throws Exception {
+    public JSONObject getIDcode(Model model, @RequestBody Map map) throws Exception {
         //定义返回数据
         String status="success";
 
@@ -100,11 +113,11 @@ public class LoginController {
         }
         else
         {
-            session.setAttribute("IDCode",IDcode);
-            status="success";
+            //session.setAttribute("IDCode",IDcode);
+            status=IDcode;
         }
 
-        status="{\"status\":\""+status+"\"}";
+        status="{\"IDcode\":\""+status+"\"}";
         System.out.println(JSONObject.fromObject(status));
         return JSONObject.fromObject(status);
     }
