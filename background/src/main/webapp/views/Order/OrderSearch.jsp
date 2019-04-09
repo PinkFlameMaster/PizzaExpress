@@ -1,20 +1,44 @@
+<%@ page import="com.pojo.Admin" %>
+<%@ page import="com.helper.AdminToFactoryHelper" %><%--
+  Created by IntelliJ IDEA.
+  User: XinJi
+  Date: 2019/3/22
+  Time: 10:19
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>PizzaExpress-Search Orders</title>
+    <!--<script type="text/javascript" src="../js/Login.js"></script>-->
     <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../css/Order.css">
+    <link rel="stylesheet" href="../../css/Common.css">
+    <link rel="stylesheet" href="../../css/Order.css">
+
     <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
     <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="../css/Common.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 
-    <script src="../lib/bootstrap-table/bootstrap-table.js"></script>
-    <link href="../lib/bootstrap-table/bootstrap-table.css" rel="stylesheet" />
-    <script src="../lib/bootstrap-table/locale/ bootstrap-table-zh-CN.js"></script>
+
+    <!--@*3、bootstrap table组件以及中文包的引用*@-->
+    <script src="../../lib/bootstrap-table/bootstrap-table.js"></script>
+    <link href="../../lib/bootstrap-table/bootstrap-table.css" rel="stylesheet" />
+    <script src="../../lib/bootstrap-table/bootstrap-table-zh-CN.js"></script>
+
+    <title>PizzaExpress-用户管理</title>
 </head>
-<body class="bright-bg">
-<div id = "mainBodyWrap">
+<script type = "text/javascript">
+    <%Admin admin = (Admin)request.getSession().getAttribute("admin");%>
+    var priority="<%=admin.getRole()%>";
+    var username = "<%=admin.getUsername()%>";
+    var entrytime = "<%=admin.getEntryTime()%>";
+    var role = "<%=admin.getRole()%>";
+    var phoneNum = "<%=admin.getPhoneNum()%>";
+    <%AdminToFactoryHelper adminToFactoryHelper = new AdminToFactoryHelper(admin);%>
+    var factory = "<%=adminToFactoryHelper.getFactoryName()%>";
+</script>
+<body class="bright-bg"><div id = "mainBodyWrap">
     <div id = "mainBody" class="white-bg">
         <div id="breadcrumbs-nav">
             <ul class="breadcrumb white-bg">
@@ -24,7 +48,7 @@
         </div>
         <div class="Order-search">
             <div id="input-area">
-                <form class="bs-example bs-example-form" role="form">
+                <div class="bs-example bs-example-form" role="form">
                     <div class="common-input-group">
                         <div class="input-group">
                             <span class="input-group-addon">姓名</span>
@@ -43,8 +67,8 @@
                             <input id="searchForm-factory" type="text" class="form-control" placeholder="">
                         </div>
                     </div>
-                    <button type="submit" class="btn  btn-default common-btn search-btn" id="searchForm-searchBtn">搜索</button>
-                </form>
+                    <button class="btn  btn-default common-btn search-btn" id="searchForm-searchBtn">搜索</button>
+                </div>
                 <div class="grid-wrap">
                     <div id="toolbar" class="btn-group">
                         <!--<button id="btn_add" type="button" class="btn btn-default">-->
@@ -63,6 +87,5 @@
 </div>
 </body>
 </html>
-<script type="text/javascript" src="../js/template_page.js"></script>
-<script src="../js/helper.js"></script>
-<script src="../js/OrderSearch.js"></script>
+<script type="text/javascript" src="../../js/template_page.js"></script>
+<script src="../../js/OrderSearch.js"></script>
