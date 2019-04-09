@@ -56,7 +56,13 @@
 
     <update id="modifyInfo" parameterType="com.pojo.User">
         UPDATE user
-        SET password = #{password},nickname = #{nickname},city = #{city},birthday = #{birthday}
+        SET nickname = #{nickname},city = #{city},birthday = #{birthday}
+        WHERE phoneNum = #{phoneNum}
+    </update>
+
+    <update id="modifyPassword" parameterType="com.pojo.User">
+        UPDATE user
+        SET password = #{password}
         WHERE phoneNum = #{phoneNum}
     </update>
 </mapper>

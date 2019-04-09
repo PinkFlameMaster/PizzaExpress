@@ -49,14 +49,16 @@
         id,
         receiverAddressId,
         state,
-        orderTime
+        orderTime,
+        factoryId
         )
         VALUES
         (
         #{id},
         #{receiverAddressId},
         #{state},
-        #{orderTime}
+        #{orderTime},
+        #{factoryId}
         )
     </insert>
 
@@ -110,4 +112,11 @@
         FROM pizzaOrder
         WHERE id = #{orderID}
     </select>
+
+
+    <update id="changeOrderStatus" >
+        UPDATE pizzaOrder
+        SET state = #{state}
+        WHERE id = #{id}
+    </update>
 </mapper>

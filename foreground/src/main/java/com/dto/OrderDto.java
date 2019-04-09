@@ -2,18 +2,26 @@ package com.dto;
 
 import com.pojo.Order;
 import com.pojo.OrderItem;
+import com.pojo.ReceiverAddress;
 
 import java.util.List;
 
 public class OrderDto {
     private String orderTime;
-    private String state;
-    private int orderID;
-    private float totalPrice;
-    private List<OrderItem> oderItem;
+    private String orderStatus;
+    private int orderId;
+    private float orderTotal;
+    private List<ItemDto> goodsList;
     private String factoryLocation;
+    private ReceiverAddress receiverAddress;
 
+    public ReceiverAddress getReceiverAddress() {
+        return receiverAddress;
+    }
 
+    public void setReceiverAddress(ReceiverAddress receiverAddress) {
+        this.receiverAddress = receiverAddress;
+    }
     public String getFactoryLocation() {
         return factoryLocation;
     }
@@ -29,35 +37,35 @@ public class OrderDto {
         this.orderTime = orderTime;
     }
 
-    public String getState() {
-        return state;
+    public String getOrderStatus() {
+        return orderStatus;
     }
 
-    public void setState(String state) {
-        this.state = state;
+    public void setOrderStatus(String state) {
+        this.orderStatus = state;
     }
 
-    public int getOrderID() {
-        return orderID;
+    public int getOrderId() {
+        return orderId;
     }
 
-    public void setOrderID(int orderID) {
-        this.orderID = orderID;
+    public void setOrderId(int orderID) {
+        this.orderId = orderID;
     }
 
-    public float getTotalPrice() {
-        return totalPrice;
+    public float getOrderTotal() {
+        return orderTotal;
     }
 
-    public void setTotalPrice(float totalPrice) {
-        this.totalPrice = totalPrice;
+    public void setOrderTotal(float totalPrice) {
+        this.orderTotal = totalPrice;
     }
 
-    public void setOderItem(List<OrderItem> oderItem) {
-        this.oderItem = oderItem;
+    public void setGoodsList(List<ItemDto> oderItem) {
+        this.goodsList = oderItem;
     }
 
-    public List<OrderItem> getOderItem() {
-        return oderItem;
+    public List<ItemDto> getGoodsList() {
+        return goodsList;
     }
 }

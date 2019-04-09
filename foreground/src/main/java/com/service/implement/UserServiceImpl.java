@@ -11,10 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.ProtocolException;
 import java.net.URL;
@@ -91,7 +88,7 @@ public class UserServiceImpl implements UserService {
     public String sendIDCode(String phoneNum) throws Exception {
         String code="";
         code=smsCode();
-        final URL url=new URL(generateSign(code));
+        final URL url=new URL(generateSign(code,phoneNum));
         Thread connectToServe = new Thread(
                 new Runnable() {
                     @Override
@@ -144,7 +141,11 @@ public class UserServiceImpl implements UserService {
         return code;
     }
 
-    public String generateSign(String code) throws Exception
+    public String unicodeToUtf8 (String s) throws UnsupportedEncodingException {
+        return new String( s.getBytes("utf-8") , "utf-8");
+    }
+
+    public String generateSign(String code,String phoneNum) throws Exception
     {
         String accessKeyId = "LTAIkFiQm30BvsIU";
         String accessSecret = "tXco3J10pjGUMVtEsrBW3V5mQXZetj";
@@ -162,7 +163,7 @@ public class UserServiceImpl implements UserService {
         paras.put("Action", "SendSms");
         paras.put("Version", "2017-05-25");
         //paras.put("RegionId", "cn-hangzhou");
-        paras.put("PhoneNumbers", "17702103242");
+        paras.put("PhoneNumbers", phoneNum);
         paras.put("SignName", "PizzaExpress");
         paras.put("TemplateParam", "{\"code\":\""+code+"\"}");
         paras.put("TemplateCode", "SMS_161360041");
@@ -271,6 +272,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean modifyInfo(User user) {
         return userDao.modifyInfo(user);
+    }
+
+    @Override
+    public boolean modifyPassword(User user) {
+        return userDao.modifyPassword(user);
     }
 
     @Override
