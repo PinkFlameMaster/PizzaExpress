@@ -17,6 +17,9 @@ public class MenuItemDto {
 
     private List<Ingredient> ingredients;
 
+    public MenuItemDto(){
+
+    }
     public MenuItemDto(MenuItem menuItem, List<Ingredient> ingredients){
         this.id = menuItem.getId();
         this.name = menuItem.getName();

@@ -1,5 +1,7 @@
 package com.pojo;
 
+import net.sf.json.util.JSONStringer;
+
 public class Ingredient {
     private int id;
     private String type;
@@ -7,6 +9,10 @@ public class Ingredient {
     private String importDate;
     private int factoryId;
     private float amount;
+
+    public Ingredient(){
+
+    }
 
     public Ingredient(String type, float amount){
         this.type = type;

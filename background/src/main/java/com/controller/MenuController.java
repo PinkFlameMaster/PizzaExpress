@@ -103,7 +103,7 @@ public class MenuController {
         JsonConfig jsonConfig = new JsonConfig();
         jsonConfig.setClassMap(classMap);
         @SuppressWarnings("unchecked")
-        MenuItemDto menuInfo = (MenuItemDto)JSONObject.toBean(jsonObj, new MenuItemDto(null,null),jsonConfig);
+        MenuItemDto menuInfo = (MenuItemDto)JSONObject.toBean(jsonObj, new MenuItemDto(),jsonConfig);
 
         ReturnMsg ret = new ReturnMsg();
         ret.setStatus("success");
