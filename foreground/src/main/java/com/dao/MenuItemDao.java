@@ -3,6 +3,7 @@ package com.dao;
 import com.pojo.MenuItem;
 
 import java.util.List;
+import java.util.Map;
 
 public interface MenuItemDao {
     /**
@@ -17,6 +18,25 @@ public interface MenuItemDao {
      * @return 所有在售的菜品集合，若没找到，返回空集合
      */
     List<MenuItem> findAllOnSale();
+
+    /**
+     * 获得所有在售菜品,从低到高排序，同时根据价格区间查询
+     * @return 所有在售的菜品集合，若没找到，返回空集合
+     */
+    List<MenuItem> queryAllOnSaleByPriceAndOrderFromLow(Map map);
+
+    /**
+     * 获得所有在售菜品,从高到低排序，同时根据价格区间查询
+     * @return 所有在售的菜品集合，若没找到，返回空集合
+     */
+    List<MenuItem> queryAllOnSaleByPriceAndOrderFromHigh(Map map);
+
+
+    /**
+     * 获得所有在售菜品,通过info进行模糊查询
+     * @return 所有在售的菜品集合，若没找到，返回空集合
+     */
+    List<MenuItem> queryAllOnSaleByInfo(String info);
 
     /**
      * 新增菜单条目

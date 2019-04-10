@@ -31,4 +31,8 @@ public interface OrderService {
     List<OrderItem> getAllOrderItemFromOrderID(int orderID);
 
     Order getOrderByID(int orderID);
+
+    void changeOrderStatus(int orderID,String status);
+
+
 }

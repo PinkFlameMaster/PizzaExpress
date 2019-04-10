@@ -6,6 +6,7 @@ import com.pojo.OrderItem;
 import com.pojo.ReceiverAddress;
 
 import java.util.List;
+import java.util.Map;
 
 public interface OrderDao {
 
@@ -62,4 +63,11 @@ public interface OrderDao {
      * @return 通过ID查找order
      */
     Order getOrderByID(int orderID);
+
+    /**
+     *
+     * @param orderID
+     * @param status
+     */
+    void changeOrderStatus(Map map);
 }

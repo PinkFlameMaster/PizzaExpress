@@ -9,6 +9,7 @@
         <result property="name" column="name"/>
         <result property="prize" column="prize"/>
         <result property="introduce" column="introduce"/>
+        <result property="imgPath" column="imgPath"/>
         <result property="onSale" column="onSale"/>
     </resultMap>
 
@@ -17,10 +18,30 @@
         FROM menuItem
     </select>
 
+    <select id="queryAllOnSaleByPriceAndOrderFromLow" resultMap="menuItem">
+        SELECT *
+        FROM menuItem
+        WHERE prize >= #{minPrice} AND  prize &lt;= #{maxPrice}
+        ORDER BY prize ASC
+    </select>
+
+    <select id="queryAllOnSaleByPriceAndOrderFromHigh" resultMap="menuItem">
+        SELECT *
+        FROM menuItem
+        WHERE prize >= #{minPrice} AND  prize &lt;= #{maxPrice}
+        ORDER BY prize DESC
+    </select>
+
     <select id="findById" resultMap="menuItem" parameterType="int">
         SELECT *
         FROM menuItem
         WHERE id = #{id}
     </select>
 
+
+    <select id="queryAllOnSaleByInfo" resultMap="menuItem" parameterType="String">
+        SELECT *
+        FROM menuItem
+        WHERE `name` LIKE CONCAT('%',#{info},'%')
+    </select>
 </mapper>

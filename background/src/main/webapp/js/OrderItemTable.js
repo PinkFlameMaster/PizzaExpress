@@ -4,8 +4,30 @@ $(function () {
     var oTable = new TableInit();
     oTable.Init();
     var orderId=getQueryString("id");
-    alert(orderId);
+    if (orderId!=null) {
+        var params = {};
+        params.orderId = orderId;
+        $.ajax({
+            type: "POST",
+            url: "../order/info",
+            data: params,
+            dataType: "json",
+            //	         		   contentType: "application/json; charset=utf-8",//此处不能设置，否则后台无法接值
+            success: function (data) {
+                if (data.status === "success") {
+                    $('#tb_item').bootstrapTable('load', data.item);
+                    $('#factory').textContent=data.factoryName;
+                    $('#delivery-fee').textContent=data.deliveryFee;
 
+                } else {
+                    alert("错误:" + data.errorMsg);
+                }
+            },
+            error: function (data) {
+                alert("出现异常，异常原因【" + data + "】!");
+            }
+        });
+    }
 
 });
 
@@ -14,8 +36,6 @@ var TableInit = function () {
     //初始化Table
     oTableInit.Init = function () {
         $('#tb_item').bootstrapTable({
-            url: '/Home/GetDepartment',         //请求后台的URL（*）
-            method: 'get',                      //请求方式（*）
             clickEdit: false,                    //点击修改
             //toolbar: '#toolbar',                //工具按钮用哪个容器
             striped: true,                      //是否显示行间隔色

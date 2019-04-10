@@ -57,26 +57,48 @@ public class HomeController {
     @ResponseBody
     public  JSONArray getMenuItem(Model model) {
         List<MenuItem> items=new ArrayList<>();
-        List<Object> ret=new ArrayList<>();
 
         items=menuService.queryAllOnSale();
 
-//        if(items!=null)
-//        {
-//            for(int i=0;i<items.size();i++)
-//            {
-//                Map<String,Object> map=new HashMap<String,Object>();
-//                map.put("productId",items.get(i).getId());
-//                map.put("salePrice",items.get(i).getPrize());
-//                map.put("productName",items.get(i).getName());
-//                map.put("subTitle",items.get(i).getIntroduce());
-//                ret.add(map);
-//            }
-//        }
+        return JSONArray.fromObject(items);
+    }
 
-//        String goods= JSONArray.fromObject(ret).toString();
-//        System.out.println(goods);
-        //response.setHeader("Access-Control-Allow-Origin","*");
+    @RequestMapping(value = "/orderedMenu",method = RequestMethod.POST)
+    @ResponseBody
+    public  JSONArray getMenuItemByOrder(Model model,@RequestBody Map map)
+    {
+        int type=Integer.valueOf(map.get("orderType").toString());
+        float minPrice=Float.valueOf(map.get("minPrice").toString());
+        float maxPrice=Float.valueOf(map.get("maxPrice").toString());
+        System.out.println("===================="+map.toString());
+        List<MenuItem> items=new ArrayList<>();
+
+        if(type==1)
+        {
+            items=menuService.queryAllOnSale();
+        }
+        else if(type==2)
+        {
+            items=menuService.queryAllOnSaleByPriceAndOrderFromLow(minPrice,maxPrice);
+        }
+        else
+        {
+            items=menuService.queryAllOnSaleByPriceAndOrderFromHigh(minPrice,maxPrice);
+        }
+
+        return JSONArray.fromObject(items);
+    }
+
+    @RequestMapping(value = "/searchItem",method = RequestMethod.POST)
+    @ResponseBody
+    public  JSONArray searchItem(Model model,@RequestBody Map map)
+    {
+        String searchInfo=map.get("searchContent").toString();
+        System.out.println(map.toString());
+        System.out.println(searchInfo);
+        List<MenuItem> items=new ArrayList<>();
+
+        items=menuService.queryAllOnSaleByInfo(searchInfo);
         return JSONArray.fromObject(items);
     }
 
@@ -98,6 +120,7 @@ public class HomeController {
     public JSONObject commitOrder(Model model,@RequestBody Map map) throws MalformedURLException, UnsupportedEncodingException {
         //addressId
         int addressID=Integer.valueOf(map.get("addressId").toString());
+        System.out.println(addressID);
         ReceiverAddress receiverAddress=receiverAddressDao.findById(addressID);
         System.out.println(receiverAddress.getAddress());
 
@@ -162,13 +185,24 @@ public class HomeController {
                 if(!originalLocationMap.get("latitude").toString().equals("false"))
                 {
                     int distance = orderService.getDistance(originalLocationMap.get("latitude"), originalLocationMap.get("longitude"), desLocationMap.get("latitude"), desLocationMap.get("longitude"));
-                    System.out.println(distance);
+                    System.out.println("***********************"+distance);
                     if (distance <= 10000) {
                         selectFactory = factory;
+                        System.out.println("-----------------select factory:"+selectFactory.getId()+" "+selectFactory.getAddress());
                         break;
                     }
                 }
             }
+        }
+
+        if(selectFactory==null || selectFactory.getId()==0)
+        {
+            System.out.println("-----------------select factory:is null");
+            isSuccess=false;
+            String ret=String.valueOf(isSuccess);
+            ret="{\"success\":\""+ret+"\"}";
+            System.out.println(ret);
+            return JSONObject.fromObject(ret);
         }
 
         //生成Order
@@ -176,7 +210,7 @@ public class HomeController {
         order.setId(id);
         order.setOrderTime(orderTime);
         order.setReceiverAddressId(receiverAddress.getId());
-        order.setState("Ordered");
+        order.setState("1");
         order.setFactoryId(selectFactory.getId());
 
 
@@ -196,7 +230,29 @@ public class HomeController {
             isSuccess=false;
 
         String ret=String.valueOf(isSuccess);
-        ret="{\"success\":\""+ret+"\"}";
+        if(isSuccess==true)
+        {
+            ret="{\"success\":\""+String.valueOf(id)+"\"}";
+        }
+        else
+        {
+            ret = "{\"success\":\"" + ret + "\"}";
+        }
+        System.out.println(ret);
         return JSONObject.fromObject(ret);
     }
+
+    @RequestMapping(value = "/payment",method = RequestMethod.POST)
+    @ResponseBody
+    public JSONObject afterPayment(Model model,@RequestBody Map map)
+    {
+        String result="true";
+        int orderID=Integer.valueOf(map.get("orderId").toString());
+
+        orderService.changeOrderStatus(orderID,"2");
+
+        result="{\"success\":\""+result+"\"}";
+        return JSONObject.fromObject(result);
+    }
+
 }

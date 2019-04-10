@@ -20,18 +20,18 @@ var TableInit = function () {
             pagination: true,                   //是否显示分页（*）
             sortable: false,                     //是否启用排序
             sortOrder: "asc",                   //排序方式
-            queryParams: oTableInit.queryParams,//传递参数（*）
             sidePagination: "client",           //分页方式：client客户端分页，server服务端分页（*）
+            queryParams: oTableInit.queryParams,//传递参数（*）
             pageNumber:1,                       //初始化加载第一页，默认第一页
             pageSize: 10,                       //每页的记录行数（*）
             pageList: [10, 25, 50, 100],        //可供选择的每页的行数（*）
             search: false,                       //是否显示表格搜索，此搜索是客户端搜索，不会进服务端，所以，个人感觉意义不大
-            strictSearch: true,
+            strictSearch: false,
             showColumns: false,                  //是否显示所有的列
-            showRefresh: true,                  //是否显示刷新按钮
+            showRefresh: false,                  //是否显示刷新按钮
             minimumCountColumns: 2,             //最少允许的列数
             clickToSelect: false,                //是否启用点击选中行
-            uniqueId: "ID",                     //每一行的唯一标识，一般为主键列
+            uniqueId: "id",                     //每一行的唯一标识，一般为主键列
             showToggle:false,                    //是否显示详细视图和列表视图的切换按钮
             cardView: false,                    //是否显示详细视图
             detailView: false,                   //是否显示父子表
@@ -45,14 +45,17 @@ var TableInit = function () {
                 title: '用户名称',
                 edit:false,
             }, {
-                field: 'userid',
+                field: 'userId',
                 title: '用户id',
                 edit:false,
             }, {
-                field: 'phoneNum',
-                title: '收货人联系方式'
+                field: 'ReceiverPhoneNum',
+                title: '收货人联系方式',
+                formatter: function(value, row, index) {
+                    return row.receiverAddress.receiverPhoneNum;
+                }
             },{
-                field: 'factory',
+                field: 'factoryName',
                 title: '配送门店'
             },{
                 field: 'DetailHref',
@@ -63,6 +66,7 @@ var TableInit = function () {
             } ],
 
             onClickCell: function(field, value, row, $element) {
+                if ( row.id != null )
                 window.location.href="./OrderInfo.html?id="+row.id;
             }
         });
@@ -71,15 +75,7 @@ var TableInit = function () {
     };
 
     //得到查询的参数
-    oTableInit.queryParams = function (params) {
-        var temp = {   //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
-            limit: params.limit,   //页面大小
-            offset: params.offset,  //页码
-            departmentname: $("#txt_search_departmentname").val(),
-            statu: $("#txt_search_statu").val()
-        };
-        return temp;
-    };
+    oTableInit.queryParams = function (params) {}
     return oTableInit;
 
     function identifierFormatter(value, row, index) {
@@ -109,7 +105,6 @@ $("#searchForm-searchBtn").click(function(){
         dataType:"json",
         //	         		   contentType: "application/json; charset=utf-8",//此处不能设置，否则后台无法接值
         success:function(data){
-            alert("success");
             if(data.status === "success") {
                 $('#tb_order').bootstrapTable('load', data.data);
             }
@@ -127,16 +122,22 @@ var mockData = [
     {
         "id": 0,
         "username": "Item 0",
-        "userid":"1909999999",
-        "phoneNum": "1801999999",
-        "factory":"dasw"
+        "userId":"1909999999",
+        "receiverAddress":
+            {
+                "receiverPhoneNum": "1801999999"
+            },
+        "factoryName":"dasw"
     },
     {
         "id":1,
         "username": "Item 1",
-        "userid":"1909999999",
-        "phoneNum": "1801999999",
-        "factory":"dasw"
+        "userId":"1909999999",
+        "receiverAddress":
+            {
+                "receiverPhoneNum": "1801999999"
+            },
+        "factoryName":"dasw"
     },
 ]
 

@@ -10,4 +10,10 @@ public interface MenuService {
 
     MenuItem queryItemByID(int id);
 
+    List<MenuItem> queryAllOnSaleByPriceAndOrderFromLow(float minPrice,float maxPrice);
+
+    List<MenuItem> queryAllOnSaleByPriceAndOrderFromHigh(float minPrice,float maxPrice);
+
+    List<MenuItem> queryAllOnSaleByInfo(String info);
+
 }

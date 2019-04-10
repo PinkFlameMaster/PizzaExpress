@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.FactoryDao">
+
+    <resultMap type="Factory" id="factory" >
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="address" column="address"/>
+        <result property="latitude" column="latitude"/>
+        <result property="longitude" column="longitude"/>
+        <result property="phoneNum" column="phoneNum"/>
+        <result property="businessTimeFrom" column="businessTimeFrom"/>
+        <result property="businessTimeTo" column="businessTimeTo"/>
+    </resultMap>
+
+
+    <select id="getFactoryByID" resultMap="factory" parameterType="int">
+        SELECT *
+        FROM factory
+        WHERE id = #{id}
+    </select>
+
+
+
+</mapper>

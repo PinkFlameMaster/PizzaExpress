@@ -19,7 +19,7 @@ leftNavBarDiv.innerHTML = '' +
     '            </a>\n' +
     '            <ul id = "orderMgtItem">\n' +
     '                <li><a href="#">退单审核</a></li>\n' +
-    '                <li><a href="#">订单查询</a></li>\n' +
+    '                <li><a href="../views/Order/OrderSearch.jsp">订单查询</a></li>\n' +
     '                <li><a href="#">订单详情</a></li>\n' +
     '            </ul>\n' +
     '        </li>\n' +

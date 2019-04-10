@@ -38,6 +38,13 @@ public interface UserDao {
     boolean modifyInfo(User user);
 
     /**
+     *
+     * @param user
+     * @return
+     */
+    boolean modifyPassword(User user);
+
+    /**
      * 注册新用户
      * @param user 新注册的用户信息
      * @return 是否注册成功
