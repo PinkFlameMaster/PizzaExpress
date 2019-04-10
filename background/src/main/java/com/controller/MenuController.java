@@ -91,7 +91,6 @@ public class MenuController {
     @ResponseBody
     public ReturnMsg saveMenuItems(Model model, String mode, String menuItemDto) {
 
-
         JSONObject jsonObj=JSONObject.fromObject(menuItemDto);
         //获取json对象中,键ingredients的值
         String ingredientsStr = jsonObj.getString("ingredients");
@@ -105,6 +104,11 @@ public class MenuController {
         @SuppressWarnings("unchecked")
         MenuItemDto menuInfo = (MenuItemDto)JSONObject.toBean(jsonObj, new MenuItemDto(),jsonConfig);
 
+        if(mode.equals("create")){
+            int id = menuItemService.createMenuItem();
+            menuInfo.setId(id);
+        }
+        menuItemService.updateMenuItem(menuInfo);
         ReturnMsg ret = new ReturnMsg();
         ret.setStatus("success");
         return ret;
