@@ -11,6 +11,11 @@ $(function () {
 });
 
 var mode = getQueryString("mode");
+var id = getQueryString('id');
+var item={}
+if(mode === "view"){
+    searchItemDetail();
+}
 var TableInit = function () {
     var oTableInit = new Object();
     //初始化Table
@@ -206,7 +211,7 @@ $("#saveBtn").click(function () {
     var menuItemDto = {};
     menuItemDto.name = $("#itemInfoForm-name").val();
     menuItemDto.prize = $("#itemInfoForm-prize").val();
-    menuItemDto.onsale = $("#itemInfoForm-status").val() === '在售' ? true : false;
+    menuItemDto.onSale = $("#itemInfoForm-status").val() === '在售' ? true : false;
     menuItemDto.introduce = $("#itemInfoForm-desc").val();
     menuItemDto.imgPath = $("#itemInfoForm-img").val();
     menuItemDto.ingredients = ingredients;
@@ -235,3 +240,30 @@ $("#saveBtn").click(function () {
         }
     });
 });
+
+function searchItemDetail() {
+    //封装ajax参数
+    var params = {};
+    params.id = id;
+    //发起ajax请求
+    $.ajax({
+        type: "POST",
+        url: "../../menu/searchItemDetail",
+        data: params,
+        dataType: "json",
+        //	         		   contentType: "application/json; charset=utf-8",//此处不能设置，否则后台无法接值
+        success: function (data) {
+            // alert("success");
+            if (data.status === "success") {
+                alert("nb!!");
+                // $('#tb_menu').bootstrapTable('load', data.data);
+            }
+            else {
+                alert("错误:" + data.errorMsg);
+            }
+        },
+        error: function (data) {
+            alert("出现异常，异常原因【" + data + "】!");
+        }
+    });
+}
