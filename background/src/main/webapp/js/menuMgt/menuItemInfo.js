@@ -226,7 +226,7 @@ $("#saveBtn").click(function () {
         success: function (data) {
             // alert("success");
             if (data.status === "success") {
-                $('#tb_menu').bootstrapTable('load', data.data);
+                alert("保存成功");
             }
             else {
                 alert("错误:" + data.errorMsg);
