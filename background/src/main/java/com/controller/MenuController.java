@@ -108,4 +108,17 @@ public class MenuController {
         return ret;
     }
 
+    @RequestMapping("/searchItemDetail")
+    @ResponseBody
+    public ReturnMsg searchMenuItemDetal(Model model, String id){
+
+        /*
+         *   menuInfo.name -> 菜品名称，""表示全部
+         *  status -> “在售” 、 “下架” 、 “全部”
+         * */
+        ReturnMsg ret = new ReturnMsg();
+        ret.setStatus("success");
+//        ret.setData(menuItems);
+        return ret;
+    }
 }

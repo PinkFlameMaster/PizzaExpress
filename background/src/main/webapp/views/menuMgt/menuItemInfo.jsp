@@ -1,5 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
+<%@ page import="com.helper.AdminToFactoryHelper" %>
+<%@ page import="com.pojo.Admin" %><%--
+  Created by IntelliJ IDEA.
+  User: XinJi
+  Date: 2019/3/22
+  Time: 10:19
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
 <head>
     <meta charset="UTF-8">
     <!--<script type="text/javascript" src="../js/Login.js"></script>-->
@@ -19,9 +27,15 @@
     <script type="text/javascript" src="../../js/helper.js"></script>
     <title>Title</title>
 </head>
-<script type="text/javascript">
-    // var id = getQueryString('id');
-    // alert(id);
+<script type = "text/javascript">
+    <%Admin admin = (Admin)request.getSession().getAttribute("admin");%>
+    var priority="<%=admin.getRole()%>";
+    var username = "<%=admin.getUsername()%>";
+    var entrytime = "<%=admin.getEntryTime()%>";
+    var role = "<%=admin.getRole()%>";
+    var phoneNum = "<%=admin.getPhoneNum()%>";
+    <%AdminToFactoryHelper adminToFactoryHelpler = new AdminToFactoryHelper(admin);%>
+    var factory = "<%=adminToFactoryHelpler.getFactoryName()%>";
 </script>
 <body class="bright-bg">
 <div id = "mainBodyWrap">
@@ -96,3 +110,4 @@
 </html>
 <script type="text/javascript" src="../../js/template_page.js"></script>
 <script type="text/javascript" src="../../js/menuMgt/menuItemInfo.js"></script>
+
