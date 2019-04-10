@@ -17,6 +17,12 @@
         FROM menuItem
         WHERE id = #{id}
     </select>
+
+    <select id="findIngredientByMenuItem" resultType="MenuItem_Ingredient" parameterType="Integer">
+        SELECT *
+        FROM menuItem_ingredient
+        WHERE menuItemId = #{id}
+    </select>
 <!--private int id;
     private String name;
     private float prize;

@@ -2,6 +2,7 @@ package com.service.implement;
 
 import com.dao.MenuItemDao;
 import com.pojo.MenuItem;
+import com.pojo.MenuItem_Ingredient;
 import com.service.MenuItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,5 +25,10 @@ public class MenuItemServiceImpl implements MenuItemService {
     @Override
     public void deleteMenuItem(int id) {
         menuItemDao.deleteMenuItemById(id);
+    }
+
+    @Override
+    public List<MenuItem_Ingredient> getItemDetail(int id) {
+        return menuItemDao.findIngredientByMenuItem(id);
     }
 }

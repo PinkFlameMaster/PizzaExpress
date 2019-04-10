@@ -1,6 +1,7 @@
 package com.dto;
 
 import com.pojo.Ingredient;
+import com.pojo.MenuItem;
 
 import java.util.Dictionary;
 import java.util.List;
@@ -15,6 +16,17 @@ public class MenuItemDto {
     private String imgPath;
 
     private List<Ingredient> ingredients;
+
+    public MenuItemDto(MenuItem menuItem, List<Ingredient> ingredients){
+        this.id = menuItem.getId();
+        this.name = menuItem.getName();
+        this.prize = menuItem.getPrize();
+        this.introduce = menuItem.getIntroduce();
+        this.onSale = menuItem.isOnSale();
+        this.imgPath = menuItem.getImgPath();
+        this.ingredients = ingredients;
+    }
+
 
     public int getId() {
         return id;
