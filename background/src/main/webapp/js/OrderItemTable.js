@@ -18,7 +18,10 @@ $(function () {
                     $('#tb_item').bootstrapTable('load', data.item);
                     $('#factory').textContent=data.factoryName;
                     $('#delivery-fee').textContent=data.deliveryFee;
-
+                    $('#address').textContent=data.receiverAddress.address;
+                    $('#datetime').textContent=data.orderTime;
+                    $('#receiverName').textContent=data.receiverAddress.receiverName;
+                    $('#contact').textContent=data.receiverAddress.receiverPhoneNum;
                 } else {
                     alert("错误:" + data.errorMsg);
                 }
