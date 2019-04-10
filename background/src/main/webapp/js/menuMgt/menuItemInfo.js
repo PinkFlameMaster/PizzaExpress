@@ -256,7 +256,7 @@ function searchItemDetail() {
                 $("#itemInfoForm-prize").val(result.data[0].prize);
                 $("#itemInfoForm-status").val(result.data[0].onSale == true?'在售':'下架');
                 $("#itemInfoForm-desc").val(result.data[0].introduce);
-                // menuItemDto.imgPath = $("#itemInfoForm-img").val();
+                $('#itemInfoForm-img').attr("src", result.data[0].imgPath);
                 $('#tb_ingredient').bootstrapTable('load',result.data[0].ingredients);
             }
             else {
