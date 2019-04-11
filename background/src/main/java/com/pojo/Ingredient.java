@@ -1,12 +1,23 @@
 package com.pojo;
 
+import net.sf.json.util.JSONStringer;
+
 public class Ingredient {
     private int id;
     private String type;
     private String source;
-    private String inportDate;
+    private String importDate;
     private int factoryId;
     private float amount;
+
+    public Ingredient(){
+
+    }
+
+    public Ingredient(String type, float amount){
+        this.type = type;
+        this.amount = amount;
+    }
 
     public int getId() {
         return id;
@@ -32,12 +43,12 @@ public class Ingredient {
         this.source = source;
     }
 
-    public String getInportDate() {
-        return inportDate;
+    public String getImportDate() {
+        return importDate;
     }
 
-    public void setInportDate(String inportDate) {
-        this.inportDate = inportDate;
+    public void setImportDate(String importDate) {
+        this.importDate = importDate;
     }
 
     public int getFactoryId() {

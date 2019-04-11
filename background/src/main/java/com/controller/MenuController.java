@@ -1,8 +1,10 @@
 package com.controller;
 
+import com.dto.IngredientDto;
 import com.dto.MenuItemDto;
 import com.pojo.Ingredient;
 import com.pojo.MenuItem;
+import com.pojo.MenuItem_Ingredient;
 import com.pojo.User;
 import com.service.AdminService;
 import com.service.MenuItemService;
@@ -89,7 +91,6 @@ public class MenuController {
     @ResponseBody
     public ReturnMsg saveMenuItems(Model model, String mode, String menuItemDto) {
 
-
         JSONObject jsonObj=JSONObject.fromObject(menuItemDto);
         //获取json对象中,键ingredients的值
         String ingredientsStr = jsonObj.getString("ingredients");
@@ -103,6 +104,11 @@ public class MenuController {
         @SuppressWarnings("unchecked")
         MenuItemDto menuInfo = (MenuItemDto)JSONObject.toBean(jsonObj, new MenuItemDto(),jsonConfig);
 
+        if(mode.equals("create")){
+            int id = menuItemService.createMenuItem();
+            menuInfo.setId(id);
+        }
+        menuItemService.updateMenuItem(menuInfo);
         ReturnMsg ret = new ReturnMsg();
         ret.setStatus("success");
         return ret;
@@ -110,15 +116,21 @@ public class MenuController {
 
     @RequestMapping("/searchItemDetail")
     @ResponseBody
-    public ReturnMsg searchMenuItemDetal(Model model, String id){
+    public ReturnMsg searchMenuItemDetail(Model model, int id){
 
-        /*
-         *   menuInfo.name -> 菜品名称，""表示全部
-         *  status -> “在售” 、 “下架” 、 “全部”
-         * */
         ReturnMsg ret = new ReturnMsg();
+
+        List<MenuItem_Ingredient> mi = menuItemService.getItemDetail(id);
+        List<MenuItemDto> result = new ArrayList<>();
+        List<Ingredient> ingredients = new ArrayList<>();
+        for(MenuItem_Ingredient m: mi){
+            Ingredient in = new Ingredient(m.getIngredientType(),m.getIngredientAmount());
+            ingredients.add(in);
+        }
+        result.add(new MenuItemDto(menuItemService.searchMenuItemById(id),ingredients));
         ret.setStatus("success");
-//        ret.setData(menuItems);
+
+        ret.setData(result);
         return ret;
     }
 }

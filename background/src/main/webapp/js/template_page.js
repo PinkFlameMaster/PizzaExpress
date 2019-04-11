@@ -1,6 +1,11 @@
 var insertNodeBefore = function (newNode, oldNode){
     oldNode.parentNode.insertBefore(newNode,oldNode);
 }
+var curWwwPath = window.document.location.href;
+var pathName = window.document.location.pathname;
+var pos = curWwwPath.indexOf(pathName);
+var localhostPath = curWwwPath.substring(0, pos);//获取主机地址，如： http://localhost:8080
+
 var adminInfo={}
  //var username = "";
 // var priority = "";
@@ -10,8 +15,8 @@ var leftNavBarDivWrap = document.createElement("div");
 var leftNavBarDiv = document.createElement("div");
 leftNavBarDiv.innerHTML = '' +
     '    <ul class="nav nav-pills nav-stacked white-bg">\n' +
-    '        <li class="active"><a href="./HomePage.html">首页</a></li>\n' +
-    '        <li><a href="./UserMgt.html">用户管理</a></li>\n' +
+    '        <li class="active"><a href="'+localhostPath+'/views/HomePage.jsp">首页</a></li>\n' +
+    '        <li><a href="'+localhostPath+'/views/UserMgt.jsp">用户管理</a></li>\n' +
     '        <li>\n' +
     '            <a data-toggle="collapse" data-parent="#accordion"\n' +
     '               href="#orderMgtItem">\n' +
@@ -19,7 +24,7 @@ leftNavBarDiv.innerHTML = '' +
     '            </a>\n' +
     '            <ul id = "orderMgtItem">\n' +
     '                <li><a href="#">退单审核</a></li>\n' +
-    '                <li><a href="../views/Order/OrderSearch.jsp">订单查询</a></li>\n' +
+    '                <li><a href="'+localhostPath+'/views/Order/OrderSearch.jsp">订单查询</a></li>\n' +
     '                <li><a href="#">订单详情</a></li>\n' +
     '            </ul>\n' +
     '        </li>\n' +
@@ -30,8 +35,8 @@ leftNavBarDiv.innerHTML = '' +
     '                菜单管理<b class="caret"></b>\n' +
     '            </a>\n' +
     '            <ul id = "menuMgtItem">\n' +
-    '                <li><a href="#">菜单查询</a></li>\n' +
-    '                <li><a href="./menuMgt/menuSearch.html">新增菜品</a></li>\n' +
+    '                <li><a href="'+localhostPath+'/views/menuMgt/menuSearch.jsp">菜单查询</a></li>\n' +
+    '                <li><a href="'+localhostPath+'/views/menuMgt/menuItemInfo.jsp?mode=create">新增菜品</a></li>\n' +
     '            </ul>\n' +
     '        </li>\n' +
     '        <li><a href="#">店面管理</a></li>\n' +

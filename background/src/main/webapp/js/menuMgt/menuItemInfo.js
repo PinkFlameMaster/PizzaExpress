@@ -4,10 +4,6 @@ $(function () {
     var oTable = new TableInit();
     oTable.Init();
 
-    //2.初始化Button的点击事件
-    // var oButtonInit = new ButtonInit();
-    // oButtonInit.Init();
-
 });
 
 var mode = getQueryString("mode");
@@ -209,6 +205,7 @@ $("#saveBtn").click(function () {
     })
     //menuItem对象
     var menuItemDto = {};
+    menuItemDto.id = id;
     menuItemDto.name = $("#itemInfoForm-name").val();
     menuItemDto.prize = $("#itemInfoForm-prize").val();
     menuItemDto.onSale = $("#itemInfoForm-status").val() === '在售' ? true : false;
@@ -229,7 +226,7 @@ $("#saveBtn").click(function () {
         success: function (data) {
             // alert("success");
             if (data.status === "success") {
-                $('#tb_menu').bootstrapTable('load', data.data);
+                alert("保存成功");
             }
             else {
                 alert("错误:" + data.errorMsg);
@@ -252,14 +249,18 @@ function searchItemDetail() {
         data: params,
         dataType: "json",
         //	         		   contentType: "application/json; charset=utf-8",//此处不能设置，否则后台无法接值
-        success: function (data) {
+        success: function (result) {
             // alert("success");
-            if (data.status === "success") {
-                alert("nb!!");
-                // $('#tb_menu').bootstrapTable('load', data.data);
+            if (result.status === "success") {
+                $("#itemInfoForm-name").val(result.data[0].name);
+                $("#itemInfoForm-prize").val(result.data[0].prize);
+                $("#itemInfoForm-status").val(result.data[0].onSale == true?'在售':'下架');
+                $("#itemInfoForm-desc").val(result.data[0].introduce);
+                $('#itemInfoForm-img').attr("src", result.data[0].imgPath);
+                $('#tb_ingredient').bootstrapTable('load',result.data[0].ingredients);
             }
             else {
-                alert("错误:" + data.errorMsg);
+                alert("错误:" + result.errorMsg);
             }
         },
         error: function (data) {
