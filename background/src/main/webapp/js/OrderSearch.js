@@ -65,10 +65,7 @@ var TableInit = function () {
                 }
             } ],
 
-            onClickCell: function(field, value, row, $element) {
-                if ( row.id != null )
-                window.location.href="OrderInfo.jsp?id="+row.id;
-            }
+
         });
 
 

@@ -1,8 +1,10 @@
 $(function () {
 
     //1.初始化Table
-    var oTable = new TableInit();
+    var oTable = new Table();
     oTable.Init();
+    var modalTable=new TableInit();
+    modalTable.Init();
     var orderId=getQueryString("id");
     if (orderId!=null) {
         var params = {};
@@ -17,15 +19,18 @@ $(function () {
                 if (data.status === "success") {
                     alert("success");
                     if (data.data[0]!=null) {
-                        $('#datetime').innerHTML = data.data[0].orderTime;
-                        $('#tb_item').bootstrapTable('load', data.data[0].item);
-                        $('#factory').textContent = data.data[0].factoryName;
-                        $('#delivery-fee').textContent = data.data[0].deliveryFee;
+                        $('#datetime').text(data.data[0].orderTime);
+                        $('#tb_item').bootstrapTable('load', data.data[0].orderItems);
+                        $('#factory').text(data.data[0].factoryName);
+                        $('#delivery-fee').text(data.data[0].deliveryFee);
                         if (data.data[0].receiverAddress != null) {
-                            $('#address').textContent = data.data[0].receiverAddress.address;
-                            $('#receiverName').textContent = data.data[0].receiverAddress.receiverName;
-                            $('#contact').textContent = data.data[0].receiverAddress.receiverPhoneNum;
+                            $('#address').text(data.data[0].receiverAddress.address);
+                            $('#receiverName').text(data.data[0].receiverAddress.receiverName);
+                            $('#contact').text(data.data[0].receiverAddress.receiverPhoneNum);
                         }
+                        oTable.data=data.data[0].orderItems;
+                        if (data.data[0].state === "refunded")
+                            $('#refund-div').text('已退款');
                     }
                 } else {
                     alert("错误:" + data.errorMsg);
@@ -39,10 +44,10 @@ $(function () {
 
 });
 
-var TableInit = function () {
-    var oTableInit = new Object();
+var Table = function () {
+    var oTable = new Object();
     //初始化Table
-    oTableInit.Init = function () {
+    oTable.Init = function () {
         $('#tb_item').bootstrapTable({
             clickEdit: false,                    //点击修改
             //toolbar: '#toolbar',                //工具按钮用哪个容器
@@ -51,7 +56,7 @@ var TableInit = function () {
             //pagination: true,                   //是否显示分页（*）
             sortable: false,                     //是否启用排序
             sortOrder: "asc",                   //排序方式
-            queryParams: oTableInit.queryParams,//传递参数（*）
+            queryParams: oTable.queryParams,//传递参数（*）
             //sidePagination: "server",           //分页方式：client客户端分页，server服务端分页（*）
             //pageNumber:1,                       //初始化加载第一页，默认第一页
             //pageSize: 10,                       //每页的记录行数（*）
@@ -76,50 +81,102 @@ var TableInit = function () {
                 title: '菜品名称',
                 edit:false,
             }, {
-                field: 'price',
+                field: 'actualUnitPrize',
                 title: '单价',
                 edit:false,
             }, {
-                field: 'amount',
+                field: 'num',
                 title: '数量'
             }, ],
 
             onClickCell: function(field, value, row, $element) {
-                if (field=="name")
-                {
-                    RequestItemDetail(row.id)
-                }
+                RequestItemDetail(row.id)
             }
         });
         function  RequestItemDetail(id) {
-            alert(id);
+            $('#ingredient-modal').modal();
+
+            $('#tb_item-ingredient').bootstrapTable('load',oTable.data[id].ingredients);
         }
 
 
     };
     
 
-    //得到查询的参数
-    oTableInit.queryParams = function (params) {
-        var temp = {   //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
-            limit: params.limit,   //页面大小
-            offset: params.offset,  //页码
-            departmentname: $("#txt_search_departmentname").val(),
-            statu: $("#txt_search_statu").val()
-        };
-        return temp;
+    return oTable;
+
+
+};
+
+$('#refund').click(function refund(){
+    var params={};
+    params.orderId=getQueryString("id");
+    $.ajax({
+        type: "POST",
+        url: "../../order/refund",
+        data: params,
+        dataType: "json",
+        //	         		   contentType: "application/json; charset=utf-8",//此处不能设置，否则后台无法接值
+        success: function (data) {
+            if (data.status === "success") {
+                alert("退单成功");
+                window.location.href="OrderInfo.jsp?id="+getQueryString("id");
+            } else {
+                alert("错误:" + data.errorMsg);
+            }
+        },
+        error: function (data) {
+            alert("出现异常，异常原因【" + data + "】!");
+        }
+    });
+});
+
+var TableInit = function () {
+    var oTableInit = new Object();
+    //初始化Table
+    oTableInit.Init = function () {
+        $('#tb_item-ingredient').bootstrapTable({
+            clickEdit: false,                    //点击修改
+            toolbar: '#toolbar',                //工具按钮用哪个容器
+            cache: false,                       //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
+            sortable: false,                     //是否启用排序
+            sortOrder: "asc",                   //排序方式
+            queryParams: oTableInit.queryParams,//传递参数（*）
+            search: false,                       //是否显示表格搜索，此搜索是客户端搜索，不会进服务端，所以，个人感觉意义不大
+            strictSearch: true,
+            showColumns: false,                  //是否显示所有的列
+            showRefresh: false,                  //是否显示刷新按钮
+            minimumCountColumns: 2,             //最少允许的列数
+            clickToSelect: false,                //是否启用点击选中行
+            uniqueId: "ID",                     //每一行的唯一标识，一般为主键列
+            showToggle: false,                    //是否显示详细视图和列表视图的切换按钮
+            cardView: false,                    //是否显示详细视图
+            detailView: false,                   //是否显示父子表
+            editable: false,
+
+            columns: [{
+                field: 'type',
+                title: '原料名称'
+            }, {
+                field: 'importDate',
+                title: '进货时间'
+            }, {
+                field: 'idCode',
+                title: '识别码'
+            }, {
+                field: 'source',
+                title: '供货商'
+            }
+            ]
+
+
+        });
     };
     return oTableInit;
 
-    function identifierFormatter(value, row, index) {
-        return [
-            '<a class="like" href="javascript:void(0)" title="Like">',
-            value,
-            '</a>'].join('');
-    }
 };
 
-$('#refund').onclick=
+
 var mockData = [
     {
         "id": 0,

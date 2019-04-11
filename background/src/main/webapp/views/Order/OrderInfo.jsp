@@ -49,15 +49,35 @@
         </div>
 
         <div class="Order-content">
-            <div id="factory" class="">
-                曹杨路店
+            <div class="header">
+                <div id="factory" class="col-md-9">
+                    曹杨路店
+                </div>
+                <div class="pull-right" id="refund-div">
+                    <button id="refund" type="button" class="btn btn-info btn-md" >退款</button>
+                </div>
             </div>
-            <button id="refund" type="button" class="btn btn-info btn-md pull-right" >退款</button>
             <table id="tb_item" >
-                <thead>
-                </thead>
-                <tbody id="tbody"></tbody>
             </table>
+
+            <div class="modal fade" id="ingredient-modal" role="dialog">
+                <div class="modal-dialog">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title" id="item-name">菜品名称</h4>
+                        </div>
+                        <div class="modal-body">
+                            <table id="tb_item-ingredient" >
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
             <div class="delivery-fee">
                 <div class="pull-left">
                     配送费
