@@ -6,6 +6,7 @@ import com.service.UserService;
 import com.vo.ReturnMsg;
 import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.OrderComparator;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -25,7 +26,7 @@ public class TestOrderController {
 
     @RequestMapping("/search")
     @ResponseBody
-    public ReturnMsg searchOrders(Model model, @RequestBody String order, String status){
+    public ReturnMsg searchOrders(Model model, String order, String status){
         // json字符串转json对象
         System.out.println(order);
 
@@ -62,43 +63,17 @@ public class TestOrderController {
         return ret;
     }
 
-    @RequestMapping("/deleteByPhoneNum")
+    @RequestMapping("/info")
     @ResponseBody
-    public ReturnMsg deleteByPhoneNum(Model model, String[] phoneNums){
+    public ReturnMsg GetInfo(Model model,  @RequestBody String orderId, String status){
+        System.out.println(orderId);
         ReturnMsg ret =new ReturnMsg();
-        ret.setStatus("failure");
-
-        List<String> deletedUsers = new ArrayList<>();
-
-        List<String> notDeletedUsers = new ArrayList<>();
-
-        List<User> queryResult = new ArrayList<>();
-
-
-        /*  组织data，returnMsg数据格式：
-            {
-                data:[
-                    ["15800111111","15800222222"],   //成功删除
-                    ["15800333333","15800444444"]   //未成功删除
-                ],
-                ...
-            }
-
-         */
-        List<List<String>> data = new ArrayList<>();
-        data.add(deletedUsers);
-        data.add(notDeletedUsers);
-
-        ret.setData(data);
         ret.setStatus("success");
-        //end mock
-
-        //当查询遇到错误时
-//        ret.setStatus("failure");
-//        ret.setErrorMsg("这是一条错误信息");
-
-//        User user = (User) JSONObject.toBean(JSONObject.fromObject(request.getParameter("user")), User.class);
-
+        OrderDto orderDto=new OrderDto();
+        orderDto.setOrderTime("00:00");
+        List<OrderDto> orders=new ArrayList<OrderDto>();
+        orders.add(orderDto);
+        ret.setData(orders);
         return ret;
     }
 }

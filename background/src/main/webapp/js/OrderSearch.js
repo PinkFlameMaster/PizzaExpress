@@ -61,13 +61,13 @@ var TableInit = function () {
                 field: 'DetailHref',
                 title: '查看详情',
                 formatter: function(value, row, index) {
-                    return '<a href="../../html/OrderInfo.html?id='+row.id+'">查看详情</a>'
+                    return '<a href="OrderInfo.jsp?id='+row.id+'">查看详情</a>'
                 }
             } ],
 
             onClickCell: function(field, value, row, $element) {
                 if ( row.id != null )
-                window.location.href="./OrderInfo.html?id="+row.id;
+                window.location.href="OrderInfo.jsp?id="+row.id;
             }
         });
 
@@ -100,7 +100,7 @@ $("#searchForm-searchBtn").click(function(){
     //发起ajax请求
     $.ajax({
         type: "POST",
-        url: "../order/search",
+        url: "../../order/search",
         data: params,
         dataType:"json",
         //	         		   contentType: "application/json; charset=utf-8",//此处不能设置，否则后台无法接值

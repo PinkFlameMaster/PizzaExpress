@@ -9,19 +9,24 @@ $(function () {
         params.orderId = orderId;
         $.ajax({
             type: "POST",
-            url: "../order/info",
+            url: "../../order/info",
             data: params,
             dataType: "json",
             //	         		   contentType: "application/json; charset=utf-8",//此处不能设置，否则后台无法接值
             success: function (data) {
                 if (data.status === "success") {
-                    $('#tb_item').bootstrapTable('load', data.item);
-                    $('#factory').textContent=data.factoryName;
-                    $('#delivery-fee').textContent=data.deliveryFee;
-                    $('#address').textContent=data.receiverAddress.address;
-                    $('#datetime').textContent=data.orderTime;
-                    $('#receiverName').textContent=data.receiverAddress.receiverName;
-                    $('#contact').textContent=data.receiverAddress.receiverPhoneNum;
+                    alert("success");
+                    if (data.data[0]!=null) {
+                        $('#datetime').innerHTML = data.data[0].orderTime;
+                        $('#tb_item').bootstrapTable('load', data.data[0].item);
+                        $('#factory').textContent = data.data[0].factoryName;
+                        $('#delivery-fee').textContent = data.data[0].deliveryFee;
+                        if (data.data[0].receiverAddress != null) {
+                            $('#address').textContent = data.data[0].receiverAddress.address;
+                            $('#receiverName').textContent = data.data[0].receiverAddress.receiverName;
+                            $('#contact').textContent = data.data[0].receiverAddress.receiverPhoneNum;
+                        }
+                    }
                 } else {
                     alert("错误:" + data.errorMsg);
                 }
@@ -114,6 +119,7 @@ var TableInit = function () {
     }
 };
 
+$('#refund').onclick=
 var mockData = [
     {
         "id": 0,

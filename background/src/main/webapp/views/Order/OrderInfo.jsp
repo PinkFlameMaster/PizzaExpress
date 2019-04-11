@@ -52,6 +52,7 @@
             <div id="factory" class="">
                 曹杨路店
             </div>
+            <button id="refund" type="button" class="btn btn-info btn-md pull-right" >退款</button>
             <table id="tb_item" >
                 <thead>
                 </thead>
@@ -96,4 +97,5 @@
 </body>
 </html>
 <script type="text/javascript" src="../../js/template_page.js"></script>
+<script src="../../js/helper.js"></script>
 <script src="../../js/OrderItemTable.js"></script>
