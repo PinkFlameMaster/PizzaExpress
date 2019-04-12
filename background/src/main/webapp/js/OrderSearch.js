@@ -46,7 +46,7 @@ var TableInit = function () {
                 edit:false,
             }, {
                 field: 'userId',
-                title: '用户id',
+                title: '用户手机',
                 edit:false,
             }, {
                 field: 'ReceiverPhoneNum',
@@ -89,8 +89,8 @@ $("#searchForm-searchBtn").click(function(){
     //user对象
     var order={};
     order.username = $("#searchForm-name").val();
-    order.phoneNum = $("#searchForm-phoneNum").val();
-    order.factory = $("#searchForm-factory").val();
+    order.userId = $("#searchForm-phoneNum").val();
+    order.factoryName = $("#searchForm-factory").val();
     //user状态
     var params = {};
     params.order = JSON.stringify(order);
