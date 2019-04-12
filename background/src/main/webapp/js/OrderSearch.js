@@ -49,6 +49,12 @@ var TableInit = function () {
                 title: '用户手机',
                 edit:false,
             }, {
+                field: 'receiverName',
+                title: '收货人名',
+                formatter: function(value, row, index) {
+                    return row.receiverAddress.receiverName;
+                }
+            } ,{
                 field: 'ReceiverPhoneNum',
                 title: '收货人联系方式',
                 formatter: function(value, row, index) {
@@ -63,7 +69,7 @@ var TableInit = function () {
                 formatter: function(value, row, index) {
                     return '<a href="OrderInfo.jsp?id='+row.id+'">查看详情</a>'
                 }
-            } ],
+            }],
 
 
         });
@@ -88,7 +94,7 @@ $("#searchForm-searchBtn").click(function(){
 
     //user对象
     var order={};
-    order.username = $("#searchForm-name").val();
+    order.receiverAddress={receiverName : $("#searchForm-name").val()};
     order.userId = $("#searchForm-phoneNum").val();
     order.factoryName = $("#searchForm-factory").val();
     //user状态
@@ -122,7 +128,8 @@ var mockData = [
         "userId":"1909999999",
         "receiverAddress":
             {
-                "receiverPhoneNum": "1801999999"
+                "receiverPhoneNum": "1801999999",
+                "receiverName":"aaa"
             },
         "factoryName":"dasw"
     },
@@ -132,7 +139,8 @@ var mockData = [
         "userId":"1909999999",
         "receiverAddress":
             {
-                "receiverPhoneNum": "1801999999"
+                "receiverPhoneNum": "1801999999",
+                "receiverName":"aaa"
             },
         "factoryName":"dasw"
     },
