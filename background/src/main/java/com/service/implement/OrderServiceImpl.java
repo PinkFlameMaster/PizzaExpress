@@ -2,13 +2,13 @@ package com.service.implement;
 
 import com.dao.OrderDao;
 import com.dao.ReceiverAddressDao;
-import com.pojo.Order;
-import com.pojo.User;
 import com.service.OrderService;
+import com.vo.OrderVo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+@Service
 public class OrderServiceImpl implements OrderService {
     @Autowired
     ReceiverAddressDao receiverAddressDao;
@@ -16,10 +16,7 @@ public class OrderServiceImpl implements OrderService {
     OrderDao orderDao;
 
     @Override
-    public List<Order> findOrder(List<User> users, int factoryId) {
-        for(User u:users){
-            u.getPhoneNum();
-        }
-        return null;
+    public List<OrderVo> findOrder(String name, String phone, String factory) {
+        return orderDao.findOrderComplex(name,phone, factory);
     }
 }

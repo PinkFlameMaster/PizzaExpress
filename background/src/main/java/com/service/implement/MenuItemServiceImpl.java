@@ -45,10 +45,11 @@ public class MenuItemServiceImpl implements MenuItemService {
         int id = menuItemDto.getId();
         List<Ingredient> ingredients = menuItemDto.getIngredients();
         menuItemDao.deleteItemIngredients(id);
-        for(Ingredient in: ingredients){
-            System.out.println(in.getType());
-            menuItemDao.insertItemIngredients(id, in.getType(),in.getAmount());
-        }
+        if (ingredients != null)
+            for(Ingredient in: ingredients){
+                System.out.println(in.getType());
+                menuItemDao.insertItemIngredients(id, in.getType(),in.getAmount());
+            }
         menuItemDao.updateMenuItem(menuItemDto.getId(), menuItemDto.getName(),
                 menuItemDto.getPrize(), menuItemDto.getIntroduce(), menuItemDto.getImgPath());
         return 0;

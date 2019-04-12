@@ -44,11 +44,4 @@
         UPDATE menuItem set name = #{name}, prize = #{prize}, introduce = #{introduce}, imgPath = #{imgPath} WHERE id = #{id}
     </select>
 
-
-<!--private int id;
-    private String name;
-    private float prize;
-    private String introduce;
-    private boolean onSale;
-    private String imgPath;-->
 </mapper>
