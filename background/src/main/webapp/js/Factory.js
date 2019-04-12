@@ -3,8 +3,6 @@ $(function () {
     //1.初始化Table
     var oTable = new TableInit();
     oTable.Init();
-
-
 });
 
 
@@ -13,8 +11,6 @@ var TableInit = function () {
     //初始化Table
     oTableInit.Init = function () {
         $('#tb_factory').bootstrapTable({
-            url: '/Home/GetDepartment',         //请求后台的URL（*）
-            method: 'get',                      //请求方式（*）
             clickEdit: false,                    //点击修改
             toolbar: '#toolbar',                //工具按钮用哪个容器
             striped: true,                      //是否显示行间隔色
@@ -44,34 +40,41 @@ var TableInit = function () {
                 title: '门店名称',
             }, {
                 field: 'address',
-                title: '门店地址',
-                edit:false,
+                title: '门店地址'
             }, {
                 field: 'manager',
                 title: '联系人',
             }, {
                 field: 'phoneNum',
-                title: '联系方式',
-                edit:true,
+                title: '联系方式'
             },{
                 field: 'businessTimeFrom',
-                title: '营业起始时间',
-                edit:true,
+                title: '营业起始时间'
             },{
                 field: 'businessTimeTo',
                 title: '营业结束时间',
                 edit:true,
-            },
+            },{
+                field: 'remove',
+                title: '',
+                formatter: function(value, row, index) {
+                    return '<a class="remove" onclick="remove('+row.id+'">查看详情</a>'
+                }
+            }
             ],
 
             onClickCell: function(field, value, row, $element) {
-                $element.attr('contenteditable', true);
-                $element.blur(function() {
-                    let index = $element.parent().data('index');
-                    let tdValue = $element.html();
+                if (field!='remove')
+                {
+                    $('#modify-factory-name').val(row.name);
+                    $('#modify-factory-address').val(row.address);
+                    $('#modify-factory-phoneNum').val(row.phoneNum);
+                    $('#modify-factory-timeFrom').val(row.businessTimeFrom);
+                    $('#modify-factory-timeTo').val(row.businessTimeTo);
+                    var selectedId=row.id;
+                    $('#modify-model').modal();
+                }
 
-                    saveData(index, field, tdValue);
-                })
             }
         });
 
@@ -84,26 +87,128 @@ var TableInit = function () {
         }
     };
 
-    //得到查询的参数
-    oTableInit.queryParams = function (params) {
-        var temp = {   //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
-            limit: params.limit,   //页面大小
-            offset: params.offset,  //页码
-            departmentname: $("#txt_search_departmentname").val(),
-            statu: $("#txt_search_statu").val()
-        };
-        return temp;
-    };
+
     return oTableInit;
 
-    function identifierFormatter(value, row, index) {
-        return [
-            '<a class="like" href="javascript:void(0)" title="Like">',
-            value,
-            '</a>'].join('');
-    }
+
 };
 
+$('#search').click(function search(){
+    if ($("#factory-search-name").val()!="")
+    {
+        //user状态
+        var params = {};
+        params.factoryName = $("#factory-search-name").val();
+        //发起ajax请求
+        $.ajax({
+            type: "POST",
+            url: "../../factory/search",
+            data: params,
+            dataType:"json",
+            //	         		   contentType: "application/json; charset=utf-8",//此处不能设置，否则后台无法接值
+            success:function(data){
+                if(data.status === "success") {
+                    $('#tb_factory').bootstrapTable('load', data.data);
+                }
+                else{
+                    alert("错误:"+data.errorMsg);
+                }
+            },
+            error:function(data){
+                alert("出现异常，异常原因【" + data + "】!");
+            }
+        });
+    }
+});
+
+$('#submit').click(function search(){
+        //user状态
+        var params = {};
+        var factory={};
+        factory.name = $('#factory-name').val();
+        factory.address=$('#factory-address').val();
+        factory.phoneNum=$('#factory-phoneNum').val();
+        factory.businessTimeFrom=$('#factory-timeFrom').val();
+        factory.businessTimeTo=$('#factory-timeTo').val();
+        params.factory=JSON.stringify(factory);
+        //发起ajax请求
+        $.ajax({
+            type: "POST",
+            url: "../../factory/create",
+            data: params,
+            dataType:"json",
+            //	         		   contentType: "application/json; charset=utf-8",//此处不能设置，否则后台无法接值
+            success:function(data){
+                if(data.status === "success") {
+                    window.location.reload();
+                }
+                else{
+                    alert("错误:"+data.errorMsg);
+                }
+            },
+            error:function(data){
+                alert("出现异常，异常原因【" + data + "】!");
+            }
+        });
+
+});
+
+$('#modify-submit').click(function search(){
+    //user状态
+    var params = {};
+    var factory={};
+    factory.name = $('#modify-factory-name').val();
+    factory.address=$('#modify-factory-address').val();
+    factory.phoneNum=$('#modify-factory-phoneNum').val();
+    factory.businessTimeFrom=$('#modify-factory-timeFrom').val();
+    factory.businessTimeTo=$('#modify-factory-timeTo').val();
+    factory.id=selectedId;
+    params.factory=JSON.stringify(factory);
+    //发起ajax请求
+    $.ajax({
+        type: "POST",
+        url: "../../factory/modify",
+        data: params,
+        dataType:"json",
+        //	         		   contentType: "application/json; charset=utf-8",//此处不能设置，否则后台无法接值
+        success:function(data){
+            if(data.status === "success") {
+                window.location.reload();
+            }
+            else{
+                alert("错误:"+data.errorMsg);
+            }
+        },
+        error:function(data){
+            alert("出现异常，异常原因【" + data + "】!");
+        }
+    });
+
+});
+
+function remove(id){
+    var params = {};
+    params.factoryId=id;
+    //发起ajax请求
+    $.ajax({
+        type: "POST",
+        url: "../../factory/remove",
+        data: params,
+        dataType:"json",
+        //	         		   contentType: "application/json; charset=utf-8",//此处不能设置，否则后台无法接值
+        success:function(data){
+            if(data.status === "success") {
+                window.location.reload();
+            }
+            else{
+                alert("错误:"+data.errorMsg);
+            }
+        },
+        error:function(data){
+            alert("出现异常，异常原因【" + data + "】!");
+        }
+    });
+};
 var mockData = [
     {
         "id": 0,

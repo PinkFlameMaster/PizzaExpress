@@ -1,19 +1,43 @@
+<%@ page import="com.pojo.Admin" %>
+<%@ page import="com.helper.AdminToFactoryHelper" %><%--
+  Created by IntelliJ IDEA.
+  User: XinJi
+  Date: 2019/3/22
+  Time: 10:19
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>PizzaExpress-factory</title>
+    <!--<script type="text/javascript" src="../js/Login.js"></script>-->
     <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/Common.css">
     <link rel="stylesheet" href="../css/factory.css">
+
     <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
     <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="../css/Common.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 
+
+    <!--@*3、bootstrap table组件以及中文包的引用*@-->
     <script src="../lib/bootstrap-table/bootstrap-table.js"></script>
     <link href="../lib/bootstrap-table/bootstrap-table.css" rel="stylesheet" />
-    <script src="../lib/bootstrap-table/locale/bootstrap-table-zh-CN.js"></script>
+    <script src="../lib/bootstrap-table/bootstrap-table-zh-CN.js"></script>
+
+    <title>PizzaExpress-门店管理</title>
 </head>
-<body class="bright-bg">
+<script type = "text/javascript">
+    <%Admin admin = (Admin)request.getSession().getAttribute("admin");%>
+    var priority="<%=admin.getRole()%>";
+    var username = "<%=admin.getUsername()%>";
+    var entrytime = "<%=admin.getEntryTime()%>";
+    var role = "<%=admin.getRole()%>";
+    var phoneNum = "<%=admin.getPhoneNum()%>";
+    <%AdminToFactoryHelper adminToFactoryHelper = new AdminToFactoryHelper(admin);%>
+    var factory = "<%=adminToFactoryHelper.getFactoryName()%>";
+</script><body class="bright-bg">
 <div id = "mainBodyWrap">
     <div id = "mainBody" class="white-bg">
         <div id="breadcrumbs-nav">
@@ -148,3 +172,4 @@
 <script type="text/javascript" src="../js/template_page.js"></script>
 <script src="../js/helper.js"></script>
 <script src="../js/Factory.js"></script>
+
