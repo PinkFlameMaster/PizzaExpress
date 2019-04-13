@@ -39,7 +39,7 @@ leftNavBarDiv.innerHTML = '' +
     '                <li><a href="'+localhostPath+'/views/menuMgt/menuItemInfo.jsp?mode=create">新增菜品</a></li>\n' +
     '            </ul>\n' +
     '        </li>\n' +
-    '        <li><a href="#">店面管理</a></li>\n' +
+    '        <li><a href="'+localhostPath+'/views/Factory.jsp">店面管理</a></li>\n' +
     '        <li><a href="#">系统设置</a></li>\n' +
     '        <li>\n' +
     '            <a data-toggle="collapse" data-parent="#accordion"\n' +

@@ -51,19 +51,19 @@
                 <div class="bs-example bs-example-form" role="form">
                     <div class="common-input-group">
                         <div class="input-group">
-                            <span class="input-group-addon">姓名</span>
+                            <span class="input-group-addon">收货人姓名</span>
                             <input id="searchForm-name" type="text" class="form-control" placeholder="">
                         </div>
                     </div>
                     <div class="common-input-group">
                         <div class="input-group">
-                            <span class="input-group-addon">收货人手机</span>
+                            <span class="input-group-addon">下单用户id</span>
                             <input id="searchForm-phoneNum" type="text" class="form-control" placeholder="">
                         </div>
                     </div>
                     <div class="common-input-group">
                         <div class="input-group">
-                            <span  class="input-group-addon">门店</span>
+                            <span  class="input-group-addon">配送门店</span>
                             <input id="searchForm-factory" type="text" class="form-control" placeholder="">
                         </div>
                     </div>
