@@ -17,6 +17,17 @@
     <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
     <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="../css/Common.css">
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+
+
+    <!--@*3、bootstrap table组件以及中文包的引用*@-->
+    <script src="../lib/bootstrap-table/bootstrap-table.js"></script>
+    <link href="../lib/bootstrap-table/bootstrap-table.css" rel="stylesheet" />
+    <script src="../lib/bootstrap-table/bootstrap-table-zh-CN.js"></script>
 </head>
 <script type = "text/javascript">
     <%Admin admin = (Admin)request.getSession().getAttribute("admin");%>
@@ -64,24 +75,12 @@
                 </div>
             </div>
         </div>
-        <div class="table-repsonsive">
-            <table class="table">
-                <tr class="active">
-                    <td>事件</td>
-                    <td>优先级</td>
-                    <td>发生日期</td>
-                    <td>详细内容</td>
-                </tr>
-                <tr class="">
-                    <td>pp</td>
-                    <td>ww</td>
-                    <td>ww</td>
-                    <td>ww</td>
-                </tr>
-            </table>
+        <div class="table-activity">
+            <table id="tb_activity"></table>
         </div>
     </div>
 </div>
 </body>
 </html>
 <script type="text/javascript" src="../js/template_page.js"></script>
+<script src="../js/HomePage.js"></script>

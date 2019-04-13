@@ -1,6 +1,8 @@
 package com.controller;
 import javax.servlet.http.HttpSession;
 
+import com.pojo.Activity;
+import com.service.ActivityService;
 import com.vo.ReturnMsg;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,6 +16,7 @@ import com.pojo.Admin;
 import com.service.AdminService;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 @RequestMapping("/admin")
@@ -22,6 +25,8 @@ public class AdminController {
 
     @Autowired
     private AdminService adminService;
+    @Autowired
+    private ActivityService activityService;
 
     //正常访问login页面
     @RequestMapping("/login")
@@ -62,4 +67,16 @@ public class AdminController {
         return "login";
     }
 
+    @RequestMapping("/activity")
+    @ResponseBody
+    public ReturnMsg getActivities(){
+        List<Activity> result = activityService.getAllActivities();
+        for(Activity activity: result){
+            activity.solveString();
+        }
+        ReturnMsg msg = new ReturnMsg();
+        msg.setStatus("success");
+        msg.setData(result);
+        return msg;
+    }
 }

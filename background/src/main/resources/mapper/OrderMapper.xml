@@ -3,8 +3,29 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dao.OrderDao">
-    <select id="findOrderByAddress" parameterType="Integer">
-        select * from pizzaOrder where receiverAddressId = #{receiverAddressId}
+    <resultMap id="orderVo" type="com.vo.OrderVo">
+        <result column="id" property="id" />
+        <result column="factoryName" property="factoryName"/>
+        <result column="userId" property="userId"/>
+        <result column="username" property="username"/>
+        <association property="receiverAddress" javaType="com.pojo.ReceiverAddress">
+            <result property="receiverName" column="receiverName"/>
+            <result property="receiverPhoneNum" column="receiverPhoneNum"/>
+        </association>
+    </resultMap>
+    <select id="findOrderComplex" resultMap="orderVo">
+    SELECT pizzaOrder.id as id, receiverAddress.receiverName as receiverName, user.phoneNum as userId
+      ,receiverAddress.receiverPhoneNum as receiverPhoneNum, factory.name as factoryName, user.nickname as username
+      from pizzaOrder
+    INNER JOIN factory
+    ON pizzaOrder.factoryId = factory.id
+    INNER JOIN receiverAddress
+    ON receiverAddress.Id = pizzaOrder.receiverAddressId
+    INNER JOIN user
+    ON receiverAddress.userPhoneNum = user.phoneNum
+    WHERE receiverAddress.receiverName LIKE  CONCAT('%',#{name},'%')
+    AND user.phoneNum LIKE  CONCAT('%',#{phone},'%')
+    AND factory.name LIKE  CONCAT('%',#{factoryName},'%')
     </select>
 
 
