@@ -58,8 +58,9 @@ var TableInit = function () {
                 field: 'remove',
                 title: '',
                 formatter: function(value, row, index) {
-                    return '<a class="remove" onclick="remove('+row.id+'">查看详情</a>'
-                }
+                    return '<a class="remove" onclick="remove('+row.id+')">删除门店</a>'
+                },
+                edit:false
             }
             ],
 
@@ -72,7 +73,7 @@ var TableInit = function () {
                     $('#modify-factory-timeFrom').val(row.businessTimeFrom);
                     $('#modify-factory-timeTo').val(row.businessTimeTo);
                     var selectedId=row.id;
-                    $('#modify-model').modal();
+                    $('#modify-modal').modal();
                 }
 
             }

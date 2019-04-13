@@ -42,7 +42,7 @@
     <div id = "mainBody" class="white-bg">
         <div id="breadcrumbs-nav">
             <ul class="breadcrumb white-bg">
-                <li><a href="./HomePage.html">首页</a></li>
+                <li><a href="./HomePage.jsp">首页</a></li>
                 <li class="active">门店管理</li>
             </ul>
         </div>
@@ -122,7 +122,7 @@
                         <div class="modal-content">
                             <div class="modal-header">
                                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                <h4 class="modal-title">新增门店</h4>
+                                <h4 class="modal-title">修改门店信息</h4>
                             </div>
                             <div class="modal-body">
                                 <div class="common-input-group">

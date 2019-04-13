@@ -3,7 +3,26 @@ $(function () {
     //1.初始化Table
     var oTable = new TableInit();
     oTable.Init();
-
+    var params = {};
+    //发起ajax请求
+    $.ajax({
+        type: "POST",
+        url: "../../ingredient/stockOverview",
+        data: params,
+        dataType:"json",
+        //	         		   contentType: "application/json; charset=utf-8",//此处不能设置，否则后台无法接值
+        success:function(data){
+            if(data.status === "success") {
+                $('#tb_ingredient').bootstrapTable('load', data.data);
+            }
+            else{
+                alert("错误:"+data.errorMsg);
+            }
+        },
+        error:function(data){
+            alert("出现异常，异常原因【" + data + "】!");
+        }
+    });
 
 });
 
@@ -12,9 +31,7 @@ var TableInit = function () {
     var oTableInit = new Object();
     //初始化Table
     oTableInit.Init = function () {
-        $('#tb_item').bootstrapTable({
-            url: '/Home/GetDepartment',         //请求后台的URL（*）
-            method: 'get',                      //请求方式（*）
+        $('#tb_ingredient').bootstrapTable({
             clickEdit: false,                    //点击修改
             toolbar: '#toolbar',                //工具按钮用哪个容器
             striped: true,                      //是否显示行间隔色
@@ -30,7 +47,6 @@ var TableInit = function () {
             search: false,                       //是否显示表格搜索，此搜索是客户端搜索，不会进服务端，所以，个人感觉意义不大
             strictSearch: true,
             showColumns: false,                  //是否显示所有的列
-            showRefresh: true,                  //是否显示刷新按钮
             minimumCountColumns: 2,             //最少允许的列数
             clickToSelect: false,                //是否启用点击选中行
             uniqueId: "ID",                     //每一行的唯一标识，一般为主键列
@@ -43,15 +59,12 @@ var TableInit = function () {
                 field: 'itemType',
                 title: '原料品种',
                 formatter: function(value, row, index) {
-                    return '<a href="../../html/Ingredient.html?id='+row.id+'">'+row.type+'</a>'
+                    return '<a href="./Ingredient.jsp?type='+row.type+'">'+row.type+'</a>'
                 }
             }, {
-                field: 'remain',
+                field: 'amount',
                 title: '库存数量',
-            }, {
-                field: 'threshold',
-                title: '阈值',
-            }, {
+            },  {
                 field: 'status',
                 title: '状态',
             }
@@ -81,12 +94,44 @@ var TableInit = function () {
 
 var mockData = [
     {
-        "id": 0,
         "type":"鸡肉",
-        "importTime":"1999年9月9日 9:00",
-        "source": "正常",
-        "phoneNum": "p100019",
-        "manager":"abc"
+        "status": "正常"
     }
 ]
 $('#tb_item').bootstrapTable('load',mockData);   //这行代码在浏览器debug的console里输入，就有数据了。
+$('#submit').click(function ()
+{
+    var params = {};
+    var _import={};
+    _import.source=$('#source').val();
+    _import.amount=$('#amount').val();
+    _import.type=$('#type').val();
+    params._import=JSON.stringify(_import);
+    //发起ajax请求
+    $.ajax({
+        type: "POST",
+        url: "../../ingredient/import",
+        data: params,
+        dataType:"json",
+        //	         		   contentType: "application/json; charset=utf-8",//此处不能设置，否则后台无法接值
+        success:function(data){
+            if(data.status === "success") {
+                window.location.reload();
+            }
+            else{
+                alert("错误:"+data.errorMsg);
+            }
+        },
+        error:function(data){
+            alert("出现异常，异常原因【" + data + "】!");
+        }
+    });
+
+});
+
+$('#import_new').click(function (){
+    $('#source').val('');
+    $('#type').val('');
+    $('#amount').val(0);
+    $('#myModal').modal();
+})
