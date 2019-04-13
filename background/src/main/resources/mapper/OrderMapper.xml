@@ -8,14 +8,30 @@
         <result column="factoryName" property="factoryName"/>
         <result column="userId" property="userId"/>
         <result column="username" property="username"/>
+        <result column="state" property="state"/>
+        <result column="orderTime" property="orderTime"/>
+        <result column="receiveTime" property="receiveTime"/>
         <association property="receiverAddress" javaType="com.pojo.ReceiverAddress">
             <result property="receiverName" column="receiverName"/>
             <result property="receiverPhoneNum" column="receiverPhoneNum"/>
+            <result property="address" column="address"/>
+            <result property="id" column="receiverAddressId"/>
+            <result property="longitude" column="longitude"/>
+            <result property="latitude" column="latitude"/>
+            <result property="deleted" column="deleted"/>
+            <result property="userPhoneNum" column="username"/>
         </association>
+
     </resultMap>
+
+
     <select id="findOrderComplex" resultMap="orderVo">
     SELECT pizzaOrder.id as id, receiverAddress.receiverName as receiverName, user.phoneNum as userId
-      ,receiverAddress.receiverPhoneNum as receiverPhoneNum, factory.name as factoryName, user.nickname as username
+      ,receiverAddress.receiverPhoneNum as receiverPhoneNum, factory.name as factoryName, user.nickname as username,
+      receiverAddress.address as address, receiverAddress.longitude as longitude,
+			receiverAddress.latitude as latitude, receiverAddress.deleted as deleted,
+			pizzaOrder.receiverAddressId as receiverAddressId, pizzaOrder.state as state,
+			pizzaOrder.orderTime as orderTime, pizzaOrder.receiveTime as receiveTime
       from pizzaOrder
     INNER JOIN factory
     ON pizzaOrder.factoryId = factory.id
@@ -26,6 +42,30 @@
     WHERE receiverAddress.receiverName LIKE  CONCAT('%',#{name},'%')
     AND user.phoneNum LIKE  CONCAT('%',#{phone},'%')
     AND factory.name LIKE  CONCAT('%',#{factoryName},'%')
+    </select>
+
+    <select id="findOderItemById" resultMap="orderVo" parameterType="Integer">
+    SELECT pizzaOrder.id as id, receiverAddress.receiverName as receiverName, user.phoneNum as userId
+      ,receiverAddress.receiverPhoneNum as receiverPhoneNum, factory.name as factoryName, user.nickname as username,
+      receiverAddress.address as address, receiverAddress.longitude as longitude,
+			receiverAddress.latitude as latitude, receiverAddress.deleted as deleted,
+			pizzaOrder.receiverAddressId as receiverAddressId, pizzaOrder.state as state,
+			pizzaOrder.orderTime as orderTime, pizzaOrder.receiveTime as receiveTime
+      from pizzaOrder
+    INNER JOIN factory
+    ON pizzaOrder.factoryId = factory.id
+    INNER JOIN receiverAddress
+    ON receiverAddress.Id = pizzaOrder.receiverAddressId
+    INNER JOIN user
+    ON receiverAddress.userPhoneNum = user.phoneNum
+    WHERE pizzaOrder.id = #{id}
+    </select>
+
+    <select id="findOrderItemListById" parameterType="Integer" resultType="com.dto.OrderItemDto">
+        SELECT orderItem.id as id, orderItem.actualUnitPrize as actualUnitPrize,
+        orderItem.num as num, menuItem.name as name
+        from orderItem INNER JOIN menuItem ON orderItem.menuItemId = menuItem.id
+        WHERE orderId = #{oderId}
     </select>
 
 

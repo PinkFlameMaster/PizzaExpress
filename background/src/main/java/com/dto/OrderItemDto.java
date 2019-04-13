@@ -3,8 +3,18 @@ package com.dto;
 import java.util.List;
 
 public class OrderItemDto {
-    private int id;
     private MenuItemDto menuItem;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    private int id;
+    private String name;
     private float actualUnitPrize;
     private int num;
     private List<IngredientDto> ingredients;

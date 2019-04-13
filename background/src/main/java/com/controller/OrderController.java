@@ -1,5 +1,10 @@
 package com.controller;
 
+import com.dto.OrderDto;
+import com.dto.OrderItemDto;
+import com.pojo.Order;
+import com.pojo.OrderItem;
+import com.pojo.ReceiverAddress;
 import com.service.OrderService;
 import com.vo.OrderVo;
 import com.vo.ReturnMsg;
@@ -10,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -29,4 +35,18 @@ public class OrderController {
         ret.setData(result);
         return ret;
     }
+    @RequestMapping("/info")
+    @ResponseBody
+    public ReturnMsg orderDetail(Model model, int orderId){
+        OrderVo orderDetail = orderService.findOrderById(orderId);
+        List<OrderItemDto> orderItems = orderService.getOderItemList(orderId);
+        OrderDto orderDto = new OrderDto(orderDetail,orderItems);
+        List<OrderDto> result =  new ArrayList<OrderDto>();
+        result.add(orderDto);
+        ReturnMsg ret = new ReturnMsg();
+        ret.setData(result);
+        ret.setStatus("success");
+        return ret;
+    }
+
 }
