@@ -17,7 +17,7 @@ $(function () {
             //	         		   contentType: "application/json; charset=utf-8",//此处不能设置，否则后台无法接值
             success: function (data) {
                 if (data.status === "success") {
-                    alert("success");
+                   // alert("success");
                     if (data.data[0]!=null) {
                         $('#datetime').text(data.data[0].orderTime);
                         $('#tb_item').bootstrapTable('load', data.data[0].orderItems);
