@@ -3,6 +3,7 @@ package com.dto;
 import com.pojo.Factory;
 
 public class FactoryDto {
+    private int id;
     private String name;
     private String address;
     private float latitude;
@@ -13,6 +14,7 @@ public class FactoryDto {
     private String manager;
     public FactoryDto(){}
     public FactoryDto(Factory factory,String manager){
+        this.id = factory.getId();
         this.manager = manager;
         this.name = factory.getName();
         this.address = factory.getAddress();
@@ -30,7 +32,6 @@ public class FactoryDto {
         this.id = id;
     }
 
-    private int id;
     public String getName() {
         return name;
     }

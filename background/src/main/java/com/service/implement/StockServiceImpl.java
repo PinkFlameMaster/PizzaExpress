@@ -13,7 +13,17 @@ public class StockServiceImpl implements StockService {
     @Autowired
     IngredientDao ingredientDao;
     @Override
-    public List<IngredientDto> getAllIngredient() {
-        return ingredientDao.getAllIngredientDto();
+    public List<IngredientDto> getAllIngredient(int factoryId) {
+        return ingredientDao.getAllIngredientDto(factoryId);
+    }
+
+    @Override
+    public List<IngredientDto> getIngredientByType(String type,int factoryId) {
+        return ingredientDao.getIngredientByType(type,factoryId); }
+
+    @Override
+    public void importIngredient(Ingredient ingredient) {
+        ingredientDao.importIngredient(ingredient.getType(),ingredient.getSource()
+                ,ingredient.getAmount(),ingredient.getImportDate(),ingredient.getFactoryId());
     }
 }

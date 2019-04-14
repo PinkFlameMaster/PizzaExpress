@@ -8,7 +8,10 @@ $(function () {
     var params = {};
     itemType=getQueryString('type');
     $('#title').text(itemType);
-    params._import=itemType;
+    var _import = {};
+    _import.type = itemType;
+    _import.factoryId = factoryId;
+    params._import = JSON.stringify(_import);
     //发起ajax请求
     $.ajax({
         type: "POST",
@@ -18,9 +21,10 @@ $(function () {
         //	         		   contentType: "application/json; charset=utf-8",//此处不能设置，否则后台无法接值
         success:function(data){
             if(data.status === "success") {
-                $('#storage').text(data.data[0].amount);
+                $('#storage').text(data.data[0].sumAmount);
                 $('#status').text(data.data[0].status);
-                $('#tb_import').bootstrapTable('load', data.data[0]._imports);
+                $('#threshold').text(data.data[0].threshold);
+                $('#tb_import').bootstrapTable('load', data.data);
             }
             else{
                 alert("错误:"+data.errorMsg);
@@ -65,7 +69,7 @@ var TableInit = function () {
                 field: 'amount',
                 title: '进货量',
             }, {
-                field: 'importDate',
+                field: 'inportDate',
                 title: '进货时间',
             }, {
                 field: 'id',
@@ -120,6 +124,7 @@ $('#submit').click(function ()
     _import.source=$('#source').val();
     _import.amount=$('#amount').val();
     _import.type=$('#type').val();
+    _import.factoryId = factoryId;
     params._import=JSON.stringify(_import);
     //发起ajax请求
     $.ajax({

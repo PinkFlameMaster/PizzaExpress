@@ -13,6 +13,27 @@ public class IngredientDto {
     private String status;
     private float amount;
 
+    public float getThreshold() {
+        return threshold;
+    }
+
+    public void setThreshold(float threshold) {
+        this.threshold = threshold;
+    }
+
+    private float threshold;
+
+    public float getSumAmount() {
+        return sumAmount;
+    }
+
+    public void setSumAmount(float sumAmount) {
+        this.sumAmount = sumAmount;
+    }
+
+    private float sumAmount;
+
+
     private List<ImportDto> _imports;
 
     public List<ImportDto> get_imports() {

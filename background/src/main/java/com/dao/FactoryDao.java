@@ -11,7 +11,7 @@ public interface FactoryDao {
     int count();
     void createFactory(int id);
     void updateFactory(@Param("id")int id, @Param("name")String name,@Param("address")String address,
-                        @Param("latitude")float latitude,@Param("longitude")float longitude,
-                        @Param("phoneNum")String phoneNum, @Param("businessTimeFrom")String businessTimeFrom,@Param("businessTimeTo")String businessTimeTo
+                       @Param("latitude")float latitude,@Param("longitude")float longitude,
+                       @Param("phoneNum")String phoneNum, @Param("businessTimeFrom")String businessTimeFrom,@Param("businessTimeTo")String businessTimeTo
     );
 }

@@ -10,6 +10,8 @@
         <result column="source" property="source"/>
         <result column="inportDate" property="importDate"/>
         <result column="amount" property="amount"/>
+        <result column="sumAmount" property="sumAmount"/>
+        <result column="threshold" property="threshold"/>
         <association property="factory" javaType="com.pojo.Factory">
             <result property="id" column="factoryId"/>
             <result property="name" column="name"/>
@@ -34,10 +36,22 @@
         WHERE orderItem.orderId = #{orderId}
     </select>
     <select id="getAllIngredientDto" parameterType="Integer" resultType="com.dto.IngredientDto">
-SELECT ingredient.id as id, ingredient.type, ingredient.source, ingredient.inportDate,
-        ingredient.amount, factory.id as factoryId, factory.name, factory.address, factory.longitude, factory.latitude, factory.phoneNum,
-        factory.businessTimeFrom, factory.businessTimeTo
-          from ingredient INNER JOIN factory ON ingredient.factoryId = factory.id
+        SELECT ingredient.type ,sum(ingredient.amount) as amount
+        from ingredient INNER JOIN factory ON ingredient.factoryId = factory.id
+        WHERE factory.id = #{factoryId}
+        GROUP BY ingredient.type
     </select>
-
+    <select id="getIngredientByType" resultType="com.dto.IngredientDto">
+        SELECT ingredient.id as id, ingredient.type, ingredient.source, ingredient.inportDate,
+        ingredient.amount, factory.id as factoryId, factory.name, factory.address,
+        factory.longitude, factory.latitude, factory.phoneNum, factory.businessTimeFrom, factory.businessTimeTo,
+        ingredientThreshold.threshold
+        from ingredient INNER JOIN factory ON ingredient.factoryId = factory.id
+        INNER JOIN ingredientThreshold ON ingredientThreshold.type = ingredient.type
+        WHERE ingredient.type =   #{type} and factory.id = #{factoryId}
+    </select>
+    <select id="importIngredient">
+        INSERT INTO ingredient(type,source,amount,inportDate,factoryId)
+        values(#{type},#{source},#{amount},#{importDate},#{factoryId})
+    </select>
 </mapper>
