@@ -5,7 +5,7 @@ $(function () {
     oTable.Init();
 });
 
-
+var selectedId = getQueryString("id");
 var TableInit = function () {
     var oTableInit = new Object();
     //初始化Table
@@ -72,7 +72,7 @@ var TableInit = function () {
                     $('#modify-factory-phoneNum').val(row.phoneNum);
                     $('#modify-factory-timeFrom').val(row.businessTimeFrom);
                     $('#modify-factory-timeTo').val(row.businessTimeTo);
-                    var selectedId=row.id;
+                    selectedId=row.id;
                     $('#modify-modal').modal();
                 }
 
@@ -124,6 +124,7 @@ $('#search').click(function search(){
 
 $('#submit').click(function search(){
         //user状态
+
         var params = {};
         var factory={};
         factory.name = $('#factory-name').val();

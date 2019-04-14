@@ -16,6 +16,6 @@ public class AdminToFactoryHelper {
         id = admin.getFactoryId();
     }
     public String getFactoryName (){
-        return factoryService.getFactory(id).getName();
+        return factoryService.getAdminFactory(id).getName();
     }
 }
