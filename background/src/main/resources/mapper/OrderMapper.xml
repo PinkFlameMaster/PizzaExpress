@@ -63,7 +63,7 @@
 
     <select id="findOrderItemListById" parameterType="Integer" resultType="com.dto.OrderItemDto">
         SELECT orderItem.id as id, orderItem.actualUnitPrize as actualUnitPrize,
-        orderItem.num as num, menuItem.name as name
+        orderItem.num as num, menuItem.name as name, menuItem.id as menuItemId, orderItem.orderId as orderId
         from orderItem INNER JOIN menuItem ON orderItem.menuItemId = menuItem.id
         WHERE orderId = #{oderId}
     </select>

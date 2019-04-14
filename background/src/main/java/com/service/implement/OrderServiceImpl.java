@@ -1,8 +1,10 @@
 package com.service.implement;
 
+import com.dao.IngredientDao;
 import com.dao.OrderDao;
 import com.dao.ReceiverAddressDao;
 import com.dto.OrderItemDto;
+import com.pojo.Ingredient;
 import com.pojo.OrderItem;
 import com.pojo.ReceiverAddress;
 import com.service.OrderService;
@@ -17,6 +19,8 @@ public class OrderServiceImpl  implements OrderService {
     ReceiverAddressDao receiverAddressDao;
     @Autowired
     OrderDao orderDao;
+    @Autowired
+    IngredientDao ingredientDao;
 
     @Override
     public List<OrderVo> findOrder(String name, String phone, String factory) {
@@ -30,7 +34,18 @@ public class OrderServiceImpl  implements OrderService {
 
     @Override
     public List<OrderItemDto> getOderItemList(int id) {
-        return orderDao.findOrderItemListById(id);
+        List<OrderItemDto> result = orderDao.findOrderItemListById(id);
+        for(OrderItemDto orderItemDto: result){
+            int orderId = orderItemDto.getOrderId();
+            List<Ingredient> ingredients = ingredientDao.getIngredientByOrder(orderId);
+            orderItemDto.setIngredients(ingredients);
+        }
+        return result;
+    }
+
+    @Override
+    public List<Ingredient> getIngredientByOrderId(int orderId) {
+        return ingredientDao.getIngredientByOrder(orderId);
     }
 
 

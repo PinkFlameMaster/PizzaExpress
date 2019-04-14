@@ -1,6 +1,7 @@
 package com.dao;
 
 import com.dto.OrderItemDto;
+import com.pojo.Ingredient;
 import com.pojo.Order;
 import com.pojo.OrderItem;
 import com.pojo.ReceiverAddress;

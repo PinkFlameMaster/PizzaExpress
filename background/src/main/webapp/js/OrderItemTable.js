@@ -74,7 +74,7 @@ var Table = function () {
             editable:false,
 
             columns: [ {
-                field: 'id',
+                field: 'menuItemId',
                 title: '菜品编号',
             }, {
                 field: 'name',

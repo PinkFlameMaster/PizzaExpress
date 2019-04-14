@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.dao.IngredientDao">
+    <select id="getIngredientByOrder" parameterType="Integer" resultType="com.pojo.Ingredient">
+        SELECT ingredient.id as id, ingredient.type as type, ingredient.source as source,
+        ingredient.inportDate as importDate, ingredient.factoryId as factoryId, ingredient.amount as amount
+        FROM ingredient
+        INNER JOIN orderItem_ingredient
+        ON ingredient.id = orderItem_ingredient.ingredientId
+        INNER JOIN orderItem
+        ON orderItem_ingredient.orderItemId = orderItem.id
+        WHERE orderItem.orderId = #{orderId}
+    </select>
+</mapper>
