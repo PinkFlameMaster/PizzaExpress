@@ -44,7 +44,7 @@
             <ul class="breadcrumb white-bg">
                 <li><a href="../HomePage.jsp">首页</a></li>
                 <li>菜单管理</li>
-                <li class="active">新增菜品</li>
+                <li class="active">菜品详情</li>
             </ul>
         </div>
         <div id="input-area">
