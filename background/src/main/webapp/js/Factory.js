@@ -95,9 +95,8 @@ var TableInit = function () {
 };
 
 $('#search').click(function search(){
-    if ($("#factory-search-name").val()!="")
+    // if ($("#factory-search-name").val()!="")
     {
-        //user状态
         var params = {};
         params.factoryName = $("#factory-search-name").val();
         //发起ajax请求
@@ -175,7 +174,7 @@ $('#modify-submit').click(function search(){
         //	         		   contentType: "application/json; charset=utf-8",//此处不能设置，否则后台无法接值
         success:function(data){
             if(data.status === "success") {
-                window.location.reload();
+
             }
             else{
                 alert("错误:"+data.errorMsg);
@@ -190,7 +189,7 @@ $('#modify-submit').click(function search(){
 
 function remove(id){
     var params = {};
-    params.factoryId=id;
+    params.id=id;
     //发起ajax请求
     $.ajax({
         type: "POST",
@@ -200,7 +199,10 @@ function remove(id){
         //	         		   contentType: "application/json; charset=utf-8",//此处不能设置，否则后台无法接值
         success:function(data){
             if(data.status === "success") {
-                window.location.reload();
+                $('#tb_factory').bootstrapTable('remove',{
+                    field:"id",
+                    values: id.toString()
+                })
             }
             else{
                 alert("错误:"+data.errorMsg);
