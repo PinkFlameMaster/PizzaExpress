@@ -23,12 +23,10 @@ leftNavBarDiv.innerHTML = '' +
     '                订单管理<b class="caret"></b>\n' +
     '            </a>\n' +
     '            <ul id = "orderMgtItem">\n' +
-    '                <li><a href="#">退单审核</a></li>\n' +
     '                <li><a href="'+localhostPath+'/views/Order/OrderSearch.jsp">订单查询</a></li>\n' +
-    '                <li><a href="#">订单详情</a></li>\n' +
     '            </ul>\n' +
     '        </li>\n' +
-    '        <li><a href="#">库存管理</a></li>\n' +
+    '        <li><a href="'+localhostPath+'/views/Stock/Stock.jsp">库存管理</a></li>\n' +
     '        <li>\n' +
     '            <a data-toggle="collapse" data-parent="#accordion"\n' +
     '               href="#menuMgtItem">\n' +

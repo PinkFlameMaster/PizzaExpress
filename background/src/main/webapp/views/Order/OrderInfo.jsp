@@ -43,7 +43,7 @@
     <div class="white-bg" id = "mainBody">
         <div id="breadcrumbs-nav">
             <ul class="breadcrumb white-bg">
-                <li><a href="./HomePage.html">首页</a></li>
+                <li><a href="../HomePage.jsp">首页</a></li>
                 <li class="active">订单详情</li>
             </ul>
         </div>

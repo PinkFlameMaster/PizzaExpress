@@ -14,7 +14,7 @@
     <!--<script type="text/javascript" src="../js/Login.js"></script>-->
     <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="../../css/Common.css">
-    <link rel="stylesheet" href="../../css/Order.css">
+    <link rel="stylesheet" href="../../css/Stock.css">
 
     <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
     <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -26,7 +26,7 @@
     <link href="../../lib/bootstrap-table/bootstrap-table.css" rel="stylesheet" />
     <script src="../../lib/bootstrap-table/bootstrap-table-zh-CN.js"></script>
 
-    <title>PizzaExpress-用户管理</title>
+    <title>PizzaExpress-库存管理</title>
 </head>
 <script type = "text/javascript">
     <%Admin admin = (Admin)request.getSession().getAttribute("admin");%>
@@ -38,54 +38,68 @@
     <%AdminToFactoryHelper adminToFactoryHelper = new AdminToFactoryHelper(admin);%>
     var factory = "<%=adminToFactoryHelper.getFactoryName()%>";
 </script>
-<body class="bright-bg"><div id = "mainBodyWrap">
+<body class="bright-bg">
+<div id = "mainBodyWrap">
     <div id = "mainBody" class="white-bg">
         <div id="breadcrumbs-nav">
             <ul class="breadcrumb white-bg">
                 <li><a href="../HomePage.jsp">首页</a></li>
-                <li class="active">订单查询</li>
+                <li class="active">库存管理</li>
             </ul>
         </div>
-        <div class="Order-search">
-            <div id="input-area">
-                <div class="bs-example bs-example-form" role="form">
-                    <div class="common-input-group">
-                        <div class="input-group">
-                            <span class="input-group-addon">收货人姓名</span>
-                            <input id="searchForm-name" type="text" class="form-control" placeholder="">
-                        </div>
-                    </div>
-                    <div class="common-input-group">
-                        <div class="input-group">
-                            <span class="input-group-addon">下单用户id</span>
-                            <input id="searchForm-phoneNum" type="text" class="form-control" placeholder="">
-                        </div>
-                    </div>
-                    <div class="common-input-group">
-                        <div class="input-group">
-                            <span  class="input-group-addon">配送门店</span>
-                            <input id="searchForm-factory" type="text" class="form-control" placeholder="">
-                        </div>
-                    </div>
-                    <button class="btn  btn-default common-btn search-btn" id="searchForm-searchBtn">搜索</button>
+        <div class="lobby-content">
+            <div class="headline">
+                <div id="title">
+                    Title
                 </div>
-                <div class="grid-wrap">
-                    <div id="toolbar" class="btn-group">
-                        <!--<button id="btn_add" type="button" class="btn btn-default">-->
-                        <!--<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>新增-->
-                        <!--</button>-->
-                        <!--<button id="btn_edit" type="button" class="btn btn-default">-->
-                        <!--<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>修改-->
-                        <!--</button>-->
+                <a class="pull-right" id="import_new">
+                    购置原料
+                </a>
+            </div>
+            <table id="tb_ingredient"></table>
 
+        </div>
+    </div>
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">新增库存</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="common-input-group">
+                        <div class="input-group">
+                            <span class="input-group-addon">原料名称</span>
+                            <input id="searchForm-type" type="text" class="form-control">
+                        </div>
                     </div>
-                    <table id="tb_order"></table>
+                    <div class="common-input-group">
+                        <div class="input-group">
+                            <span class="input-group-addon">进货量</span>
+                            <input id="searchForm-amount" type="number" min="0" step="0.01" class="form-control">
+                        </div>
+                    </div>
+                    <div class="common-input-group">
+                        <div class="input-group">
+                            <span class="input-group-addon">货源</span>
+                            <input id="source" type="text" class="form-control">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" id="submit" data-dismiss="modal">提交</button>
                 </div>
             </div>
+
         </div>
     </div>
 </div>
 </body>
 </html>
 <script type="text/javascript" src="../../js/template_page.js"></script>
-<script src="../../js/OrderSearch.js"></script>
+<script src="../../js/helper.js"></script>
+<script src="../../js/Stock.js"></script>
+

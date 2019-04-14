@@ -32,8 +32,15 @@ public class TestFactoryController {
         ReturnMsg ret =new ReturnMsg();
         ret.setStatus("failure");
         List<FactoryDto> factories = new ArrayList<>();
-
-
+        FactoryDto factoryDto=new FactoryDto();
+        factoryDto.setName("衡山店");
+        factoryDto.setAddress("衡山路203号");
+        factoryDto.setBusinessTimeFrom("08:00");
+        factoryDto.setBusinessTimeTo("22:00");
+        factoryDto.setManager("gsl");
+        factoryDto.setPhoneNum("1233444446");
+        factoryDto.setId(99);
+        factories.add(factoryDto);
         ret.setData(factories);
         ret.setStatus("success");
         return ret;

@@ -10,6 +10,15 @@ public class FactoryDto {
     private String businessTimeTo;
     private String manager;
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    private int id;
     public String getName() {
         return name;
     }
