@@ -6,6 +6,8 @@ $(function () {
 });
 
 var selectedId = getQueryString("id");
+var modifyRowData;
+var selectedIndex;
 var TableInit = function () {
     var oTableInit = new Object();
     //初始化Table
@@ -63,6 +65,10 @@ var TableInit = function () {
                 edit:false
             }
             ],
+
+            onClickRow(row, $element) {
+                selectedIndex = $element.data('index');
+            },
 
             onClickCell: function(field, value, row, $element) {
                 if (field!='remove')
@@ -164,6 +170,7 @@ $('#modify-submit').click(function search(){
     factory.businessTimeFrom=$('#modify-factory-timeFrom').val();
     factory.businessTimeTo=$('#modify-factory-timeTo').val();
     factory.id=selectedId;
+    modifyRowData = factory;
     params.factory=JSON.stringify(factory);
     //发起ajax请求
     $.ajax({
@@ -174,7 +181,10 @@ $('#modify-submit').click(function search(){
         //	         		   contentType: "application/json; charset=utf-8",//此处不能设置，否则后台无法接值
         success:function(data){
             if(data.status === "success") {
-
+                $('#tb_factory').bootstrapTable('updateRow', {
+                    index: selectedIndex,
+                    row: modifyRowData,
+                })
             }
             else{
                 alert("错误:"+data.errorMsg);
