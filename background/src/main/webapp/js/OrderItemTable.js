@@ -90,13 +90,13 @@ var Table = function () {
             }, ],
 
             onClickCell: function(field, value, row, $element) {
-                RequestItemDetail(row.id)
+                RequestItemDetail(row)
             }
         });
-        function  RequestItemDetail(id) {
+        function   RequestItemDetail(row) {
             $('#ingredient-modal').modal();
 
-            $('#tb_item-ingredient').bootstrapTable('load',oTable.data[id].ingredients);
+            $('#tb_item-ingredient').bootstrapTable('load',row.ingredients);
         }
 
 
