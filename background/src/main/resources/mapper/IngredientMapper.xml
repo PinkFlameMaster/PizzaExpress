@@ -4,6 +4,25 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.dao.IngredientDao">
+    <resultMap id="orderVo" type="com.dto.IngredientDto">
+        <result column="id" property="id" />
+        <result column="type" property="type"/>
+        <result column="source" property="source"/>
+        <result column="inportDate" property="importDate"/>
+        <result column="amount" property="amount"/>
+        <association property="factory" javaType="com.pojo.Factory">
+            <result property="id" column="factoryId"/>
+            <result property="name" column="name"/>
+            <result property="address" column="address"/>
+            <result property="longitude" column="longitude"/>
+            <result property="latitude" column="latitude"/>
+            <result property="phoneNum" column="phoneNum"/>
+            <result property="businessTimeFrom" column="businessTimeFrom"/>
+            <result property="businessTimeTo" column="businessTimeTo"/>
+        </association>
+
+    </resultMap>
+
     <select id="getIngredientByOrder" parameterType="Integer" resultType="com.pojo.Ingredient">
         SELECT ingredient.id as id, ingredient.type as type, ingredient.source as source,
         ingredient.inportDate as importDate, ingredient.factoryId as factoryId, ingredient.amount as amount
@@ -14,4 +33,11 @@
         ON orderItem_ingredient.orderItemId = orderItem.id
         WHERE orderItem.orderId = #{orderId}
     </select>
+    <select id="getAllIngredientDto" parameterType="Integer" resultType="com.dto.IngredientDto">
+SELECT ingredient.id as id, ingredient.type, ingredient.source, ingredient.inportDate,
+        ingredient.amount, factory.id as factoryId, factory.name, factory.address, factory.longitude, factory.latitude, factory.phoneNum,
+        factory.businessTimeFrom, factory.businessTimeTo
+          from ingredient INNER JOIN factory ON ingredient.factoryId = factory.id
+    </select>
+
 </mapper>

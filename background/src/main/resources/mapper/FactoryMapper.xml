@@ -29,14 +29,12 @@
     <select id="createFactory" parameterType="Integer">
         INSERT INTO factory(id) VALUES (#{id})
     </select>
+
     <select id="updateFactory">
-        UPDATE factory SET name = #{name}, address = #{address},  latitude = #{latitude},
+        UPDATE factory SET name = #{name}, address = #{address},  latitude = #{latitude}, longitude = #{longitude},
         phoneNum = #{phoneNum}, businessTimeFrom = #{businessTimeFrom}, businessTimeTo = #{businessTimeTo}
         WHERE id = #{id}
     </select>
 
-    <!--@Param("id")int id, @Param("name")String name,@Param("address")String address,-->
-    <!--@Param("latitude")float latitude,@Param("longitude")float longitude,-->
-    <!--@Param("phoneNum")String phoneNum, @Param("businessTimeFrom")String businessTimeFrom,@Param("businessTimeTo")String businessTimeTo-->
 
 </mapper>

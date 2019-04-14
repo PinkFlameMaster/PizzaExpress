@@ -1,11 +1,12 @@
 package com.service;
 
+import com.dto.FactoryDto;
 import com.pojo.Factory;
 
 import java.util.List;
 
 public interface FactoryService {
-    List<Factory> getFactory(String name);
+    List<FactoryDto> getFactory(String name);
     Factory getAdminFactory(int id);
     void updateFac(Factory factory);
     void createFac(Factory factory);

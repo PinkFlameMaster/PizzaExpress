@@ -32,7 +32,7 @@ public class FactoryController {
         //定义返回数据
         ReturnMsg ret =new ReturnMsg();
         ret.setStatus("failure");
-        List<Factory> factories = new ArrayList<>();
+        List<FactoryDto> factories = new ArrayList<>();
         factories = factoryService.getFactory(factoryName);
         ret.setData(factories);
         ret.setStatus("success");

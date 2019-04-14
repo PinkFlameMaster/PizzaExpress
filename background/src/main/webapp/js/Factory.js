@@ -163,7 +163,7 @@ $('#modify-submit').click(function search(){
     factory.phoneNum=$('#modify-factory-phoneNum').val();
     factory.businessTimeFrom=$('#modify-factory-timeFrom').val();
     factory.businessTimeTo=$('#modify-factory-timeTo').val();
-    factory.id=selectedId;
+    factory.id=selectedId+1;
     params.factory=JSON.stringify(factory);
     //发起ajax请求
     $.ajax({
@@ -189,7 +189,7 @@ $('#modify-submit').click(function search(){
 
 function remove(id){
     var params = {};
-    params.id=id;
+    params.id=id+1;
     //发起ajax请求
     $.ajax({
         type: "POST",

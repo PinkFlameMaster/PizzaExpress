@@ -1,43 +1,32 @@
 package com.controller;
 
-import com.dto.*;
-import com.pojo.Factory;
-import com.pojo.Ingredient;
-import com.pojo.ReceiverAddress;
-import com.pojo.User;
-import com.service.UserService;
+
+import com.dto.ImportDto;
+import com.dto.IngredientDto;
+import com.service.StockService;
 import com.vo.ReturnMsg;
-import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.OrderComparator;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
-@RequestMapping("/testingredient")
-public class TestIngredientController {
-
+@RequestMapping("/ingredient")
+public class IngredientController {
+    @Autowired
+    StockService stockService;
 
     @RequestMapping("/stockOverview")
     @ResponseBody
     public ReturnMsg StockOverview(Model model, String status){
-        // json字符串转json对象
-        System.out.println("StockOverview was called");
 
-        //定义返回数据
         ReturnMsg ret =new ReturnMsg();
         ret.setStatus("failure");
-        List<IngredientDto> ingredientDtos = new ArrayList<>();
-        IngredientDto ingredientDto=new IngredientDto();
-        ingredientDto.setAmount(10);
-        ingredientDto.setType("Beef");
-        ingredientDto.setStatus("缺货");
-        ingredientDtos.add(ingredientDto);
+        List<IngredientDto> ingredientDtos = stockService.getAllIngredient();
         ret.setData(ingredientDtos);
         ret.setStatus("success");
         return ret;
@@ -55,7 +44,6 @@ public class TestIngredientController {
     @RequestMapping("/specificIngredient")
     @ResponseBody
     public ReturnMsg SpecificIngredient(Model model, String type, String status){
-        System.out.println(type);
         ReturnMsg ret =new ReturnMsg();
 
         List<IngredientDto> ingredientDtos = new ArrayList<>();
