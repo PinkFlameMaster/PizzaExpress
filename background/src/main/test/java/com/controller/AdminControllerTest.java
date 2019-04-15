@@ -56,4 +56,10 @@ public class AdminControllerTest extends BaseUnitTest {
         Assert.assertEquals("login", controller.outLogin(session));
         Assert.assertTrue(session.isInvalid());
     }
+
+    @Test
+    public void testGetActivities()
+    {
+        Assert.assertEquals("success", controller.getActivities().getStatus());
+    }
 }

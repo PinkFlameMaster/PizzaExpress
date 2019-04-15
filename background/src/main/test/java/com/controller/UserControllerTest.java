@@ -66,7 +66,7 @@ public class UserControllerTest extends BaseUnitTest {
     @Test
     public void testDeleteByPhoneNum()
     {
-        String[] phoneNums = new String[]{"001"};
+        String[] phoneNums = new String[]{"005"};
         ReturnMsg ret = controller.deleteByPhoneNum(null, phoneNums);
         Assert.assertEquals("success", ret.getStatus());
     }
