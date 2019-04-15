@@ -1,5 +1,7 @@
 package com.dto;
 
+import com.pojo.Ingredient;
+
 import java.util.List;
 
 public class OrderItemDto {
@@ -16,8 +18,27 @@ public class OrderItemDto {
     private int id;
     private String name;
     private float actualUnitPrize;
+
+    public int getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(int orderId) {
+        this.orderId = orderId;
+    }
+
+    private int orderId;
+    public int getMenuItemId() {
+        return menuItemId;
+    }
+
+    public void setMenuItemId(int menuItemId) {
+        this.menuItemId = menuItemId;
+    }
+
+    private int menuItemId;
     private int num;
-    private List<IngredientDto> ingredients;
+    private List<Ingredient> ingredients;
 
     public int getId() {
         return id;
@@ -51,11 +72,11 @@ public class OrderItemDto {
         this.num = num;
     }
 
-    public List<IngredientDto> getIngredients() {
+    public List<Ingredient> getIngredients() {
         return ingredients;
     }
 
-    public void setIngredients(List<IngredientDto> ingredients) {
+    public void setIngredients(List<Ingredient> ingredients) {
         this.ingredients = ingredients;
     }
 }

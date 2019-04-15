@@ -1,12 +1,9 @@
 package com.controller;
 
-import com.dto.IngredientDto;
 import com.dto.MenuItemDto;
 import com.pojo.Ingredient;
 import com.pojo.MenuItem;
 import com.pojo.MenuItem_Ingredient;
-import com.pojo.User;
-import com.service.AdminService;
 import com.service.MenuItemService;
 import com.vo.ReturnMsg;
 import net.sf.json.JSONArray;

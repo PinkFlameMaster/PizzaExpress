@@ -18,6 +18,23 @@
         FROM factory
         WHERE id = #{id}
     </select>
+    <select id="findFactoryByName" resultType="Factory" parameterType="String">
+        SELECT *
+        FROM factory
+        WHERE name LIKE CONCAT('%',#{name},'%')
+    </select>
+    <select id="count" resultType="Integer">
+        SELECT COUNT(*) FROM factory
+    </select>
+    <select id="createFactory" parameterType="Integer">
+        INSERT INTO factory(id) VALUES (#{id})
+    </select>
+
+    <select id="updateFactory">
+        UPDATE factory SET name = #{name}, address = #{address},  latitude = #{latitude}, longitude = #{longitude},
+        phoneNum = #{phoneNum}, businessTimeFrom = #{businessTimeFrom}, businessTimeTo = #{businessTimeTo}
+        WHERE id = #{id}
+    </select>
 
 
 </mapper>

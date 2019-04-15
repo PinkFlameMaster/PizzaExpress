@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.util.*;
 
 @Controller
-@RequestMapping("/factory")
+@RequestMapping("/factoryTest")
 public class TestFactoryController {
 
 

@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.util.*;
 
 @Controller
-@RequestMapping("/ingredient")
+@RequestMapping("/testingredient")
 public class TestIngredientController {
 
 

@@ -8,10 +8,32 @@ public class IngredientDto {
     private int id;
     private String type;
     private String source;
-    private String inportDate;
+    private String importDate;
     private Factory factory;
     private String status;
     private float amount;
+
+    public float getThreshold() {
+        return threshold;
+    }
+
+    public void setThreshold(float threshold) {
+        this.threshold = threshold;
+    }
+
+    private float threshold;
+
+    public float getSumAmount() {
+        return sumAmount;
+    }
+
+    public void setSumAmount(float sumAmount) {
+        this.sumAmount = sumAmount;
+    }
+
+    private float sumAmount;
+
+
     private List<ImportDto> _imports;
 
     public List<ImportDto> get_imports() {
@@ -55,12 +77,12 @@ public class IngredientDto {
         this.source = source;
     }
 
-    public String getInportDate() {
-        return inportDate;
+    public String getImportDate() {
+        return importDate;
     }
 
-    public void setInportDate(String inportDate) {
-        this.inportDate = inportDate;
+    public void setImportDate(String importDate) {
+        this.importDate = importDate;
     }
 
     public Factory getFactory() {

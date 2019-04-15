@@ -104,42 +104,6 @@ var ButtonInit = function () {
     return oInit;
 };
 
-
-// $("#searchForm-searchBtn").click(function(){
-//     // alert("Value: " + $("#test").val());
-//
-//     //user对象
-//     var menuItem={};
-//     menuItem.name = $("#searchForm-name").val();
-//     //user状态
-//     var status = $("#searchForm-status").val();
-//     //封装ajax参数
-//     var params = {};
-//     params.menuItem = JSON.stringify(menuItem);
-//     params.status = status;
-//     //发起ajax请求
-//     $.ajax({
-//         type: "POST",
-//         url: "../../menu/searchItems",
-//         data: params,
-//         dataType:"json",
-//         //	         		   contentType: "application/json; charset=utf-8",//此处不能设置，否则后台无法接值
-//         success:function(data){
-//             // alert("success");
-//             if(data.status === "success") {
-//                 $('#tb_menu').bootstrapTable('load', data.data);
-//             }
-//             else{
-//                 alert("错误:"+data.errorMsg);
-//             }
-//         },
-//         error:function(data){
-//             alert("出现异常，异常原因【" + data + "】!");
-//         }
-//     });
-// });
-
-
 $("#btn_ingredient_add").click(function () {
     var rows = $("#tb_ingredient").bootstrapTable('getData').length;
     var rowData = {type: '', amount: 0}
@@ -156,44 +120,6 @@ $("#btn_ingredient_delete").click(function () {
         field: "type",
         values: deleteItems
     })
-    // var ids = []
-    // rows.forEach(function(value){
-    //     ids.push(value.id);
-    // })
-    // var params = {};
-    // params = {"ids":ids}
-    // //发起ajax请求
-    // $.ajax({
-    //     type: "POST",
-    //     url: "../../menu/deleteItemsById",
-    //     data: params,
-    //     traditional:true,//防止深度序列化
-    //     dataType:"json",
-    //     //	         		   contentType: "application/json; charset=utf-8",//此处不能设置，否则后台无法接值
-    //     success:function(data){
-    //         // alert("success");
-    //         if(data.status === "success") {
-    //             var deletedItems = data.data[0];
-    //             var undeletedItems = data.data[1];
-    //             $("#tb_ingredient").bootstrapTable('remove',{
-    //                 field:"id",
-    //                 values: deletedItems
-    //             })
-    //             if(undeletedItems.length === 0){
-    //                 alert("所选用户已删除");
-    //             }
-    //             else{
-    //                 alert('用户：'+ undeletedItems.toString()+' 删除失败');
-    //             }
-    //         }
-    //         else{
-    //             alert("错误:"+data.errorMsg);
-    //         }
-    //     },
-    //     error:function(data){
-    //         alert("出现异常，异常原因【" + data + "】!");
-    //     }
-    // });
 });
 
 // $('#tb_menu').bootstrapTable('load',mockData);   //这行代码在浏览器debug的console里输入，就有数据了。

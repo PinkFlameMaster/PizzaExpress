@@ -90,13 +90,9 @@ var TableInit = function () {
     };
 
     oTableInit.queryParams = function (params) {
-        // var temp = {   //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
-        //     limit: params.limit,   //页面大小
-        //     offset: params.offset,  //页码
-        //     departmentname: $("#txt_search_departmentname").val(),
-        //     statu: $("#txt_search_statu").val()
-        // };
-        // return temp;
+    //     var temp = {   //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
+    //     };
+    //     return temp;
     };
     return oTableInit;
 

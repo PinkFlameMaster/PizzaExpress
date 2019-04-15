@@ -90,7 +90,7 @@ var Table = function () {
             editable:false,
 
             columns: [ {
-                field: 'id',
+                field: 'menuItemId',
                 title: '菜品编号',
             }, {
                 field: 'name',
@@ -106,13 +106,13 @@ var Table = function () {
             }, ],
 
             onClickCell: function(field, value, row, $element) {
-                RequestItemDetail(row.id)
+                RequestItemDetail(row)
             }
         });
-        function  RequestItemDetail(id) {
+        function   RequestItemDetail(row) {
             $('#ingredient-modal').modal();
 
-            $('#tb_item-ingredient').bootstrapTable('load',oTable.data[id].ingredients);
+            $('#tb_item-ingredient').bootstrapTable('load',row.ingredients);
         }
 
 

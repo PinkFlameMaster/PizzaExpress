@@ -37,6 +37,7 @@
     var phoneNum = "<%=admin.getPhoneNum()%>";
     <%AdminToFactoryHelper adminToFactoryHelper = new AdminToFactoryHelper(admin);%>
     var factory = "<%=adminToFactoryHelper.getFactoryName()%>";
+    var factoryId = "<%=adminToFactoryHelper.id%>"
 </script>
 <body class="bright-bg">
 <div id = "mainBodyWrap">
@@ -50,7 +51,7 @@
         <div class="lobby-content">
             <div class="headline">
                 <div id="title">
-                    Title
+                    库存管理
                 </div>
                 <a class="pull-right" id="import_new">
                     购置原料

@@ -1,6 +1,9 @@
 package com.dto;
 
+import com.pojo.Factory;
+
 public class FactoryDto {
+    private int id;
     private String name;
     private String address;
     private float latitude;
@@ -9,7 +12,18 @@ public class FactoryDto {
     private String businessTimeFrom;
     private String businessTimeTo;
     private String manager;
-
+    public FactoryDto(){}
+    public FactoryDto(Factory factory,String manager){
+        this.id = factory.getId();
+        this.manager = manager;
+        this.name = factory.getName();
+        this.address = factory.getAddress();
+        this.latitude = factory.getLatitude();
+        this.longitude = factory.getLongitude();
+        this.phoneNum = factory.getPhoneNum();
+        this.businessTimeFrom = factory.getBusinessTimeFrom();
+        this.businessTimeTo = factory.getBusinessTimeTo();
+    }
     public int getId() {
         return id;
     }
@@ -18,7 +32,6 @@ public class FactoryDto {
         this.id = id;
     }
 
-    private int id;
     public String getName() {
         return name;
     }

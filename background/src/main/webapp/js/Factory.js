@@ -5,7 +5,9 @@ $(function () {
     oTable.Init();
 });
 
-
+var selectedId = getQueryString("id");
+var modifyRowData;
+var selectedIndex;
 var TableInit = function () {
     var oTableInit = new Object();
     //初始化Table
@@ -64,6 +66,10 @@ var TableInit = function () {
             }
             ],
 
+            onClickRow(row, $element) {
+                selectedIndex = $element.data('index');
+            },
+
             onClickCell: function(field, value, row, $element) {
                 if (field!='remove')
                 {
@@ -72,7 +78,7 @@ var TableInit = function () {
                     $('#modify-factory-phoneNum').val(row.phoneNum);
                     $('#modify-factory-timeFrom').val(row.businessTimeFrom);
                     $('#modify-factory-timeTo').val(row.businessTimeTo);
-                    var selectedId=row.id;
+                    selectedId=row.id;
                     $('#modify-modal').modal();
                 }
 
@@ -95,9 +101,8 @@ var TableInit = function () {
 };
 
 $('#search').click(function search(){
-    if ($("#factory-search-name").val()!="")
+    // if ($("#factory-search-name").val()!="")
     {
-        //user状态
         var params = {};
         params.factoryName = $("#factory-search-name").val();
         if (!isCommonTextValid(params.factoryName,10))
@@ -129,6 +134,7 @@ $('#search').click(function search(){
 
 $('#submit').click(function submit(){
         //user状态
+
         var params = {};
         var factory={};
         factory.name = $('#factory-name').val();
@@ -217,6 +223,7 @@ $('#modify-submit').click(function search(){
     factory.businessTimeFrom=$('#modify-factory-timeFrom').val();
     factory.businessTimeTo=$('#modify-factory-timeTo').val();
     factory.id=selectedId;
+    modifyRowData = factory;
 
     if (factory.name==='')
     {
@@ -274,7 +281,10 @@ $('#modify-submit').click(function search(){
         //	         		   contentType: "application/json; charset=utf-8",//此处不能设置，否则后台无法接值
         success:function(data){
             if(data.status === "success") {
-                window.location.reload();
+                $('#tb_factory').bootstrapTable('updateRow', {
+                    index: selectedIndex,
+                    row: modifyRowData,
+                })
             }
             else{
                 alert("错误:"+data.errorMsg);
@@ -289,7 +299,7 @@ $('#modify-submit').click(function search(){
 
 function remove(id){
     var params = {};
-    params.factoryId=id;
+    params.id=id;
     //发起ajax请求
     $.ajax({
         type: "POST",
@@ -299,7 +309,10 @@ function remove(id){
         //	         		   contentType: "application/json; charset=utf-8",//此处不能设置，否则后台无法接值
         success:function(data){
             if(data.status === "success") {
-                window.location.reload();
+                $('#tb_factory').bootstrapTable('remove',{
+                    field:"id",
+                    values: id.toString()
+                })
             }
             else{
                 alert("错误:"+data.errorMsg);

@@ -7,4 +7,5 @@ public interface AdminDao {
          * @return
          */
         Admin findByUsername(String username);
+        Admin findByFactory(int factoryId);
 }

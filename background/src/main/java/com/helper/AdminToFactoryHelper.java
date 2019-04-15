@@ -10,12 +10,12 @@ import org.springframework.test.context.ContextConfiguration;
 public class AdminToFactoryHelper {
 
     FactoryService factoryService = SpringTool.getBean(FactoryService.class);
-    int id;
+    public int id;
     public AdminToFactoryHelper(Admin admin){
 
         id = admin.getFactoryId();
     }
     public String getFactoryName (){
-        return factoryService.getFactory(id).getName();
+        return factoryService.getAdminFactory(id).getName();
     }
 }

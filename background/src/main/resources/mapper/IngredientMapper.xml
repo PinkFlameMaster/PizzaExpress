@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.dao.IngredientDao">
+    <resultMap id="orderVo" type="com.dto.IngredientDto">
+        <result column="id" property="id" />
+        <result column="type" property="type"/>
+        <result column="source" property="source"/>
+        <result column="inportDate" property="importDate"/>
+        <result column="amount" property="amount"/>
+        <result column="sumAmount" property="sumAmount"/>
+        <result column="threshold" property="threshold"/>
+        <association property="factory" javaType="com.pojo.Factory">
+            <result property="id" column="factoryId"/>
+            <result property="name" column="name"/>
+            <result property="address" column="address"/>
+            <result property="longitude" column="longitude"/>
+            <result property="latitude" column="latitude"/>
+            <result property="phoneNum" column="phoneNum"/>
+            <result property="businessTimeFrom" column="businessTimeFrom"/>
+            <result property="businessTimeTo" column="businessTimeTo"/>
+        </association>
+
+    </resultMap>
+
+    <select id="getIngredientByOrder" parameterType="Integer" resultType="com.pojo.Ingredient">
+        SELECT ingredient.id as id, ingredient.type as type, ingredient.source as source,
+        ingredient.inportDate as importDate, ingredient.factoryId as factoryId, ingredient.amount as amount
+        FROM ingredient
+        INNER JOIN orderItem_ingredient
+        ON ingredient.id = orderItem_ingredient.ingredientId
+        INNER JOIN orderItem
+        ON orderItem_ingredient.orderItemId = orderItem.id
+        WHERE orderItem.orderId = #{orderId}
+    </select>
+    <select id="getAllIngredientDto" parameterType="Integer" resultType="com.dto.IngredientDto">
+        SELECT ingredient.type ,sum(ingredient.amount) as amount
+        from ingredient INNER JOIN factory ON ingredient.factoryId = factory.id
+        WHERE factory.id = #{factoryId}
+        GROUP BY ingredient.type
+    </select>
+    <select id="getIngredientByType" resultType="com.dto.IngredientDto">
+        SELECT ingredient.id as id, ingredient.type, ingredient.source, ingredient.inportDate,
+        ingredient.amount, factory.id as factoryId, factory.name, factory.address,
+        factory.longitude, factory.latitude, factory.phoneNum, factory.businessTimeFrom, factory.businessTimeTo,
+        ingredientThreshold.threshold
+        from ingredient INNER JOIN factory ON ingredient.factoryId = factory.id
+        INNER JOIN ingredientThreshold ON ingredientThreshold.type = ingredient.type
+        WHERE ingredient.type =   #{type} and factory.id = #{factoryId}
+    </select>
+    <select id="importIngredient">
+        INSERT INTO ingredient(type,source,amount,inportDate,factoryId)
+        values(#{type},#{source},#{amount},#{importDate},#{factoryId})
+    </select>
+</mapper>

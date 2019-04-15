@@ -9,6 +9,11 @@
         select * from admin where username = #{username}
 
     </select>
+    <select id="findByFactory" resultType="Admin" parameterType="Integer">
+
+        SELECT * FROM admin WHERE factoryId = #{factoryId}
+
+    </select>
 
 
 </mapper>

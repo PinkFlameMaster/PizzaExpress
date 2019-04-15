@@ -37,6 +37,7 @@
     var phoneNum = "<%=admin.getPhoneNum()%>";
     <%AdminToFactoryHelper adminToFactoryHelper = new AdminToFactoryHelper(admin);%>
     var factory = "<%=adminToFactoryHelper.getFactoryName()%>";
+    var factoryId = "<%=adminToFactoryHelper.id%>"
 </script>
 <body class="bright-bg">
 <div id = "mainBodyWrap">
@@ -101,7 +102,10 @@
                     </div>
                 </div>
                 <div class="col-md-3 info-label">
-                    阈值：10
+                    阈值：
+                    <div id="threshold" class="inline-block">
+                    20
+                    </div>
                 </div>
                 <div class="col-md-3 info-label">
                     状态：

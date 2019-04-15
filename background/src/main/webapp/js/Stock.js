@@ -4,6 +4,7 @@ $(function () {
     var oTable = new TableInit();
     oTable.Init();
     var params = {};
+    params.factoryId = factoryId;
     //发起ajax请求
     $.ajax({
         type: "POST",
