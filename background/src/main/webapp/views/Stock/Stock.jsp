@@ -74,13 +74,13 @@
                     <div class="common-input-group">
                         <div class="input-group">
                             <span class="input-group-addon">原料名称</span>
-                            <input id="searchForm-type" type="text" class="form-control">
+                            <input id="type" type="text" class="form-control">
                         </div>
                     </div>
                     <div class="common-input-group">
                         <div class="input-group">
                             <span class="input-group-addon">进货量</span>
-                            <input id="searchForm-amount" type="number" min="0" step="0.01" class="form-control">
+                            <input id="amount" type="number" min="0" step="0.01" class="form-control">
                         </div>
                     </div>
                     <div class="common-input-group">

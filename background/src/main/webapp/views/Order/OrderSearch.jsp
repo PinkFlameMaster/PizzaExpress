@@ -67,7 +67,7 @@
                             <input id="searchForm-factory" type="text" class="form-control" placeholder="">
                         </div>
                     </div>
-                    <button class="btn  btn-default common-btn search-btn" id="searchForm-searchBtn">搜索</button>
+                    <button class="btn  btn-default common-btn search-btn pull-right" id="searchForm-searchBtn">搜索</button>
                 </div>
                 <div class="grid-wrap">
                     <div id="toolbar" class="btn-group">
