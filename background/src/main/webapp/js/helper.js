@@ -17,7 +17,7 @@ function isPhoneNum(phoneNum)
 }
 function isCommonTextValid(text,length)
 {
-    return (text!=null && text.length<length);
+    return (text.toString().length<length);
 }
 function isNum(num)
 {

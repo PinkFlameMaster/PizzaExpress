@@ -42,8 +42,9 @@ $(function () {
                                 map: map
                             }
                         });
-
-                        driving.search('田林路320号',data.data[0].receiverAddress.address);
+                        var start = new BMap.Point(data.data[0].factoryLatitude,data.data[0].factoryLongitude );
+                        var end = new BMap.Point(data.data[0].receiverAddress.latitude, data.data[0].receiverAddress.longitude);
+                        driving.search(start,end);
 
                         //$('#map').attr("src",'http://api.map.baidu.com/direction?origin=latlng:'+data.data[0].receiverAddress.latitude+','+data.data[0].receiverAddress.longitude+'&destination=latlng:'+data.data[0].factoryAddress+'&mode=driving&output=html&')
                     }

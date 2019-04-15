@@ -97,7 +97,7 @@ $("#searchForm-searchBtn").click(function(){
     order.receiverAddress={receiverName : $("#searchForm-name").val()};
     order.userId = $("#searchForm-phoneNum").val();
     order.factoryName = $("#searchForm-factory").val();
-    if (!order.receiverAddress==='' && !order.userId==='' && !order.factoryName==='')
+    if ($("#searchForm-name").val()==='' && order.userId==='' && order.factoryName==='')
     {
         alert('搜寻条件不得为空');
         return;
@@ -113,9 +113,9 @@ $("#searchForm-searchBtn").click(function(){
         alert("下单用户id过长");
         return;
     };
-    if (!isCommonTextValid(order.receiverAddress,30))
+    if (!isCommonTextValid($("#searchForm-name").val(),10))
     {
-        alert("门店地址过长");
+        alert("收货人姓名过长");
         return;
     };
     if (!isCommonTextValid(order.factoryName,10))

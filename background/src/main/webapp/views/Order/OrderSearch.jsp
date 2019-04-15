@@ -88,4 +88,5 @@
 </body>
 </html>
 <script type="text/javascript" src="../../js/template_page.js"></script>
+<script src="../../js/helper.js"></script>
 <script src="../../js/OrderSearch.js"></script>
