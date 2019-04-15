@@ -100,6 +100,11 @@ $('#search').click(function search(){
         //user状态
         var params = {};
         params.factoryName = $("#factory-search-name").val();
+        if (!isCommonTextValid(params.factoryName,10))
+        {
+            alert("搜索条件不得为空");
+            return;
+        }
         //发起ajax请求
         $.ajax({
             type: "POST",
@@ -122,7 +127,7 @@ $('#search').click(function search(){
     }
 });
 
-$('#submit').click(function search(){
+$('#submit').click(function submit(){
         //user状态
         var params = {};
         var factory={};
@@ -131,6 +136,54 @@ $('#submit').click(function search(){
         factory.phoneNum=$('#factory-phoneNum').val();
         factory.businessTimeFrom=$('#factory-timeFrom').val();
         factory.businessTimeTo=$('#factory-timeTo').val();
+
+        if (factory.name==='')
+        {
+            alert("门店名称不能为空");
+            return;
+        };
+        if (factory.address==='')
+        {
+            alert("门店地址不能为空");
+            return;
+        };
+        if (factory.phoneNum==='')
+        {
+            alert("联系方式不能为空");
+            return;
+        };
+        if (factory.businessTimeFrom==='')
+        {
+            alert("开始营业时间不能为空");
+            return;
+        };
+        if (factory.businessTimeTo==='')
+        {
+            alert("结束营业时间不能为空");
+            return;
+        };
+
+        if (!isCommonTextValid(factory.name,10))
+        {
+            alert("门店名称过长");
+            return;
+        };
+        if (!isCommonTextValid(factory.address,30))
+        {
+            alert("门店地址过长");
+            return;
+        };
+        if (!isNum(factory.phoneNum))
+        {
+            alert("联系方式有误");
+            return;
+        };
+        if (!isTime(factory.businessTimeFrom)||!isTime(factory.businessTimeTo)){
+            alert("时间格式：[hh:mm]");
+            return;
+        };
+
+
         params.factory=JSON.stringify(factory);
         //发起ajax请求
         $.ajax({
@@ -164,6 +217,53 @@ $('#modify-submit').click(function search(){
     factory.businessTimeFrom=$('#modify-factory-timeFrom').val();
     factory.businessTimeTo=$('#modify-factory-timeTo').val();
     factory.id=selectedId;
+
+    if (factory.name==='')
+    {
+        alert("门店名称不能为空");
+        return;
+    };
+    if (factory.address==='')
+    {
+        alert("门店地址不能为空");
+        return;
+    };
+    if (factory.phoneNum==='')
+    {
+        alert("联系方式不能为空");
+        return;
+    };
+    if (factory.businessTimeFrom==='')
+    {
+        alert("开始营业时间不能为空");
+        return;
+    };
+    if (factory.businessTimeTo==='')
+    {
+        alert("结束营业时间不能为空");
+        return;
+    };
+
+    if (!isCommonTextValid(factory.name,10))
+    {
+        alert("门店名称过长");
+        return;
+    };
+    if (!isCommonTextValid(factory.address,30))
+    {
+        alert("门店地址过长");
+        return;
+    };
+    if (!isPhoneNum(factory.phoneNum))
+    {
+        alert("联系方式有误");
+        return;
+    };
+    if (!isTime(factory.businessTimeFrom)||!isTime(factory.businessTimeTo)){
+        alert("时间格式：[hh:mm]");
+        return;
+    };
+
     params.factory=JSON.stringify(factory);
     //发起ajax请求
     $.ajax({

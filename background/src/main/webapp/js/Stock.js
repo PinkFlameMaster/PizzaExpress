@@ -106,6 +106,32 @@ $('#submit').click(function ()
     _import.source=$('#source').val();
     _import.amount=$('#amount').val();
     _import.type=$('#type').val();
+    if (_import.type==='')
+    {
+        alert("原料名称不得为空");
+        return;
+    };
+    if (_import.source==='')
+    {
+        alert("货源不得为空");
+        return;
+    };
+    if (!isCommonTextValid(factory.name,10))
+    {
+        alert("门店名称过长");
+        return;
+    };
+    if (!isCommonTextValid(factory.address,30))
+    {
+        alert("门店地址过长");
+        return;
+    };
+    if (_import.amount<=0)
+    {
+        alert("进货量须大于0");
+        return;
+    };
+
     params._import=JSON.stringify(_import);
     //发起ajax请求
     $.ajax({

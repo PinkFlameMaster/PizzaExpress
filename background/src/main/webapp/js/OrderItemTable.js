@@ -31,6 +31,21 @@ $(function () {
                         oTable.data=data.data[0].orderItems;
                         if (data.data[0].state === "refunded")
                             $('#refund-div').text('已退款');
+
+                        var map = new BMap.Map("container");
+                        map.centerAndZoom(new BMap.Point(116.403884,39.914887), 13);
+                        map.enableScrollWheelZoom();
+                        //var marker=new BMap.Marker(new BMap.Point(116.403884,39.914887));
+                        //map.addOverlay(marker);
+                        var driving = new BMap.DrivingRoute(map, {
+                            renderOptions: {
+                                map: map
+                            }
+                        });
+
+                        driving.search('田林路320号',data.data[0].receiverAddress.address);
+
+                        //$('#map').attr("src",'http://api.map.baidu.com/direction?origin=latlng:'+data.data[0].receiverAddress.latitude+','+data.data[0].receiverAddress.longitude+'&destination=latlng:'+data.data[0].factoryAddress+'&mode=driving&output=html&')
                     }
                 } else {
                     alert("错误:" + data.errorMsg);
@@ -41,6 +56,7 @@ $(function () {
             }
         });
     }
+
 
 });
 

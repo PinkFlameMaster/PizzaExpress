@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="../../css/Common.css">
     <link rel="stylesheet" href="../../css/Order.css">
-
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=1.5&ak=dsbaxEYO7qaT6qP9DdMQqiun9XfzI4Ad"></script>
     <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
     <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
@@ -108,7 +108,7 @@
                 <div class="title">
                     配送路径
                 </div>
-                <div class="path-map">
+                <div class="path-map" id="container" >
                 </div>
             </div>
         </div>
