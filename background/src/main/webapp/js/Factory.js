@@ -119,6 +119,10 @@ $('#search').click(function search(){
             //	         		   contentType: "application/json; charset=utf-8",//此处不能设置，否则后台无法接值
             success:function(data){
                 if(data.status === "success") {
+                    if (data.data.length==0)
+                    {
+                        alert("无符合条件条目");
+                    }
                     $('#tb_factory').bootstrapTable('load', data.data);
                 }
                 else{

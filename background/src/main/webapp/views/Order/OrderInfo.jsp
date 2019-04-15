@@ -102,6 +102,7 @@
                     <p>下单时间：<span id="datetime">1999年9月9日 10:10:10</span></p>
                     <p>收货人：<span id="receiverName">陈聪</span></p>
                     <p>联系方式：<span id="contact">18010001000</span></p>
+                    <p>配送状态：<span id="status"></span></p>
                 </div>
             </div>
             <div class="path">

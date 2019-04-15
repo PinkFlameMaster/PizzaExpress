@@ -24,7 +24,7 @@ $(function () {
                 $('#storage').text(data.data[0].sumAmount);
                 $('#status').text(data.data[0].status);
                 $('#threshold').text(data.data[0].threshold);
-                $('#tb_import').bootstrapTable('load', data.data);
+                $('#tb_import').bootstrapTable('load', data.data[0]._imports);
             }
             else{
                 alert("错误:"+data.errorMsg);
@@ -136,14 +136,14 @@ $('#submit').click(function ()
         alert("货源不得为空");
         return;
     };
-    if (!isCommonTextValid(factory.name,10))
+    if (!isCommonTextValid(_import.type,10))
     {
-        alert("门店名称过长");
+        alert("原料名称过长");
         return;
     };
-    if (!isCommonTextValid(factory.address,30))
+    if (!isCommonTextValid(_import.source,30))
     {
-        alert("门店地址过长");
+        alert("货源信息过长");
         return;
     };
     if (_import.amount<=0)

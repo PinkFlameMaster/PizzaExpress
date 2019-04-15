@@ -23,15 +23,13 @@ $(function () {
                         $('#tb_item').bootstrapTable('load', data.data[0].orderItems);
                         $('#factory').text(data.data[0].factoryName);
                         $('#delivery-fee').text(data.data[0].deliveryFee);
+                        $('#status').text(setState(data.data[0].state));
                         if (data.data[0].receiverAddress != null) {
                             $('#address').text(data.data[0].receiverAddress.address);
                             $('#receiverName').text(data.data[0].receiverAddress.receiverName);
                             $('#contact').text(data.data[0].receiverAddress.receiverPhoneNum);
                         }
                         oTable.data=data.data[0].orderItems;
-                        if (data.data[0].state === "refunded")
-                            $('#refund-div').text('已退款');
-
                         var map = new BMap.Map("container");
                         map.centerAndZoom(new BMap.Point(116.403884,39.914887), 13);
                         map.enableScrollWheelZoom();
@@ -60,7 +58,23 @@ $(function () {
 
 
 });
-
+function setState(status) {
+    if (status === '1') {
+        return '订单进行中'
+    } else if (status === '2') {
+        return '待发货'
+    } else if (status === '3') {
+        return '待收货'
+    } else if (status === '4') {
+        return '已完成'
+    } else if (status === '5') {
+        $('#refund-div').text('已退款');
+        return '已取消'
+    } else if (status === '6') {
+        $('#refund-div').text('支付失败');
+        return '支付失败'
+    }
+}
 var Table = function () {
     var oTable = new Object();
     //初始化Table
