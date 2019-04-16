@@ -3,6 +3,7 @@ import javax.servlet.http.HttpSession;
 
 import com.pojo.Activity;
 import com.service.ActivityService;
+import com.service.OrderService;
 import com.vo.ReturnMsg;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -27,6 +28,8 @@ public class AdminController {
     private AdminService adminService;
     @Autowired
     private ActivityService activityService;
+    @Autowired
+    private OrderService orderService;
 
     //正常访问login页面
     @RequestMapping("/login")
@@ -52,12 +55,7 @@ public class AdminController {
         ret.setErrorMsg("用户名或密码错误");
         return ret;
     }
-//
-//    //测试超链接跳转到另一个页面是否可以取到session值
-//    @RequestMapping("/anotherpage")
-//    public String hrefpage(){
-//        return "anotherpage";
-//    }
+
 
     //注销方法
     @RequestMapping("/outLogin")
@@ -70,7 +68,7 @@ public class AdminController {
     @RequestMapping("/activity")
     @ResponseBody
     public ReturnMsg getActivities(){
-
+        activityService.handleNewOrder();
         List<Activity> result = activityService.getAllActivities();
         for(Activity activity: result){
             activity.solveString();
@@ -85,19 +83,7 @@ public class AdminController {
     @RequestMapping("/getAll")
     @ResponseBody
     public ReturnMsg getAllAdmins(){
-
-        List<Admin> admins = new ArrayList<>();
-        for(int i=1;i<10;i++){
-            Admin admin = new Admin();
-            admin.setUsername("username"+i);
-            admin.setName("name"+i);
-            admin.setPhoneNum("phoneNum"+i);
-            admin.setRole("role"+i);
-            admin.setEntryTime("entryTime"+i);
-            admins.add(admin);
-
-        }
-
+        List<Admin>admins =  adminService.getAllAdmin();
         ReturnMsg msg = new ReturnMsg();
         msg.setStatus("success");
         msg.setData(admins);
@@ -107,12 +93,12 @@ public class AdminController {
     @RequestMapping("/modifyRole")
     @ResponseBody
     public ReturnMsg modifyRole(String username, String role){
-
-
+        adminService.modifyRole(role,username);
         ReturnMsg msg = new ReturnMsg();
         msg.setStatus("success");
         msg.setData(new ArrayList());
         msg.getData().add(role);
         return msg;
     }
+
 }

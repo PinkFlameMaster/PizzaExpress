@@ -8,8 +8,11 @@
         select * from activity
 
     </select>
-    <select id="newActivity">
-        INSERT INTO activity(affair, date, detail,isSolved) VALUES (#{affair}, #{date}, #{detail},0)
+    <select id="newStockActivity">
+        INSERT INTO activity(affair, date, detail,type ,isSolved) VALUES (#{affair}, #{date}, #{detail},type ,0)
+    </select>
+    <select id="newOrderActivity">
+        INSERT INTO activity(affair, date, detail,orderId ,isSolved) VALUES (#{affair}, #{date}, #{detail}, #{orderId},0)
     </select>
     <select id="solveOrderActivity" parameterType="Integer">
         UPDATE activity SET isSolved = 1 WHERE orderId = #{orderId}

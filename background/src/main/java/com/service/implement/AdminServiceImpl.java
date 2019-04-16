@@ -6,6 +6,8 @@ import com.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class AdminServiceImpl implements AdminService {
     @Autowired
@@ -19,5 +21,15 @@ public class AdminServiceImpl implements AdminService {
             return user;
         }
         return null;
+    }
+
+    @Override
+    public List<Admin> getAllAdmin() {
+        return adminDao.getAllAdmin();
+    }
+
+    @Override
+    public void modifyRole(String role, String username) {
+        adminDao.modifyByUsername(role,username);
     }
 }
