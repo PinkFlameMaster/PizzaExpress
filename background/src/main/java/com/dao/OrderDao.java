@@ -15,4 +15,5 @@ public interface OrderDao {
     OrderVo findOderItemById(int id);
     List<OrderItemDto> findOrderItemListById(int oderId);
     void refundOrder(int id);
+    int findOrderById(int id);
 }

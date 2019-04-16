@@ -12,6 +12,5 @@ public interface OrderService {
     List<OrderVo> findOrder(String name, String phone, String factory);
     OrderVo findOrderById(int id);
     List<OrderItemDto> getOderItemList(int id);
-    List<Ingredient> getIngredientByOrderId(int orderId);
     void refund(int id);
 }

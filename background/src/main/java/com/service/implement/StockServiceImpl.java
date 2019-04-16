@@ -26,4 +26,9 @@ public class StockServiceImpl implements StockService {
         ingredientDao.importIngredient(ingredient.getType(),ingredient.getSource()
                 ,ingredient.getAmount(),ingredient.getImportDate(),ingredient.getFactoryId());
     }
+
+    @Override
+    public void consumeStock(int id) {
+
+    }
 }

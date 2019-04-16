@@ -4,7 +4,9 @@ package com.controller;
 import com.dto.ImportDto;
 import com.dto.IngredientDto;
 import com.helper.TimeHelper;
+import com.pojo.Activity;
 import com.pojo.Ingredient;
+import com.service.ActivityService;
 import com.service.StockService;
 import com.vo.ReturnMsg;
 import net.sf.json.JSONObject;
@@ -22,6 +24,8 @@ import java.util.List;
 public class IngredientController {
     @Autowired
     StockService stockService;
+    @Autowired
+    ActivityService activityService;
 
     @RequestMapping("/stockOverview")
     @ResponseBody
@@ -60,6 +64,7 @@ public class IngredientController {
         for(IngredientDto ingredientDto: ingredientDtos){
             sumAmount=sumAmount+ ingredientDto.getAmount();
         }
+        if(sumAmount<ingredientDtos.get(0).getThreshold()) activityService.stockActivity(ingredient.getType());
         ingredientDtos.get(0).setSumAmount(sumAmount);
         ret.setData(ingredientDtos);
         ret.setStatus("success");

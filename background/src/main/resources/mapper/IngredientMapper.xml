@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.dao.IngredientDao">
-    <resultMap id="orderVo" type="com.dto.IngredientDto">
+    <resultMap id="ingredientVo" type="com.dto.IngredientDto">
         <result column="id" property="id" />
         <result column="type" property="type"/>
         <result column="source" property="source"/>
@@ -25,7 +25,7 @@
 
     </resultMap>
 
-    <select id="getIngredientByOrder" parameterType="Integer" resultType="com.pojo.Ingredient">
+    <select id="getIngredientByOrderItem" parameterType="Integer" resultType="com.pojo.Ingredient">
         SELECT ingredient.id as id, ingredient.type as type, ingredient.source as source,
         ingredient.inportDate as importDate, ingredient.factoryId as factoryId, ingredient.amount as amount
         FROM ingredient
@@ -33,7 +33,8 @@
         ON ingredient.id = orderItem_ingredient.ingredientId
         INNER JOIN orderItem
         ON orderItem_ingredient.orderItemId = orderItem.id
-        WHERE orderItem.orderId = #{orderId}
+        WHERE orderItem.id = #{orderId}
+
     </select>
     <select id="getAllIngredientDto" parameterType="Integer" resultType="com.dto.IngredientDto">
         SELECT ingredient.type ,sum(ingredient.amount) as amount
@@ -54,4 +55,24 @@
         INSERT INTO ingredient(type,source,amount,inportDate,factoryId)
         values(#{type},#{source},#{amount},#{importDate},#{factoryId})
     </select>
+
+    <select id="setOrderStockValue" resultType="Ingredient" parameterType="Integer">
+        SELECT ingredientType as type ,ingredientAmount as amount FROM orderItem
+        INNER JOIN menuItem_ingredient
+        ON orderItem.menuItemId = menuItem_ingredient.menuItemId
+        WHERE orderItem.id = #{id}
+    </select>
+    <select id="getOrderItemByOrderId" resultType="Integer" parameterType="Integer" >
+        SELECT id FROM orderItem WHERE orderId = #{orderId}
+    </select>
+
+    <select id="setNewAmount">
+        UPDATE ingredient SET amount = #{newAmount} WHERE id = #{id}
+    </select>
+
+    <select id="newOrderIngredient">
+        INSERT INTO orderItem_ingredient(orderItemId, ingredientId) VALUES (#{orderItemId},#{ingredientId})
+    </select>
+
+
 </mapper>

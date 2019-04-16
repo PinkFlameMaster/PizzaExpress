@@ -36,17 +36,13 @@ public class OrderServiceImpl  implements OrderService {
     public List<OrderItemDto> getOderItemList(int id) {
         List<OrderItemDto> result = orderDao.findOrderItemListById(id);
         for(OrderItemDto orderItemDto: result){
-            int orderId = orderItemDto.getOrderId();
-            List<Ingredient> ingredients = ingredientDao.getIngredientByOrder(orderId);
+            int orderItemId = orderItemDto.getId();
+            List<Ingredient> ingredients = ingredientDao.getIngredientByOrderItem(orderItemId);
             orderItemDto.setIngredients(ingredients);
         }
         return result;
     }
 
-    @Override
-    public List<Ingredient> getIngredientByOrderId(int orderId) {
-        return ingredientDao.getIngredientByOrder(orderId);
-    }
 
     @Override
     public void refund(int id) {

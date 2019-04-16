@@ -64,9 +64,12 @@ var TableInit = function () {
                 field: 'id',
                 title: '事件编号',
             }, {
-                field: 'type',
+                field: 'affair',
                 title: '事件信息',
                 edit:false,
+                formatter: function(value, row, index) {
+                    return (value===0)?"补货":"订单"
+                }
             }, {
                 field: 'date',
                 title: '发生日期',
@@ -75,16 +78,6 @@ var TableInit = function () {
                 field: 'detail',
                 title: '详情',
                 edit:false,
-            }, {
-                field: 'solve',
-                title: '是否完成',
-                edit:false
-            },{
-                field: 'DetailHref',
-                title: '查看详情',
-                formatter: function(value, row, index) {
-                    //return '<a href="OrderInfo.jsp?id='+row.id+'">查看详情</a>'
-                }
             }],
 
 

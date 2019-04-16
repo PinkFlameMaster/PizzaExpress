@@ -27,6 +27,11 @@
     </resultMap>
 
 
+
+    <select id="findOrderById" resultType="Integer">
+        select factoryId from pizzaOrder where id = #{id}
+    </select>
+
     <select id="findOrderComplex" resultMap="orderVo">
     SELECT pizzaOrder.id as id, receiverAddress.receiverName as receiverName, user.phoneNum as userId
       ,receiverAddress.receiverPhoneNum as receiverPhoneNum, factory.name as factoryName, user.nickname as username,factory.latitude as factoryLatitude, factory.longitude as factoryLongitude,

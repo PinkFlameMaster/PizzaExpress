@@ -9,4 +9,5 @@ public interface StockService {
     List<IngredientDto> getAllIngredient(int factoryId);
     List<IngredientDto> getIngredientByType(String type,int factoryId);
     void importIngredient(Ingredient ingredient);
+    void consumeStock(int id);
 }
