@@ -105,11 +105,6 @@ $('#search').click(function search(){
     {
         var params = {};
         params.factoryName = $("#factory-search-name").val();
-        if (!isCommonTextValid(params.factoryName,10))
-        {
-            alert("搜索条件不得为空");
-            return;
-        }
         //发起ajax请求
         $.ajax({
             type: "POST",

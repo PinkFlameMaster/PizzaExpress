@@ -8,6 +8,21 @@
         select * from activity
 
     </select>
+    <select id="newActivity">
+        INSERT INTO activity(affair, date, detail,isSolved) VALUES (#{affair}, #{date}, #{detail},0)
+    </select>
+    <select id="solveOrderActivity" parameterType="Integer">
+        UPDATE activity SET isSolved = 1 WHERE orderId = #{orderId}
+    </select>
+    <select id="solveStoreActivity" parameterType="String">
+        UPDATE activity SET isSolved = 1 WHERE type = #{type}
+    </select>
+    <select  id="getNewOrder" resultType="Integer">
+        SELECT b.id FROM pizzaOrder as b
+        LEFT JOIN activity as a
+        ON a.orderId = b.id
+        WHERE a.id is NULL
+    </select>
 
 
 </mapper>

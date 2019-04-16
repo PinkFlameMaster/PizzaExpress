@@ -11,6 +11,8 @@
         <result column="state" property="state"/>
         <result column="orderTime" property="orderTime"/>
         <result column="receiveTime" property="receiveTime"/>
+        <result column="factoryLatitude" property="factoryLatitude"/>
+        <result column="factoryLongitude" property="factoryLongitude"/>
         <association property="receiverAddress" javaType="com.pojo.ReceiverAddress">
             <result property="receiverName" column="receiverName"/>
             <result property="receiverPhoneNum" column="receiverPhoneNum"/>
@@ -27,7 +29,7 @@
 
     <select id="findOrderComplex" resultMap="orderVo">
     SELECT pizzaOrder.id as id, receiverAddress.receiverName as receiverName, user.phoneNum as userId
-      ,receiverAddress.receiverPhoneNum as receiverPhoneNum, factory.name as factoryName, user.nickname as username,
+      ,receiverAddress.receiverPhoneNum as receiverPhoneNum, factory.name as factoryName, user.nickname as username,factory.latitude as factoryLatitude, factory.longitude as factoryLongitude,
       receiverAddress.address as address, receiverAddress.longitude as longitude,
 			receiverAddress.latitude as latitude, receiverAddress.deleted as deleted,
 			pizzaOrder.receiverAddressId as receiverAddressId, pizzaOrder.state as state,
@@ -46,7 +48,7 @@
 
     <select id="findOderItemById" resultMap="orderVo" parameterType="Integer">
     SELECT pizzaOrder.id as id, receiverAddress.receiverName as receiverName, user.phoneNum as userId
-      ,receiverAddress.receiverPhoneNum as receiverPhoneNum, factory.name as factoryName, user.nickname as username,
+      ,receiverAddress.receiverPhoneNum as receiverPhoneNum, factory.name as factoryName, user.nickname as username,factory.latitude as factoryLatitude, factory.longitude as factoryLongitude,
       receiverAddress.address as address, receiverAddress.longitude as longitude,
 			receiverAddress.latitude as latitude, receiverAddress.deleted as deleted,
 			pizzaOrder.receiverAddressId as receiverAddressId, pizzaOrder.state as state,
@@ -67,6 +69,8 @@
         from orderItem INNER JOIN menuItem ON orderItem.menuItemId = menuItem.id
         WHERE orderId = #{oderId}
     </select>
-
+    <select id="refundOrder" parameterType="Integer">
+        UPDATE pizzaOrder SET state = 5 WHERE id = #{id}
+    </select>
 
 </mapper>

@@ -22,9 +22,10 @@ $(function () {
         success:function(data){
             if(data.status === "success") {
                 $('#storage').text(data.data[0].sumAmount);
-                $('#status').text(data.data[0].status);
+                $('#status').text((data.data[0].sumAmount<data.data[0].threshold)?"待补货":"充足");
                 $('#threshold').text(data.data[0].threshold);
-                $('#tb_import').bootstrapTable('load', data.data[0]._imports);
+                $('#tb_import').bootstrapTable('load', data.data);
+
             }
             else{
                 alert("错误:"+data.errorMsg);
@@ -126,31 +127,6 @@ $('#submit').click(function ()
     _import.type=$('#type').val();
     _import.factoryId = factoryId;
     params._import=JSON.stringify(_import);
-    if (_import.type==='')
-    {
-        alert("原料名称不得为空");
-        return;
-    };
-    if (_import.source==='')
-    {
-        alert("货源不得为空");
-        return;
-    };
-    if (!isCommonTextValid(_import.type,10))
-    {
-        alert("原料名称过长");
-        return;
-    };
-    if (!isCommonTextValid(_import.source,30))
-    {
-        alert("货源信息过长");
-        return;
-    };
-    if (_import.amount<=0)
-    {
-        alert("进货量须大于0");
-        return;
-    };
     //发起ajax请求
     $.ajax({
         type: "POST",

@@ -48,5 +48,10 @@ public class OrderServiceImpl  implements OrderService {
         return ingredientDao.getIngredientByOrder(orderId);
     }
 
+    @Override
+    public void refund(int id) {
+        orderDao.refundOrder(id);
+    }
+
 
 }

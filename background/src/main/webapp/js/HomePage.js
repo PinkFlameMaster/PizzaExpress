@@ -64,7 +64,7 @@ var TableInit = function () {
                 field: 'id',
                 title: '事件编号',
             }, {
-                field: 'affair',
+                field: 'type',
                 title: '事件信息',
                 edit:false,
             }, {

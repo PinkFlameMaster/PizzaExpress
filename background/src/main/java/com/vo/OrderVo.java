@@ -9,6 +9,25 @@ public class OrderVo {
     String factoryName;
     ReceiverAddress receiverAddress;
 
+    public float getFactoryLatitude() {
+        return factoryLatitude;
+    }
+
+    public void setFactoryLatitude(float factoryLatitude) {
+        this.factoryLatitude = factoryLatitude;
+    }
+
+    public float getFactoryLongitude() {
+        return factoryLongitude;
+    }
+
+    public void setFactoryLongitude(float factoryLongitude) {
+        this.factoryLongitude = factoryLongitude;
+    }
+
+    float factoryLatitude;
+    float factoryLongitude;
+
     public String getState() {
         return state;
     }

@@ -70,13 +70,18 @@ public class AdminController {
     @RequestMapping("/activity")
     @ResponseBody
     public ReturnMsg getActivities(){
+
         List<Activity> result = activityService.getAllActivities();
         for(Activity activity: result){
             activity.solveString();
+            activity.typeString();
         }
         ReturnMsg msg = new ReturnMsg();
         msg.setStatus("success");
         msg.setData(result);
         return msg;
     }
+
+
+
 }

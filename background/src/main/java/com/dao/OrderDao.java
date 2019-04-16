@@ -14,4 +14,5 @@ public interface OrderDao {
     List<OrderVo> findOrderComplex(@Param("name")String name, @Param("phone")String phone, @Param("factoryName")String factoryName);
     OrderVo findOderItemById(int id);
     List<OrderItemDto> findOrderItemListById(int oderId);
+    void refundOrder(int id);
 }

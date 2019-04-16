@@ -48,5 +48,12 @@ public class OrderController {
         ret.setStatus("success");
         return ret;
     }
-
+    @RequestMapping("/refund")
+    @ResponseBody
+    public ReturnMsg refund(Model model, int orderId){
+        ReturnMsg ret = new ReturnMsg();
+        orderService.refund(orderId);
+        ret.setStatus("success");
+        return ret;
+    }
 }

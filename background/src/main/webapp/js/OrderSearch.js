@@ -97,32 +97,32 @@ $("#searchForm-searchBtn").click(function(){
     order.receiverAddress={receiverName : $("#searchForm-name").val()};
     order.userId = $("#searchForm-phoneNum").val();
     order.factoryName = $("#searchForm-factory").val();
-    if ($("#searchForm-name").val()==='' && order.userId==='' && order.factoryName==='')
-    {
-        alert('搜寻条件不得为空');
-        return;
-    }
-
-    if (!isNum(order.userId))
-    {
-        alert("下单用户id有误");
-        return;
-    };
-    if (!isCommonTextValid(order.userId,11))
-    {
-        alert("下单用户id过长");
-        return;
-    };
-    if (!isCommonTextValid($("#searchForm-name").val(),10))
-    {
-        alert("收货人姓名过长");
-        return;
-    };
-    if (!isCommonTextValid(order.factoryName,10))
-    {
-        alert("门店名称过长");
-        return;
-    };
+    // if ($("#searchForm-name").val()==='' && order.userId==='' && order.factoryName==='')
+    // {
+    //     alert('搜寻条件不得为空');
+    //     return;
+    // }
+    //
+    // if (!isNum(order.userId))
+    // {
+    //     alert("下单用户id有误");
+    //     return;
+    // };
+    // if (!isCommonTextValid(order.userId,11))
+    // {
+    //     alert("下单用户id过长");
+    //     return;
+    // };
+    // if (!isCommonTextValid($("#searchForm-name").val(),10))
+    // {
+    //     alert("收货人姓名过长");
+    //     return;
+    // };
+    // if (!isCommonTextValid(order.factoryName,10))
+    // {
+    //     alert("门店名称过长");
+    //     return;
+    // };
     //user状态
     var params = {};
     params.order = JSON.stringify(order);

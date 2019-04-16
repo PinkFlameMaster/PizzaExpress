@@ -13,4 +13,5 @@ public interface OrderService {
     OrderVo findOrderById(int id);
     List<OrderItemDto> getOderItemList(int id);
     List<Ingredient> getIngredientByOrderId(int orderId);
+    void refund(int id);
 }

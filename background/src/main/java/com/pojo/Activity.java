@@ -2,7 +2,7 @@ package com.pojo;
 
 public class Activity {
     int id;
-    String affair;
+    int affair;
     int priority;
     String date;
     String detail;
@@ -24,6 +24,15 @@ public class Activity {
             solve = "待解决";
         }
     }
+    String type;
+    public void typeString(){
+        if(this.affair == 0){
+            type = "补货";
+        }else{
+            type = "订单";
+        }
+    }
+
     public int getId() {
         return id;
     }
@@ -32,11 +41,11 @@ public class Activity {
         this.id = id;
     }
 
-    public String getAffair() {
+    public int getAffair() {
         return affair;
     }
 
-    public void setAffair(String affair) {
+    public void setAffair(int affair) {
         this.affair = affair;
     }
 

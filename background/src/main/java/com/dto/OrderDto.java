@@ -11,6 +11,24 @@ public class OrderDto {
     private int id;
     private String factoryName;
 
+    public float getFactoryLatitude() {
+        return factoryLatitude;
+    }
+
+    public void setFactoryLatitude(float factoryLatitude) {
+        this.factoryLatitude = factoryLatitude;
+    }
+
+    public float getFactoryLongitude() {
+        return factoryLongitude;
+    }
+
+    public void setFactoryLongitude(float factoryLongitudeude) {
+        this.factoryLongitude = factoryLongitude;
+    }
+
+    private float factoryLatitude;
+    private float factoryLongitude;
     public int getId() {
         return id;
     }
@@ -88,7 +106,9 @@ public class OrderDto {
         this.receiverAddress = orderVo.getReceiverAddress();
         this.state = orderVo.getState();
         this.orderTime = orderVo.getOrderTime();
-        this. receiveTime = orderVo.getReceiveTime();
+        this.receiveTime = orderVo.getReceiveTime();
+        this.factoryLatitude = orderVo.getFactoryLatitude();
+        this.factoryLongitude = orderVo.getFactoryLongitude();
     }
 
 
