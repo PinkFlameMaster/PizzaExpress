@@ -38,14 +38,13 @@ leftNavBarDiv.innerHTML = '' +
     '            </ul>\n' +
     '        </li>\n' +
     '        <li><a href="'+localhostPath+'/views/Factory.jsp">店面管理</a></li>\n' +
-    '        <li><a href="#">系统设置</a></li>\n' +
     '        <li>\n' +
     '            <a data-toggle="collapse" data-parent="#accordion"\n' +
     '               href="#systemSettingItem">\n' +
     '                系统设置<b class="caret"></b>\n' +
     '            </a>\n' +
     '            <ul id = "systemSettingItem">\n' +
-    '                <li><a href="#">权限查看</a></li>\n' +
+    '                <li><a href="'+localhostPath+'/views/AuthMgt.jsp">权限查看</a></li>\n' +
     '            </ul>\n' +
     '        </li>\n' +
     '    </ul>';

@@ -82,6 +82,37 @@ public class AdminController {
         return msg;
     }
 
+    @RequestMapping("/getAll")
+    @ResponseBody
+    public ReturnMsg getAllAdmins(){
+
+        List<Admin> admins = new ArrayList<>();
+        for(int i=1;i<10;i++){
+            Admin admin = new Admin();
+            admin.setUsername("username"+i);
+            admin.setName("name"+i);
+            admin.setPhoneNum("phoneNum"+i);
+            admin.setRole("role"+i);
+            admin.setEntryTime("entryTime"+i);
+            admins.add(admin);
+
+        }
+
+        ReturnMsg msg = new ReturnMsg();
+        msg.setStatus("success");
+        msg.setData(admins);
+        return msg;
+    }
+
+    @RequestMapping("/modifyRole")
+    @ResponseBody
+    public ReturnMsg modifyRole(String username, String role){
 
 
+        ReturnMsg msg = new ReturnMsg();
+        msg.setStatus("success");
+        msg.setData(new ArrayList());
+        msg.getData().add(role);
+        return msg;
+    }
 }
