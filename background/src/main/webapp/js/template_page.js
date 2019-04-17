@@ -78,7 +78,7 @@ topNavBarDiv.innerHTML = '<nav class="navbar navbar-default white-bg">'+
 '<li><a href="#">Setting</a></li>'+
 '<li><a href="#">Something else here</a></li>'+
 '<li role="separator" class="divider"></li>'+
-    '<li><a href="#">Sign Out</a></li>'+
+    '<li><a href="'+localhostPath+'/index.jsp">Sign Out</a></li>'+
 '</li>'+
 '</ul>'+
 '</div>'+
